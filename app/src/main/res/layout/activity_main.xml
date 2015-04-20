@@ -9,17 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-         <TableRow
+        <TableRow>
             android:id="@+id/tableRowControl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-             <Button
-                 android:id="@+id/button_step"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 android:text="STEP" />
+            <Button
+                android:id="@+id/button_step"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="STEP" />
 
             <Button
                 android:id="@+id/button_reset"
@@ -36,6 +36,5 @@
                 android:text="SHOW" />
         </TableRow>
     </TableLayout>
-
 
 </RelativeLayout>
