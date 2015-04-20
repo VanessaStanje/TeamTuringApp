@@ -9,6 +9,90 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
+        <TableRow
+            android:id="@+id/tableRowFields"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/border_l"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/half_l" />
+
+            <ImageView
+                android:id="@+id/field1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/field9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/base" />
+
+            <ImageView
+                android:id="@+id/border_r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/half_r" />
+        </TableRow>
+
+
         <TableRow>
             android:id="@+id/tableRowControl"
             android:layout_width="wrap_content"
