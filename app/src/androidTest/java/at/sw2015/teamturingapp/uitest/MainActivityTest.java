@@ -25,4 +25,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void tearDown() throws Exception {
 
     }
+
+    public void testButtons(){
+        mySolo.clickOnButton("Reset");
+        mySolo.clickOnButton("Show");
+    }
 }
