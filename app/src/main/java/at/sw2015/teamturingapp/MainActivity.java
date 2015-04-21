@@ -4,15 +4,46 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button step_button = (Button) findViewById(R.id.button_step);
+        Button show_button = (Button) findViewById(R.id.button_show);
+        Button reset_button = (Button) findViewById(R.id.button_reset);
+
+        step_button.setOnClickListener(step_click_listener);
+        show_button.setOnClickListener(show_click_listener);
+        reset_button.setOnClickListener(reset_click_listener);
+
     }
+
+    View.OnClickListener step_click_listener = new View.OnClickListener() {
+        public void onClick(View v) {
+
+        }
+    };
+
+
+    View.OnClickListener show_click_listener = new View.OnClickListener() {
+        public void onClick(View v) {
+
+        }
+    };
+
+    View.OnClickListener reset_click_listener = new View.OnClickListener() {
+        public void onClick(View v) {
+
+        }
+    };
 
 
     @Override
@@ -36,4 +67,5 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
