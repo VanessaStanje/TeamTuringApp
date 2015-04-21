@@ -51,7 +51,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testStartViews(){
 
         ArrayList<ImageView> current_ImageView =  mySolo.getCurrentViews(ImageView.class);
-        Log.d("test", "OUUUT: " + current_ImageView.size());
+        Log.d("test", "ViewsSize: " + current_ImageView.size());
 
         if (current_ImageView.size() >= 11){
 
