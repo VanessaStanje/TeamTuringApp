@@ -62,7 +62,7 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
     {
         XMLParser new_xml_parser = new XMLParser();
         InputStream in = mySolo.getCurrentActivity().getResources().openRawResource(R.raw.tmtestconfig);
-        TMConfiguration new_tm_config = new_xml_parser.readTMConfig(in,mySolo.getCurrentActivity().getBaseContext());
+        TMConfiguration new_tm_config = new_xml_parser.readTMConfig(in);
         assertNotNull(new_tm_config);
 
         assertEquals(new_tm_config.getAuthor(),"Lukas Gregori and Vanessa Stanje");
