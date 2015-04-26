@@ -72,4 +72,11 @@ public class TMConfiguration {
         this.initial_state_ = initial_state;
     }
 
+    public String getCurrentState() {
+        return current_state_;
+    }
+
+    public void setCurrentState(String current_state_) {
+        this.current_state_ = current_state_;
+    }
 }
