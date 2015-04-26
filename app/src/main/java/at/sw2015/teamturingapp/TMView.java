@@ -3,6 +3,7 @@ import java.util.Vector;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.Toast;
 public class TMView {
 
     private Vector<ImageView> all_image_views_ = null;
@@ -15,7 +16,6 @@ public class TMView {
     private Drawable dollar_sel_ = null;
     private Drawable underline_ = null;
     private Drawable underline_sel_ = null;
-    private final int VISIBLE_TAPE_LENGTH = 9;
 
     public TMView(Vector<ImageView> all_image_views, Drawable base,
                   Drawable one, Drawable one_sel, Drawable zero, Drawable zero_sel,
@@ -34,7 +34,32 @@ public class TMView {
     }
 
     public String printTMState(TMConfiguration tm_config, Context ctx) {
-        return "";
+        String tm_out = "--------------TM OUT--------------\n";
+
+        for (int tape_counter = 0; tape_counter < tm_config.getAllTapes()
+                .size(); tape_counter++)
+            tm_out += "TAPE T" + tape_counter + "-> "
+                    + tm_config.getAllTapes().get(tape_counter) + "\n";
+
+        tm_out += "CURRENT STATE: " + tm_config.getCurrentState() + "\n";
+
+        for (int head_counter = 0; head_counter < tm_config.getHeadPositions()
+                .size(); head_counter++)
+            tm_out += "HEAD " + head_counter + " ON POS: "
+                    + tm_config.getHeadPositions().get(head_counter) + "\n";
+
+        for (int rule_counter = 0; rule_counter < tm_config.getAllRules()
+                .size(); rule_counter++)
+            tm_out += "RULE R" + rule_counter + "-> "
+                    + tm_config.getAllRules().get(rule_counter) + "\n";
+
+        tm_out += "--------------TM OUT--------------\n";
+
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(ctx, tm_out, duration);
+        toast.show();
+
+        return tm_out;
     }
 
 }
