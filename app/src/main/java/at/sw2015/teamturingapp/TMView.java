@@ -16,6 +16,7 @@ public class TMView {
     private Drawable dollar_sel_ = null;
     private Drawable underline_ = null;
     private Drawable underline_sel_ = null;
+    private final int VISIBLE_TAPE_LENGTH = 9;
 
     public TMView(Vector<ImageView> all_image_views, Drawable base,
                   Drawable one, Drawable one_sel, Drawable zero, Drawable zero_sel,
@@ -60,6 +61,10 @@ public class TMView {
         toast.show();
 
         return tm_out;
+    }
+
+    public void updateView(TMConfiguration tm_config,Context ctx)
+    {
     }
 
 }
