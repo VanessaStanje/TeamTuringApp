@@ -63,8 +63,44 @@ public class TMView {
         return tm_out;
     }
 
-    public void updateView(TMConfiguration tm_config,Context ctx)
+    public void updateView(TMConfiguration tm_config)
     {
+        String tape_one_in = tm_config.getAllTapes().get(0);
+        String[] tape_one = tape_one_in.split("-");
+
+        int diff = VISIBLE_TAPE_LENGTH - tape_one.length;
+        int counter = 0;
+
+        if(diff < 0)
+        {
+            counter = diff;
+            diff = 0;
+        }
+
+        for(diff/=2; counter < VISIBLE_TAPE_LENGTH; counter++)
+        {
+            if(counter < diff || counter >= tape_one.length+diff)
+                all_image_views_.get(counter).setImageDrawable(underline_);
+            else
+            {
+                if(tape_one[counter-diff].equalsIgnoreCase("0") && counter-diff != tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(zero_);
+                else if(tape_one[counter-diff].equalsIgnoreCase("0") && counter-diff == tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(zero_sel_);
+                else if(tape_one[counter-diff].equalsIgnoreCase("1") && counter-diff != tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(one_);
+                else if(tape_one[counter-diff].equalsIgnoreCase("1") && counter-diff == tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(one_sel_);
+                else if(tape_one[counter-diff].equalsIgnoreCase("$") && counter-diff != tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(dollar_);
+                else if(tape_one[counter-diff].equalsIgnoreCase("$") && counter-diff == tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(dollar_sel_);
+                else if(tape_one[counter-diff].equalsIgnoreCase("_") && counter-diff != tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(underline_);
+                else if(tape_one[counter-diff].equalsIgnoreCase("_") && counter-diff == tm_config.getHeadPositions().get(0))
+                    all_image_views_.get(counter).setImageDrawable(underline_sel_);
+            }
+        }
     }
 
 }

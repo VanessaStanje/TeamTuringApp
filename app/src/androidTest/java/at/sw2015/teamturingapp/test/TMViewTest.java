@@ -129,7 +129,14 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
                 mySolo.getCurrentActivity().getDrawable(R.mipmap.underline),
                 mySolo.getCurrentActivity().getDrawable(R.mipmap.underline_sel));
 
-        new_view.updateView(new_tm_config,mySolo.getCurrentActivity().getApplicationContext());
+        // To avoid the called from wrong thread exception
+        // Only thread that created the view can manipulate them
+        mySolo.getCurrentActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new_view.updateView(new_tm_config);
+            }
+        });
 
         mySolo.sleep(300);
 
