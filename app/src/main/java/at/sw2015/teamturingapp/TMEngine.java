@@ -1,13 +1,17 @@
 package at.sw2015.teamturingapp;
 
+
 /**
  * Created by Lukas Gregori and Vanessa Stanje on 03.05.15.
  */
 public class TMEngine {
 
+
     public TMEngine(){
     }
 
+    public void step(TMConfiguration current_tm_config) {
+    }
 
     public int moveHead(int current_head_position, String direction)
     {
