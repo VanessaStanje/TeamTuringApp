@@ -61,12 +61,14 @@ public class TMEngineTest extends TestCase {
                 1, "S0", expected_HeadPosition, expected_AllTapes, expected_AllRules);
 
         new_tm_engine.step(test_config);
-
         assertTrue(test_config.getCurrentState().equalsIgnoreCase("S1"));
         assertEquals((int)test_config.getHeadPositions().get(0),1);
 
         new_tm_engine.step(test_config);
+        assertTrue(test_config.getCurrentState().equalsIgnoreCase("S2"));
+        assertEquals((int)test_config.getHeadPositions().get(0),2);
 
+        new_tm_engine.step(test_config);
         assertTrue(test_config.getCurrentState().equalsIgnoreCase("S2"));
         assertEquals((int)test_config.getHeadPositions().get(0),2);
     }
