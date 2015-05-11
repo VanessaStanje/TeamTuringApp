@@ -16,6 +16,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.widget.ImageView;
 public class MainActivity extends ActionBarActivity {
 
+    private TMEngine tm_engine = new TMEngine();
     private TMView tm_view = null;
     private TMConfiguration current_tm_config = null;
     private XMLParser xp = new XMLParser();
@@ -72,17 +73,31 @@ public class MainActivity extends ActionBarActivity {
 
     View.OnClickListener step_click_listener = new View.OnClickListener() {
         public void onClick(View v) {
+            tm_engine.step(current_tm_config);
+            tm_view.updateView(current_tm_config);
         }
     };
 
 
     View.OnClickListener show_click_listener = new View.OnClickListener() {
         public void onClick(View v) {
+            if (current_tm_config != null)
+                tm_view.printTMState(current_tm_config, getBaseContext());
         }
     };
 
     View.OnClickListener reset_click_listener = new View.OnClickListener() {
         public void onClick(View v) {
+            raw = getResources().openRawResource(R.raw.tmtestconfig);
+
+            try {
+                current_tm_config = xp.readTMConfig(raw);
+            } catch (XmlPullParserException | IOException
+                    | ParserConfigurationException | SAXException e) {
+                e.printStackTrace();
+            }
+
+            tm_view.updateView(current_tm_config);
         }
     };
 
