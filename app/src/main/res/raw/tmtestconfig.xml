@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TM_CONFIG>
+    <AUTHOR>Lukas Gregori and Vanessa Stanje</AUTHOR>
+	<TAPE_COUNT>1</TAPE_COUNT>
+	<INITIAL_STATE>S0</INITIAL_STATE>
+	<HEADS>
+		<H>0</H>
+	</HEADS>
+	<TAPES>
+		<!-- Contents of Tape without the trailing blanks -->
+		<T>1-0-0-1-0-1</T>
+	</TAPES>
+	<RULES>
+		<!-- |Prev. State - Reads - Writes - Moves - Next State| -->
+		<R>S0-1-0-R-S1</R>
+		<R>S1-0-1-R-S2</R>
+		<R>S2-0-1-H-S2</R>
+	</RULES>
+</TM_CONFIG>
