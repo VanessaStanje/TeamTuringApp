@@ -1,124 +1,29 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <TableLayout
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        />
 
-        <TableRow
-            android:id="@+id/tableRowFields"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+    <at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:background="@color/ColorPrimary"/>
 
-            <ImageView
-                android:id="@+id/border_l"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/half_l" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        />
 
-            <ImageView
-                android:id="@+id/field1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/field9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/base" />
-
-            <ImageView
-                android:id="@+id/border_r"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/half_r" />
-        </TableRow>
-
-
-        <TableRow>
-            android:id="@+id/tableRowControl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/button_step"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="STEP" />
-
-            <Button
-                android:id="@+id/button_reset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RESET" />
-
-            <Button
-                android:id="@+id/button_show"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="SHOW" />
-        </TableRow>
-    </TableLayout>
-
-</RelativeLayout>
+</LinearLayout>

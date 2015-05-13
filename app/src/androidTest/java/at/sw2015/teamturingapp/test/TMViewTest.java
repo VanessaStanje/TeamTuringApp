@@ -55,16 +55,18 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
         all_image_views.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field8));
         all_image_views.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field9));
 
+        MainActivity activity = getActivity();
+
         TMView new_view = new TMView(all_image_views,
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.base),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.one),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.one_sel),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.zero),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.zero_sel),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.dollar),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.dollar_sel),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.underline),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.underline_sel));
+                ((activity)).getResources().getDrawable(R.mipmap.base),
+                ((activity)).getResources().getDrawable(R.mipmap.one),
+                ((activity)).getResources().getDrawable(R.mipmap.one_sel),
+                ((activity)).getResources().getDrawable(R.mipmap.zero),
+                ((activity)).getResources().getDrawable(R.mipmap.zero_sel),
+                ((activity)).getResources().getDrawable(R.mipmap.dollar),
+                ((activity)).getResources().getDrawable(R.mipmap.dollar_sel),
+                ((activity)).getResources().getDrawable(R.mipmap.underline),
+                ((activity)).getResources().getDrawable(R.mipmap.underline_sel));
 
         String tm_out = new_view.printTMState(new_tm_config,mySolo.getCurrentActivity().getBaseContext());
         assertTrue(tm_out.length() > 0);
@@ -118,16 +120,18 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
         all_image_views.add(field8);
         all_image_views.add(field9);
 
+        MainActivity activity = getActivity();
+
         final TMView new_view = new TMView(all_image_views,
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.base),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.one),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.one_sel),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.zero),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.zero_sel),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.dollar),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.dollar_sel),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.underline),
-                mySolo.getCurrentActivity().getDrawable(R.mipmap.underline_sel));
+                ((activity)).getResources().getDrawable(R.mipmap.base),
+                ((activity)).getResources().getDrawable(R.mipmap.one),
+                ((activity)).getResources().getDrawable(R.mipmap.one_sel),
+                ((activity)).getResources().getDrawable(R.mipmap.zero),
+                ((activity)).getResources().getDrawable(R.mipmap.zero_sel),
+                ((activity)).getResources().getDrawable(R.mipmap.dollar),
+                ((activity)).getResources().getDrawable(R.mipmap.dollar_sel),
+                ((activity)).getResources().getDrawable(R.mipmap.underline),
+                ((activity)).getResources().getDrawable(R.mipmap.underline_sel));
 
         // To avoid the called from wrong thread exception
         // Only thread that created the view can manipulate them
@@ -142,23 +146,23 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
         // Should be _100101__ , first 1 selected
         assertTrue(field1.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.underline).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
         assertTrue(field2.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.one_sel).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
         assertTrue(field3.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.zero).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
         assertTrue(field4.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.zero).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
         assertTrue(field5.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.one).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
         assertTrue(field6.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.zero).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
         assertTrue(field7.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.one).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
         assertTrue(field8.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.underline).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
         assertTrue(field9.getDrawable().getConstantState().equals
-                (mySolo.getCurrentActivity().getDrawable(R.mipmap.underline).getConstantState()));
+                (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
     }
 
     }
