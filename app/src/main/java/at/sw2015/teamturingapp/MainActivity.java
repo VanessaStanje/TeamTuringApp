@@ -7,6 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
 
 public class MainActivity extends ActionBarActivity {
@@ -21,13 +29,25 @@ public class MainActivity extends ActionBarActivity {
     // Made public to check in MainActivityTest
     // which test file was loaded
     public int resource_id = R.raw.tmtestconfig;
+    public TMConfiguration current_tm_config = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+        InputStream raw = getResources().openRawResource(resource_id);
+        XMLParser xp = new XMLParser();
+
+        try {
+            current_tm_config = xp.readTMConfig(raw);
+        } catch (XmlPullParserException | IOException
+                | ParserConfigurationException | SAXException e) {
+            e.printStackTrace();
+        }
 
         view_pager_adapter = new ViewPagerAdapter(getSupportFragmentManager(), headers, number_of_tabs);
         view_pager = (ViewPager) findViewById(R.id.pager);
@@ -53,6 +73,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       return item.getItemId() == R.id.action_settings || super.onOptionsItemSelected(item);
+        return item.getItemId() == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 }
