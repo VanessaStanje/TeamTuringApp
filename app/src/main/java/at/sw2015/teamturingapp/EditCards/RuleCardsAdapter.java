@@ -1,6 +1,7 @@
 
 package at.sw2015.teamturingapp.EditCards;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 
+import at.sw2015.teamturingapp.EditRuleActivity;
 import at.sw2015.teamturingapp.R;
 
 public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.RulesViewHolder> {
@@ -60,11 +62,13 @@ public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.Rule
             super(v);
             view = v;
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override public void onClick(View v) {
                     // item clicked
-
+                    System.err.println("CLICKED: " + current_info.current_state);
+                    Intent intent=new Intent(view.getContext(),EditRuleActivity.class);
+                    intent.putExtra("test", "testextra");
+                    view.getContext().startActivity(intent);
                 }
             });
 
