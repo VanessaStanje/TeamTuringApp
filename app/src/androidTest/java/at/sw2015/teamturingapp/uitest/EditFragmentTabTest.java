@@ -4,9 +4,11 @@ import android.graphics.Point;
 import android.support.v4.view.ViewPager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -80,6 +82,59 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
       mySolo.sleep(1500);
       curr_item = view_pager.getCurrentItem();
       assertTrue(old_item == curr_item);
+    }
+
+    public void testRuleChange() {
+        swipe(Direction.Left);
+        mySolo.clickOnText("RULE #0");
+
+        mySolo.enterText(0, "S0");
+        mySolo.enterText(1, "1");
+        mySolo.enterText(2, "$");
+        mySolo.enterText(3, "R");
+        mySolo.enterText(4, "S1");
+
+        mySolo.clickOnButton("RELOAD");
+
+        boolean found1 = mySolo.searchEditText("S0");
+        boolean found2 = mySolo.searchEditText("1");
+        boolean found3 = mySolo.searchEditText("0");
+        boolean found4 = mySolo.searchEditText("R");
+        boolean found5 = mySolo.searchEditText("S1");
+
+        assertEquals(found1, true);
+        assertEquals(found2, true);
+        assertEquals(found3, true);
+        assertEquals(found4, true);
+        assertEquals(found5, true);
+
+        mySolo.clearEditText(0);
+        mySolo.clearEditText(1);
+        mySolo.clearEditText(2);
+        mySolo.clearEditText(3);
+        mySolo.clearEditText(4);
+
+        mySolo.enterText(0, "S0");
+        mySolo.enterText(1, "1");
+        mySolo.enterText(2, "$");
+        mySolo.enterText(3, "R");
+        mySolo.enterText(4, "S1");
+
+        mySolo.clickOnButton("SAVE");
+        swipe(Direction.Right);
+
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+
+        MainActivity activity = getActivity();
+        ArrayList<ImageView> current_ImageView =  mySolo.getCurrentViews(ImageView.class);
+
+        ImageView field2 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2);
+        assertTrue(current_ImageView.contains(field2));
+
+        assertTrue(field2.getDrawable().getConstantState().equals
+                (activity.getResources().getDrawable(R.mipmap.dollar).getConstantState()));
     }
 
     // Source : http://blogs.steeplesoft.com/posts/2013/simulating-swipes-in-your-android-tests.html

@@ -51,4 +51,8 @@ public class EditFragmentTab extends Fragment {
     }
 
 
+    public static TMConfiguration readTMConfig()
+    {
+        return null;
+    }
 }
