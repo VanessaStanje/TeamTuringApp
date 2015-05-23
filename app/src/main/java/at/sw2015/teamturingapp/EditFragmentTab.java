@@ -8,31 +8,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.EditCards.RuleCardsAdapter;
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
 
 public class EditFragmentTab extends Fragment {
+
+    private static RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root_view = inflater.inflate(R.layout.activity_edit, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) root_view.findViewById(R.id.recycler);
+        recyclerView = (RecyclerView) root_view.findViewById(R.id.recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getBaseContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        RuleCardsAdapter ca = new RuleCardsAdapter(initRulesView(((MainActivity)getActivity()).current_tm_config));
+        TMConfiguration current_tm_config = readTMConfig();
+        RuleCardsAdapter ca = new RuleCardsAdapter(initRulesView(current_tm_config));
         recyclerView.setAdapter(ca);
 
         return  root_view;
     }
 
-    public List<RuleInfo> initRulesView(TMConfiguration current_config) {
+    public static List<RuleInfo> initRulesView(TMConfiguration current_config) {
         List<RuleInfo> result = new ArrayList<>();
         Vector<Vector<String>> all_rules = current_config.getAllRules();
 
@@ -50,9 +60,26 @@ public class EditFragmentTab extends Fragment {
         return result;
     }
 
+    public static void update()
+    {
+        TMConfiguration current_tm_config = readTMConfig();
+        RuleCardsAdapter ca = new RuleCardsAdapter(initRulesView(current_tm_config));
+        recyclerView.setAdapter(ca);
+    }
 
     public static TMConfiguration readTMConfig()
     {
-        return null;
+        TMConfiguration current_tm_config = null;
+        try {
+            org.w3c.dom.Document raw_xml_input = XMLParser.
+                    readXMLInputFromSD(MainActivity.curr_tm_file_name);
+            current_tm_config = XMLParser.readTMConfig(raw_xml_input);
+        } catch (XmlPullParserException | IOException
+                | ParserConfigurationException | SAXException e) {
+            e.printStackTrace();
+        }
+        return current_tm_config;
     }
+
+
 }

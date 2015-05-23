@@ -36,7 +36,10 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
         raw = getResources().openRawResource(resource_id);
 
         try {
-            current_tm_config = xp.readTMConfig(raw);
+            org.w3c.dom.Document raw_xml_input = XMLParser.
+                    readXMLInputFromSD(MainActivity.curr_tm_file_name);
+            System.err.println(MainActivity.curr_tm_file_name);
+            current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {
             e.printStackTrace();
@@ -91,17 +94,23 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
                     tm_view.printTMState(current_tm_config, getActivity().getBaseContext());
                 break;
             case R.id.button_reset:
-                raw = getResources().openRawResource(R.raw.tmtestconfig);
-
-                try {
-                    current_tm_config = xp.readTMConfig(raw);
-                } catch (XmlPullParserException | IOException
-                        | ParserConfigurationException | SAXException e) {
-                    e.printStackTrace();
-                }
-
-                tm_view.updateView(current_tm_config);
+                reset();
                 break;
         }
+    }
+
+    public void reset(){
+        raw = getResources().openRawResource(R.raw.tmtestconfig);
+
+        try {
+            org.w3c.dom.Document raw_xml_input = XMLParser.
+                    readXMLInputFromSD(MainActivity.curr_tm_file_name);
+            current_tm_config = XMLParser.readTMConfig(raw_xml_input);
+        } catch (XmlPullParserException | IOException
+                | ParserConfigurationException | SAXException e) {
+            e.printStackTrace();
+        }
+
+        tm_view.updateView(current_tm_config);
     }
 }

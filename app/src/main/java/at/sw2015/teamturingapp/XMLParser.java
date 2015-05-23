@@ -1,33 +1,49 @@
 package at.sw2015.teamturingapp;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
+import android.os.Environment;
 
 
 public class XMLParser {
 
-    final String AUTHOR = "AUTHOR";
-    final String TAPE_COUNT = "TAPE_COUNT";
-    final String INITIAL_STATE = "INITIAL_STATE";
-    final String HEADS = "H";
-    final String TAPES = "T";
-    final String RULES = "R";
+    final static String AUTHOR = "AUTHOR";
+    final static String TAPE_COUNT = "TAPE_COUNT";
+    final static String INITIAL_STATE = "INITIAL_STATE";
+    final static String HEADS = "H";
+    final static String TAPES = "T";
+    final static String RULES = "R";
 
-    public XMLParser(){
+    public XMLParser() {
     }
 
-    public org.w3c.dom.Document readRawXMLInput(InputStream input_stream)
+    public static org.w3c.dom.Document readRawXMLInput(InputStream input_stream)
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
         org.w3c.dom.Document document;
@@ -39,11 +55,26 @@ public class XMLParser {
         return document;
     }
 
-    public TMConfiguration readTMConfig(InputStream input_stream)
+    public static org.w3c.dom.Document readXMLInputFromSD(String file_name)
+    {
+        Document doc = null;
+        try {
+            File file = new File(Environment.
+                    getExternalStorageDirectory()+ "/TMConfigs/" + file_name + ".xml");
+            InputStream input_stream = new FileInputStream(file.getPath());
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder doc_builder = dbf.newDocumentBuilder();
+            doc = doc_builder.parse(new InputSource(input_stream));
+            doc.getDocumentElement().normalize();
+        } catch (Exception e) {
+            System.out.println("ERROR WHILE READING FROM SD; " + e);
+        }
+        return doc;
+    }
+
+    public static TMConfiguration readTMConfig(org.w3c.dom.Document raw_xml_input)
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
-
-        org.w3c.dom.Document raw_xml_input = readRawXMLInput(input_stream);
 
         String author = raw_xml_input.getElementsByTagName(AUTHOR).item(0)
                 .getTextContent();
@@ -79,8 +110,25 @@ public class XMLParser {
             all_rules.add(current_rule);
         }
 
-        return new TMConfiguration(author, tape_count,initial_state, head_positions,
+        return new TMConfiguration(author, tape_count, initial_state, head_positions,
                 all_tapes, all_rules);
     }
 
+    public static boolean saveTMRule(String current_state, String reads_sign, String writes_sign,
+                                     String moves, String next_state, int index, int resource_id,Context ctx)
+            throws XmlPullParserException, IOException,
+            ParserConfigurationException, SAXException{
+
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name);
+
+        NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
+
+        String new_content = current_state + "-" +
+                reads_sign + "-" + writes_sign + "-" + moves + "-" + next_state;
+
+        rules_list.item(index).setTextContent(new_content);
+
+        String file_name = ctx.getResources().getResourceEntryName(resource_id);
+        return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
+    }
 }

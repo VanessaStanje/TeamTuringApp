@@ -7,19 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.List;
-
-
 import at.sw2015.teamturingapp.EditRuleActivity;
 import at.sw2015.teamturingapp.R;
 
 public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.RulesViewHolder> {
 
     private static List<RuleInfo> rule_list;
+    private static int rule_counter = 0;
 
     public RuleCardsAdapter(List<RuleInfo> contactList) {
         rule_list = contactList;
+        rule_counter = 0;
     }
 
     @Override
@@ -37,6 +36,7 @@ public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.Rule
         contactViewHolder.moves.setText(rule_info.moves);
         contactViewHolder.next_state.setText(rule_info.next_state);
         contactViewHolder.current_info = rule_info;
+        contactViewHolder.rule_id = rule_counter++;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.Rule
         protected TextView moves;
         protected TextView next_state;
         protected RuleInfo current_info;
-
+        protected int rule_id;
         public View view;
 
         public RulesViewHolder(View v) {
@@ -64,10 +64,13 @@ public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.Rule
 
             view.setOnClickListener(new View.OnClickListener(){
                 @Override public void onClick(View v) {
-                    // item clicked
-                    System.err.println("CLICKED: " + current_info.current_state);
                     Intent intent=new Intent(view.getContext(),EditRuleActivity.class);
-                    intent.putExtra("test", "testextra");
+                    intent.putExtra("CURRENT_STATE", curr_state.getText());
+                    intent.putExtra("READS_SIGN", reads_sign.getText());
+                    intent.putExtra("WRITES_SIGN", writes_sign.getText());
+                    intent.putExtra("MOVES", moves.getText());
+                    intent.putExtra("NEXT_STATE", next_state.getText());
+                    intent.putExtra("RULE_ID", ""+rule_id);
                     view.getContext().startActivity(intent);
                 }
             });
@@ -79,7 +82,5 @@ public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.Rule
             moves = (TextView) v.findViewById(R.id.moves);
             next_state = (TextView) v.findViewById(R.id.nextState);
         }
-
-
     }
 }

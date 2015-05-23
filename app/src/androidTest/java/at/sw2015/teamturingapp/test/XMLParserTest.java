@@ -34,9 +34,8 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
 
     public void testXMLReadRawInput() throws Exception
     {
-        XMLParser new_xml_parser = new XMLParser();
         InputStream in = mySolo.getCurrentActivity().getResources().openRawResource(R.raw.tmtestconfig);
-        org.w3c.dom.Document new_doc = new_xml_parser.readRawXMLInput(in);
+        org.w3c.dom.Document new_doc = XMLParser.readRawXMLInput(in);
         assertNotNull(new_doc);
 
         NodeList author = new_doc.getElementsByTagName("AUTHOR");
@@ -60,9 +59,9 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
 
     public void testReadTMConfig() throws Exception
     {
-        XMLParser new_xml_parser = new XMLParser();
         InputStream in = mySolo.getCurrentActivity().getResources().openRawResource(R.raw.tmtestconfig);
-        TMConfiguration new_tm_config = new_xml_parser.readTMConfig(in);
+        org.w3c.dom.Document raw_xml_input = XMLParser.readRawXMLInput(in);
+        TMConfiguration new_tm_config = XMLParser.readTMConfig(raw_xml_input);
         assertNotNull(new_tm_config);
 
         assertEquals(new_tm_config.getAuthor(),"Lukas Gregori and Vanessa Stanje");

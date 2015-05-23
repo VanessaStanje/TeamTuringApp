@@ -9,6 +9,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     String headers[];
     int number_of_tabs;
 
+    static RunFragmentTab current_run_fragment = null;
+    static EditFragmentTab current_edit_fragment = null;
+
     public ViewPagerAdapter(FragmentManager fragment_manager, String headers[], int number_of_tabs) {
         super(fragment_manager);
         this.headers = headers;
@@ -17,10 +20,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0)
-            return new RunFragmentTab();
-        else
-            return new EditFragmentTab();
+        if (position == 0) {
+            current_run_fragment = new RunFragmentTab();
+            return current_run_fragment;
+        } else {
+            current_edit_fragment = new EditFragmentTab();
+            return current_edit_fragment;
+        }
     }
 
     @Override
