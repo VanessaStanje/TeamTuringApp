@@ -2,26 +2,18 @@ package at.sw2015.teamturingapp;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -115,7 +107,7 @@ public class XMLParser {
     }
 
     public static boolean saveTMRule(String current_state, String reads_sign, String writes_sign,
-                                     String moves, String next_state, int index, int resource_id,Context ctx)
+                                     String moves, String next_state, int index, Context ctx)
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException{
 
@@ -128,12 +120,21 @@ public class XMLParser {
 
         rules_list.item(index).setTextContent(new_content);
 
-        String file_name = ctx.getResources().getResourceEntryName(resource_id);
+        String file_name = MainActivity.curr_tm_file_name;
         return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
     }
 
     public static boolean addNewRule(String new_rule)
     {
-        return false;
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name);
+
+        NodeList rules_list = raw_xml_input.getElementsByTagName("RULES");
+        Node new_child = raw_xml_input.createElement("R");
+        new_child.setTextContent(new_rule);
+        Element rule = (Element)rules_list.item(0);
+        rule.appendChild(new_child);
+
+        String file_name = MainActivity.curr_tm_file_name;
+        return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
     }
 }

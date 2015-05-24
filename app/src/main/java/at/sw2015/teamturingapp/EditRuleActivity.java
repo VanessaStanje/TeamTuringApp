@@ -105,7 +105,7 @@ public class EditRuleActivity extends Activity{
             String next_state = next_state_text.getText().toString();
 
             no_problem_writing = XMLParser.saveTMRule(curr_state,reads_sign,writes_sign,
-                    moves,next_state,rule_id,MainActivity.resource_id,this);
+                    moves,next_state,rule_id,this);
 
         } catch (Exception pce) {
             pce.printStackTrace();

@@ -1,5 +1,6 @@
 package at.sw2015.teamturingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
@@ -38,6 +40,15 @@ public class EditFragmentTab extends Fragment {
         TMConfiguration current_tm_config = readTMConfig();
         RuleCardsAdapter ca = new RuleCardsAdapter(initRulesView(current_tm_config));
         recyclerView.setAdapter(ca);
+
+        Button new_rule_button = (Button) root_view.findViewById(R.id.button_new_rule);
+        new_rule_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),NewRuleActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         return  root_view;
     }
