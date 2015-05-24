@@ -100,4 +100,27 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         assertEquals(rule3.get(4),"S2");
     }
 
+    public void testAddNewRule(){
+        boolean ret = XMLParser.addNewRule("S7-1-0-R-S8");
+        assertTrue(ret);
+
+        org.w3c.dom.Document raw_xml_input = XMLParser.
+                readXMLInputFromSD(MainActivity.curr_tm_file_name);
+        TMConfiguration new_tm_config = null;
+        try {
+            new_tm_config = XMLParser.readTMConfig(raw_xml_input);
+        }catch (Exception e)
+        {
+
+        }
+
+        assertNotNull(new_tm_config);
+        Vector<Vector<String>> all_rules = new_tm_config.getAllRules();
+        assertTrue(all_rules.get(3).get(0).equalsIgnoreCase("S7"));
+        assertTrue(all_rules.get(3).get(1).equalsIgnoreCase("1"));
+        assertTrue(all_rules.get(3).get(2).equalsIgnoreCase("0"));
+        assertTrue(all_rules.get(3).get(3).equalsIgnoreCase("R"));
+        assertTrue(all_rules.get(3).get(4).equalsIgnoreCase("S8"));
+    }
+
 }

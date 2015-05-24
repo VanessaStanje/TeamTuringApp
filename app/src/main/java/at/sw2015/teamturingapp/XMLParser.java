@@ -131,4 +131,9 @@ public class XMLParser {
         String file_name = ctx.getResources().getResourceEntryName(resource_id);
         return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
     }
+
+    public static boolean addNewRule(String new_rule)
+    {
+        return false;
+    }
 }

@@ -41,7 +41,6 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
     }
 
     public void testInitRulesView() throws Exception {
-        EditFragmentTab editFragmentTab = new EditFragmentTab();
         Vector<Integer> head_pos = new Vector<>();
         head_pos.add(0);
         Vector<String> all_tapes = new Vector<>();
@@ -56,7 +55,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         all_rules.add(rule_1);
         TMConfiguration new_tm_config = new TMConfiguration("Test Author", 1, "S0", head_pos, all_tapes, all_rules);
 
-        List<RuleInfo> result = editFragmentTab.initRulesView(new_tm_config);
+        List<RuleInfo> result = EditFragmentTab.initRulesView(new_tm_config);
 
         assertTrue(result.size() == 1);
         assertTrue(result.get(0).rule_counter == 0);
@@ -71,18 +70,19 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
     // test to pass. If display is off, the test
     // will fail
     public void testSwipe() {
-      ViewPager  view_pager = (ViewPager) mySolo.getCurrentActivity() .findViewById(R.id.pager);
-      int old_item = view_pager.getCurrentItem();
-      swipe(Direction.Left);
-      mySolo.sleep(1500);
-      int curr_item = view_pager.getCurrentItem();
-      Log.d("HERE",old_item + "-" + curr_item);
-      assertTrue(old_item + 1 == curr_item);
-      swipe(Direction.Right);
-      mySolo.sleep(1500);
-      curr_item = view_pager.getCurrentItem();
-      assertTrue(old_item == curr_item);
+        ViewPager  view_pager = (ViewPager) mySolo.getCurrentActivity() .findViewById(R.id.pager);
+        int old_item = view_pager.getCurrentItem();
+        swipe(Direction.Left);
+        mySolo.sleep(1500);
+        int curr_item = view_pager.getCurrentItem();
+        Log.d("HERE",old_item + "-" + curr_item);
+        assertTrue(old_item + 1 == curr_item);
+        swipe(Direction.Right);
+        mySolo.sleep(1500);
+        curr_item = view_pager.getCurrentItem();
+        assertTrue(old_item == curr_item);
     }
+
 
     public void testRuleChange() {
         swipe(Direction.Left);
@@ -137,6 +137,55 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
                 (activity.getResources().getDrawable(R.mipmap.dollar).getConstantState()));
     }
 
+
+
+    public void testAddRule() {
+        swipe(Direction.Left);
+        mySolo.clickOnText("+");
+
+        mySolo.enterText(0, "HELLO");
+        mySolo.enterText(1, "I");
+        mySolo.enterText(2, "AM");
+        mySolo.enterText(3, "TEXT");
+        mySolo.enterText(4, "TEST");
+
+        mySolo.clickOnButton("CANCEL");
+
+        mySolo.clickOnText("+");
+
+        mySolo.enterText(0, "S0");
+        mySolo.enterText(1, "1");
+        mySolo.enterText(2, "$");
+        mySolo.enterText(3, "R");
+        mySolo.enterText(4, "S1");
+
+        mySolo.clickOnButton("SAVE");
+
+        mySolo.clickOnText("RULE #0");
+        mySolo.clearEditText(2);
+        mySolo.enterText(2, "1");
+        mySolo.clearEditText(3);
+        mySolo.enterText(3, "H");
+        mySolo.clearEditText(4);
+        mySolo.enterText(4, "S0");
+        mySolo.clickOnButton("SAVE");
+
+        swipe(Direction.Right);
+
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+
+        MainActivity activity = getActivity();
+        ArrayList<ImageView> current_ImageView =  mySolo.getCurrentViews(ImageView.class);
+
+        ImageView field2 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2);
+        assertTrue(current_ImageView.contains(field2));
+
+        assertTrue(field2.getDrawable().getConstantState().equals
+                (activity.getResources().getDrawable(R.mipmap.dollar).getConstantState()));
+    }
+
     // Source : http://blogs.steeplesoft.com/posts/2013/simulating-swipes-in-your-android-tests.html
     protected void swipe(final Direction direction) {
         Point size = new Point();
@@ -150,4 +199,3 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
 
 
 }
-
