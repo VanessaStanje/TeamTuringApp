@@ -9,8 +9,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     String headers[];
     int number_of_tabs;
 
-    static RunFragmentTab current_run_fragment = null;
-    static EditFragmentTab current_edit_fragment = null;
+    public static RunFragmentTab current_run_fragment = null;
+    public static EditFragmentTab current_edit_fragment = null;
 
     public ViewPagerAdapter(FragmentManager fragment_manager, String headers[], int number_of_tabs) {
         super(fragment_manager);

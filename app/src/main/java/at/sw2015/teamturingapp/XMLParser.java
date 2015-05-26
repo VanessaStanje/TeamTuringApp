@@ -140,6 +140,17 @@ public class XMLParser {
 
     public static boolean removeRule(int index)
     {
-        return false;
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name);
+
+        NodeList main_rule = raw_xml_input.getElementsByTagName("RULES");
+        NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
+
+        if(index >= rules_list.getLength() || main_rule.getLength() == 0)
+            return false;
+
+        main_rule.item(0).removeChild(rules_list.item(index));
+        String file_name = MainActivity.curr_tm_file_name;
+        return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
     }
+
 }
