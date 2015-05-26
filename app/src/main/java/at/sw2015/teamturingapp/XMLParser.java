@@ -137,4 +137,9 @@ public class XMLParser {
         String file_name = MainActivity.curr_tm_file_name;
         return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
     }
+
+    public static boolean removeRule(int index)
+    {
+        return false;
+    }
 }

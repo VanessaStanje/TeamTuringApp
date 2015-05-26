@@ -186,6 +186,29 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
                 (activity.getResources().getDrawable(R.mipmap.dollar).getConstantState()));
     }
 
+    public void testRemoveRule()
+    {
+        swipe(Direction.Left);
+        mySolo.clickLongOnText("RULE #0");
+        mySolo.sleep(150);
+        mySolo.clickOnButton("YES");
+
+        swipe(Direction.Right);
+
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+
+        MainActivity activity = getActivity();
+        ArrayList<ImageView> current_ImageView =  mySolo.getCurrentViews(ImageView.class);
+
+        ImageView field2 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2);
+        assertTrue(current_ImageView.contains(field2));
+
+        assertTrue(field2.getDrawable().getConstantState().equals
+                (activity.getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
+    }
+
     // Source : http://blogs.steeplesoft.com/posts/2013/simulating-swipes-in-your-android-tests.html
     protected void swipe(final Direction direction) {
         Point size = new Point();
