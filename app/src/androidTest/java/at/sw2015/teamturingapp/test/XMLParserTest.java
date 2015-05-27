@@ -60,9 +60,9 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
 
     public void testReadTMConfig() throws Exception
     {
-        XMLParser new_xml_parser = new XMLParser();
         InputStream in = mySolo.getCurrentActivity().getResources().openRawResource(R.raw.tmtestconfig);
-        TMConfiguration new_tm_config = new_xml_parser.readTMConfig(in);
+        org.w3c.dom.Document raw_xml_input = XMLParser.readRawXMLInput(in);
+        TMConfiguration new_tm_config = XMLParser.readTMConfig(raw_xml_input);
         assertNotNull(new_tm_config);
 
         assertEquals(new_tm_config.getAuthor(),"Lukas Gregori and Vanessa Stanje");
@@ -101,4 +101,44 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         assertEquals(rule3.get(4),"S2");
     }
 
+    public void testAddNewRule(){
+        XMLParser.addNewRule("S7-1-0-R-S8");
+
+        org.w3c.dom.Document raw_xml_input = XMLParser.
+                readXMLInputFromSD(MainActivity.curr_tm_file_name);
+        TMConfiguration new_tm_config = null;
+        try {
+            new_tm_config = XMLParser.readTMConfig(raw_xml_input);
+        }catch (Exception e)
+        {
+
+        }
+
+        assertNotNull(new_tm_config);
+        Vector<Vector<String>> all_rules = new_tm_config.getAllRules();
+        assertTrue(all_rules.get(3).get(0).equalsIgnoreCase("S7"));
+        assertTrue(all_rules.get(3).get(1).equalsIgnoreCase("1"));
+        assertTrue(all_rules.get(3).get(2).equalsIgnoreCase("0"));
+        assertTrue(all_rules.get(3).get(3).equalsIgnoreCase("R"));
+        assertTrue(all_rules.get(3).get(4).equalsIgnoreCase("S8"));
+    }
+
+    public void testRemoveRule(){
+        XMLParser.removeRule(0);
+
+        org.w3c.dom.Document raw_xml_input = XMLParser.
+                readXMLInputFromSD(MainActivity.curr_tm_file_name);
+        TMConfiguration new_tm_config = null;
+        try {
+            new_tm_config = XMLParser.readTMConfig(raw_xml_input);
+        }catch (Exception e)
+        {
+        }
+
+        assertNotNull(new_tm_config);
+        Vector<Vector<String>> all_rules = new_tm_config.getAllRules();
+        assertTrue(all_rules.size() == 2);
+        assertTrue(all_rules.get(0).get(0).equalsIgnoreCase("S1"));
+        assertTrue(all_rules.get(1).get(0).equalsIgnoreCase("S2"));
+    }
 }

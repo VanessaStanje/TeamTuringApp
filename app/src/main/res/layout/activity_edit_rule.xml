@@ -1,0 +1,176 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:weightSum="1"
+    android:background="@color/tabsScrollColor">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:text="Edit Rule"
+        android:id="@+id/textView2"
+        android:layout_weight="0.09"
+        android:fontFamily="@string/abc_action_bar_home_subtitle_description_format"
+        android:background="@color/ColorPrimaryDark" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:layout_weight="0.09"
+        android:background="@color/cardview_shadow_start_color">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="CURRENT STATE"
+            android:id="@+id/textViewCurrState" />
+
+        <EditText
+            android:layout_width="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_height="wrap_content"
+            android:id="@+id/curr_state_edit"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="READS SIGN"
+            android:id="@+id/textViewReads" />
+
+        <EditText
+            android:layout_width="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_height="wrap_content"
+            android:id="@+id/reads_sign_edit"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"
+        android:background="@color/cardview_shadow_start_color">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="WRITES SIGN"
+            android:id="@+id/textViewWrites" />
+
+        <EditText
+            android:layout_width="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_height="wrap_content"
+            android:id="@+id/writes_sign_edit"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="MOVES"
+            android:id="@+id/textViewMoves" />
+
+        <EditText
+            android:layout_width="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:id="@+id/moves_edit"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"
+        android:background="@color/cardview_shadow_start_color">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="NEXT STATE"
+            android:id="@+id/textViewNext"
+            style="@style/Animation.AppCompat.DropDownUp" />
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/next_state_edit"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.26">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RELOAD"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:id="@+id/button_reload" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:id="@+id/button_save" />
+    </LinearLayout>
+
+</LinearLayout>

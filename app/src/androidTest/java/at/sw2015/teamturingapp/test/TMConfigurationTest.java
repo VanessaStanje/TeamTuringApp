@@ -80,8 +80,4 @@ public class TMConfigurationTest extends TestCase {
         Vector<Vector<String>> result = test_class.getAllRules();
         assertEquals(expected_AllRules, result);
     }
-
-
-
-
 }
