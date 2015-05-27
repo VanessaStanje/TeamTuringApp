@@ -164,5 +164,4 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
         assertTrue(field9.getDrawable().getConstantState().equals
                 (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
     }
-
-    }
+}

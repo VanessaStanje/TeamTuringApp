@@ -28,22 +28,29 @@ public class MainActivity extends ActionBarActivity {
 
     // Made public to check in MainActivityTest
     // which test file was loaded
-    public int resource_id = R.raw.tmtestconfig;
-    public TMConfiguration current_tm_config = null;
+    public static int resource_id = R.raw.tmtestconfig;
+    public static String curr_tm_file_name = "tmtestconfig";
 
+    public TMConfiguration current_tm_config = null;
+    public static OutWriter out_writer = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         InputStream raw = getResources().openRawResource(resource_id);
-        XMLParser xp = new XMLParser();
+        curr_tm_file_name = getResources().getResourceEntryName(resource_id);
+        out_writer = new OutWriter("TMConfigs");
 
         try {
-            current_tm_config = xp.readTMConfig(raw);
+            out_writer.writeXMLToFile(XMLParser.readRawXMLInput(raw),curr_tm_file_name);
+            raw = getResources().openRawResource(resource_id);
+            org.w3c.dom.Document raw_xml_input = XMLParser.readRawXMLInput(raw);
+            current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {
             e.printStackTrace();

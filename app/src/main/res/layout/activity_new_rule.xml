@@ -14,7 +14,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center"
         android:textColor="#FFFFFF"
-        android:text="Edit Rule"
+        android:text="Create New Rule"
         android:id="@+id/textView2"
         android:layout_weight="0.09"
         android:fontFamily="@string/abc_action_bar_home_subtitle_description_format"
@@ -159,10 +159,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RELOAD"
+            android:text="CANCEL"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
-            android:id="@+id/button_reload" />
+            android:id="@+id/button_cancel" />
 
         <Button
             android:layout_width="wrap_content"
