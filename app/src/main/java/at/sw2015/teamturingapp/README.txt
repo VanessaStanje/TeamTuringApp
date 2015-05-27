@@ -12,3 +12,12 @@
 #                    the customer can give us the go
 #
 ########################################################
+############### RELEASE 0.2 ############################
+#
+# Second release at the end of iteration 2. 
+# Most of the user stories planed for this implementation were
+# completed, only missing is the load rule functionality.
+# This was not completed due to problems with the XML file handlers,
+# which took up more time than planned. We will implement
+# Them in the next iteration.
+########################################################
