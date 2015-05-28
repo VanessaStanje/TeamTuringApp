@@ -31,7 +31,13 @@ public class EditRuleActivity extends Activity{
         init_writes_sign = intent.getStringExtra("WRITES_SIGN");
         init_moves = intent.getStringExtra("MOVES");
         init_next_state = intent.getStringExtra("NEXT_STATE");
-        rule_id = Integer.parseInt(intent.getStringExtra("RULE_ID"));
+
+        try{
+          rule_id = Integer.parseInt(intent.getStringExtra("RULE_ID"));
+        }catch (NumberFormatException e)
+        {
+          rule_id = 0;
+        }
 
         EditText curr_state_text = (EditText) findViewById(R.id.curr_state_edit);
         EditText reads_sign_text = (EditText) findViewById(R.id.reads_sign_edit);

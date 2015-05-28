@@ -71,6 +71,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
     // will fail
     public void testSwipe() {
         ViewPager  view_pager = (ViewPager) mySolo.getCurrentActivity() .findViewById(R.id.pager);
+        mySolo.sleep(150);
         int old_item = view_pager.getCurrentItem();
         swipe(Direction.Left);
         mySolo.sleep(1500);
@@ -214,8 +215,8 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         Point size = new Point();
         mySolo.getCurrentActivity().getWindowManager().getDefaultDisplay().getSize(size);
         int width = size.x;
-        float xStart = ((direction == Direction.Left) ? (width - 10) : 10);
-        float xEnd = ((direction == Direction.Left) ? 10 : (width - 10));
+        float xStart = ((direction == Direction.Left) ? (width - 10) : 100);
+        float xEnd = ((direction == Direction.Left) ? 100 : (width - 10));
         // The value for y doesn't change, as we want to swipe straight across
         mySolo.drag(xStart, xEnd, size.y / 2, size.y / 2, 1);
     }

@@ -24,7 +24,6 @@ public class EditRuleActivityTest extends ActivityInstrumentationTestCase2<EditR
 
     public void testButtons(){
         mySolo.clickOnButton("RELOAD");
-        mySolo.clickOnButton("SAVE");
 
         mySolo.clickOnEditText(0);
         mySolo.clickOnEditText(1);
@@ -49,5 +48,7 @@ public class EditRuleActivityTest extends ActivityInstrumentationTestCase2<EditR
         assertEquals(found3, true);
         assertEquals(found4, true);
         assertEquals(found5, true);
+
+        mySolo.clickOnButton("SAVE");
     }
 }
