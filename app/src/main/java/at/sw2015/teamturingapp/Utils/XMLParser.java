@@ -1,4 +1,4 @@
-package at.sw2015.teamturingapp;
+package at.sw2015.teamturingapp.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,9 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
-import android.os.Environment;
+
+import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.TMConfiguration;
 
 
 public class XMLParser {
@@ -47,12 +49,26 @@ public class XMLParser {
         return document;
     }
 
-    public static org.w3c.dom.Document readXMLInputFromSD(String file_name)
+    public static org.w3c.dom.Document readXMLInputFromSD(String file_path)
     {
         Document doc = null;
         try {
-            File file = new File(Environment.
-                    getExternalStorageDirectory()+ "/TMConfigs/" + file_name + ".xml");
+            File file = new File(file_path);
+            InputStream input_stream = new FileInputStream(file.getPath());
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder doc_builder = dbf.newDocumentBuilder();
+            doc = doc_builder.parse(new InputSource(input_stream));
+            doc.getDocumentElement().normalize();
+        } catch (Exception e) {
+            System.out.println("ERROR WHILE READING FROM SD; " + e);
+        }
+        return doc;
+    }
+
+    public static org.w3c.dom.Document readXMLInputFromFile(File file)
+    {
+        Document doc = null;
+        try {
             InputStream input_stream = new FileInputStream(file.getPath());
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder doc_builder = dbf.newDocumentBuilder();
@@ -111,7 +127,7 @@ public class XMLParser {
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException{
 
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
 
@@ -120,13 +136,13 @@ public class XMLParser {
 
         rules_list.item(index).setTextContent(new_content);
 
-        String file_name = MainActivity.curr_tm_file_name;
-        return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
+        String file_path = MainActivity.curr_tm_file_name_path;
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
     }
 
     public static boolean addNewRule(String new_rule)
     {
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName("RULES");
         Node new_child = raw_xml_input.createElement("R");
@@ -134,13 +150,13 @@ public class XMLParser {
         Element rule = (Element)rules_list.item(0);
         rule.appendChild(new_child);
 
-        String file_name = MainActivity.curr_tm_file_name;
-        return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
+        String file_path = MainActivity.curr_tm_file_name_path;
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
     }
 
     public static boolean removeRule(int index)
     {
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
         NodeList main_rule = raw_xml_input.getElementsByTagName("RULES");
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
@@ -149,8 +165,8 @@ public class XMLParser {
             return false;
 
         main_rule.item(0).removeChild(rules_list.item(index));
-        String file_name = MainActivity.curr_tm_file_name;
-        return MainActivity.out_writer.writeXMLToFile(raw_xml_input,file_name);
+        String file_path = MainActivity.curr_tm_file_name_path;
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
     }
 
 }

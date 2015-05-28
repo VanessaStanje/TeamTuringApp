@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import at.sw2015.teamturingapp.Utils.XMLParser;
+
 public class EditRuleActivity extends Activity{
 
     private String init_curr_state = "";
@@ -110,8 +112,8 @@ public class EditRuleActivity extends Activity{
             String moves = moves_text.getText().toString();
             String next_state = next_state_text.getText().toString();
 
-            no_problem_writing = XMLParser.saveTMRule(curr_state,reads_sign,writes_sign,
-                    moves,next_state,rule_id,this);
+            no_problem_writing = XMLParser.saveTMRule(curr_state, reads_sign, writes_sign,
+                    moves, next_state, rule_id, this);
 
         } catch (Exception pce) {
             pce.printStackTrace();

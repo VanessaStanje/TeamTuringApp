@@ -17,7 +17,7 @@ import at.sw2015.teamturingapp.EditFragmentTab;
 import at.sw2015.teamturingapp.EditRuleActivity;
 import at.sw2015.teamturingapp.R;
 import at.sw2015.teamturingapp.ViewPagerAdapter;
-import at.sw2015.teamturingapp.XMLParser;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.RulesViewHolder> {
 

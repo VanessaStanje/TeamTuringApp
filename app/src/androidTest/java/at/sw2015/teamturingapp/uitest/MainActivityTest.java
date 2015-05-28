@@ -113,7 +113,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertTrue(current_ImageView.contains(fieldr));
 
             // Loaded the tmtestconfig file
-            if(((MainActivity)mySolo.getCurrentActivity()).resource_id == R.raw.tmtestconfig){
+            if(MainActivity.resource_id == R.raw.tmtestconfig){
                 MainActivity activity = getActivity();
 
                 assertTrue(field1.getDrawable().getConstantState().equals
@@ -178,7 +178,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertTrue(current_ImageView.contains(fieldr));
 
             // Loaded the tmtestconfig file
-            if(((MainActivity)mySolo.getCurrentActivity()).resource_id == R.raw.tmtestconfig){
+            if(MainActivity.resource_id == R.raw.tmtestconfig){
                 MainActivity activity = getActivity();
 
                 //Check if initial config matches expected
@@ -256,6 +256,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
                 assertTrue(field9.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
+
             }
         }
         else
@@ -265,4 +266,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         }
     }
 
+    public void testLoadTMFunctionalityButton() {
+        mySolo.clickOnActionBarItem(R.id.action_load);
+        mySolo.sleep(1500);
+    }
 }
+

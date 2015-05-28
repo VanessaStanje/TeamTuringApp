@@ -2,9 +2,7 @@ package at.sw2015.teamturingapp.test;
 
 import junit.framework.TestCase;
 
-import at.sw2015.teamturingapp.EditFragmentTab;
-import at.sw2015.teamturingapp.OutWriter;
-import at.sw2015.teamturingapp.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.OutWriter;
 
 public class OutWriterTest extends TestCase {
 
@@ -15,6 +13,6 @@ public class OutWriterTest extends TestCase {
 
     public void testOutWriteError() throws Exception {
         OutWriter out_writer = new OutWriter("");
-        assertTrue(!out_writer.writeXMLToFile(null,"test"));
+        assertTrue(!out_writer.writeXMLToFileName(null,"test"));
     }
 }

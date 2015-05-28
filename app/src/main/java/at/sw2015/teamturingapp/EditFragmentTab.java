@@ -22,6 +22,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.EditCards.RuleCardsAdapter;
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class EditFragmentTab extends Fragment {
 
@@ -83,7 +84,7 @@ public class EditFragmentTab extends Fragment {
         TMConfiguration current_tm_config = null;
         try {
             org.w3c.dom.Document raw_xml_input = XMLParser.
-                    readXMLInputFromSD(MainActivity.curr_tm_file_name);
+                    readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
             current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {
