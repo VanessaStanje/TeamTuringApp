@@ -1,5 +1,7 @@
 package at.sw2015.teamturingapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.ViewPager;
@@ -7,16 +9,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
+import at.sw2015.teamturingapp.Utils.FileHandler;
 import at.sw2015.teamturingapp.Utils.OutWriter;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
@@ -87,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_load:
-                //Todo Create file chooser
+                createFileChooser();
                 return true;
             default:
                 return item.getItemId() == R.id.action_settings
@@ -95,6 +100,42 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private void createFileChooser() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "Choose a TM File to run"),
+                    0);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "No File Manager found, please install one and try again",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    try {
+                      String path = FileHandler.getPath(this, uri);
+                      org.w3c.dom.Document raw = XMLParser.readXMLInputFromFile(new File(path));
+                      current_tm_config = XMLParser.readTMConfig(raw);
+                      curr_tm_file_name_path = path;
+                      EditFragmentTab.update();
+                      ViewPagerAdapter.current_run_fragment.reset();
+                    } catch (Exception e) {
+                      e.printStackTrace();
+                    }
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
 
 }
