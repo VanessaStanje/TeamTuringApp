@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Vector;
 
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
-import at.sw2015.teamturingapp.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
 import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.R;
-import at.sw2015.teamturingapp.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 
 
 public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainActivity> {

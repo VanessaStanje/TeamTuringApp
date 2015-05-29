@@ -13,7 +13,7 @@ import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.R;
 
 
-import at.sw2015.teamturingapp.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity>{

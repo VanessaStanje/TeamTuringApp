@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.Vector;
 
-import at.sw2015.teamturingapp.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.TMEngine;
 
 public class TMEngineTest extends TestCase {

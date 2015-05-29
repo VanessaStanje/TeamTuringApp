@@ -21,8 +21,11 @@ import java.io.InputStream;
 import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
 import at.sw2015.teamturingapp.Utils.FileHandler;
 import at.sw2015.teamturingapp.Utils.OutWriter;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class MainActivity extends ActionBarActivity {
@@ -54,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
 
         InputStream raw = getResources().openRawResource(resource_id);
         curr_tm_file_name_path = Environment.
-                getExternalStorageDirectory()+ "/TMConfigs/" + getResources().getResourceEntryName(resource_id) + ".xml";
+                getExternalStorageDirectory() + "/TMConfigs/" + getResources().getResourceEntryName(resource_id) + ".xml";
 
         try {
             out_writer.writeXMLToFileName(XMLParser.readRawXMLInput(raw), getResources().getResourceEntryName(resource_id));
@@ -94,6 +97,9 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_load:
                 createFileChooser();
                 return true;
+            case R.id.action_new:
+                createNewTMDialog();
+                return true;
             default:
                 return item.getItemId() == R.id.action_settings
                         || super.onOptionsItemSelected(item);
@@ -122,19 +128,24 @@ public class MainActivity extends ActionBarActivity {
                 if (resultCode == RESULT_OK) {
                     Uri uri = data.getData();
                     try {
-                      String path = FileHandler.getPath(this, uri);
-                      org.w3c.dom.Document raw = XMLParser.readXMLInputFromFile(new File(path));
-                      current_tm_config = XMLParser.readTMConfig(raw);
-                      curr_tm_file_name_path = path;
-                      EditFragmentTab.update();
-                      ViewPagerAdapter.current_run_fragment.reset();
+                        String path = FileHandler.getPath(this, uri);
+                        org.w3c.dom.Document raw = XMLParser.readXMLInputFromFile(new File(path));
+                        current_tm_config = XMLParser.readTMConfig(raw);
+                        curr_tm_file_name_path = path;
+                        EditFragmentTab.update();
+                        ViewPagerAdapter.current_run_fragment.reset();
                     } catch (Exception e) {
-                      e.printStackTrace();
+                        e.printStackTrace();
                     }
                 }
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void createNewTMDialog() {
+        Intent intent = new Intent(this, NewTMActivity.class);
+        this.startActivity(intent);
     }
 
 

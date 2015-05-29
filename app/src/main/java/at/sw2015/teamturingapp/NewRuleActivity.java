@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class NewRuleActivity extends Activity{

@@ -2,6 +2,8 @@ package at.sw2015.teamturingapp;
 
 import java.util.Vector;
 
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+
 public class TMEngine {
 
     private static final int CURRENT_STATE = 0;

@@ -22,7 +22,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.content.Context;
 
 import at.sw2015.teamturingapp.MainActivity;
-import at.sw2015.teamturingapp.TMConfiguration;
 
 
 public class XMLParser {

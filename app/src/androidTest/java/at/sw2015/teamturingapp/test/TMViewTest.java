@@ -8,7 +8,7 @@ import com.robotium.solo.Solo;
 
 import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.R;
-import at.sw2015.teamturingapp.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.TMView;
 
 

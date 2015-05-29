@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+
 public class TMView {
 
     private Vector<ImageView> all_image_views_ = null;

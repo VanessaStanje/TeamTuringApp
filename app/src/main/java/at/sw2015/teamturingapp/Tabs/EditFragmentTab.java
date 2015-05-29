@@ -1,4 +1,4 @@
-package at.sw2015.teamturingapp;
+package at.sw2015.teamturingapp.Tabs;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.EditCards.RuleCardsAdapter;
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
+import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.NewRuleActivity;
+import at.sw2015.teamturingapp.R;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class EditFragmentTab extends Fragment {

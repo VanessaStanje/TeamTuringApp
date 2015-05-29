@@ -1,4 +1,4 @@
-package at.sw2015.teamturingapp;
+package at.sw2015.teamturingapp.Tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +16,11 @@ import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.R;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+import at.sw2015.teamturingapp.TMEngine;
+import at.sw2015.teamturingapp.TMView;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class RunFragmentTab extends Fragment implements View.OnClickListener {

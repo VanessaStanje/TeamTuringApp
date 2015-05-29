@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class EditRuleActivity extends Activity{
