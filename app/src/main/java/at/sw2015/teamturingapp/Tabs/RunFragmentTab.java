@@ -1,4 +1,4 @@
-package at.sw2015.teamturingapp;
+package at.sw2015.teamturingapp.Tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,33 +12,34 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
+
+import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.R;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+import at.sw2015.teamturingapp.TMEngine;
+import at.sw2015.teamturingapp.TMView;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class RunFragmentTab extends Fragment implements View.OnClickListener {
 
     // Made public to check in MainActivityTest
     // which test file was loaded
-    public int resource_id = R.raw.tmtestconfig;
     private TMEngine tm_engine = new TMEngine();
     private TMView tm_view = null;
     private TMConfiguration current_tm_config = null;
-    private XMLParser xp = new XMLParser();
-    private InputStream raw = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root_view = inflater.inflate(R.layout.activity_run, container, false);
 
-        raw = getResources().openRawResource(resource_id);
-
         try {
             org.w3c.dom.Document raw_xml_input = XMLParser.
-                    readXMLInputFromSD(MainActivity.curr_tm_file_name);
-            System.err.println(MainActivity.curr_tm_file_name);
+                    readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+            System.err.println(MainActivity.curr_tm_file_name_path);
             current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {
@@ -100,11 +101,9 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
     }
 
     public void reset(){
-        raw = getResources().openRawResource(R.raw.tmtestconfig);
-
         try {
             org.w3c.dom.Document raw_xml_input = XMLParser.
-                    readXMLInputFromSD(MainActivity.curr_tm_file_name);
+                    readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
             current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {

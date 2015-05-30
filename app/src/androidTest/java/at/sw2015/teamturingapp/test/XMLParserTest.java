@@ -13,8 +13,8 @@ import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.R;
 
 
-import at.sw2015.teamturingapp.TMConfiguration;
-import at.sw2015.teamturingapp.XMLParser;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
@@ -34,9 +34,8 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
 
     public void testXMLReadRawInput() throws Exception
     {
-        XMLParser new_xml_parser = new XMLParser();
         InputStream in = mySolo.getCurrentActivity().getResources().openRawResource(R.raw.tmtestconfig);
-        org.w3c.dom.Document new_doc = new_xml_parser.readRawXMLInput(in);
+        org.w3c.dom.Document new_doc = XMLParser.readRawXMLInput(in);
         assertNotNull(new_doc);
 
         NodeList author = new_doc.getElementsByTagName("AUTHOR");
@@ -105,13 +104,13 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         XMLParser.addNewRule("S7-1-0-R-S8");
 
         org.w3c.dom.Document raw_xml_input = XMLParser.
-                readXMLInputFromSD(MainActivity.curr_tm_file_name);
+                readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
         TMConfiguration new_tm_config = null;
         try {
             new_tm_config = XMLParser.readTMConfig(raw_xml_input);
         }catch (Exception e)
         {
-
+          e.printStackTrace();
         }
 
         assertNotNull(new_tm_config);
@@ -127,12 +126,13 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         XMLParser.removeRule(0);
 
         org.w3c.dom.Document raw_xml_input = XMLParser.
-                readXMLInputFromSD(MainActivity.curr_tm_file_name);
+                readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
         TMConfiguration new_tm_config = null;
         try {
             new_tm_config = XMLParser.readTMConfig(raw_xml_input);
         }catch (Exception e)
         {
+            e.printStackTrace();
         }
 
         assertNotNull(new_tm_config);

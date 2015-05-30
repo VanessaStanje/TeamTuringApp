@@ -2,11 +2,8 @@ package at.sw2015.teamturingapp.test;
 
 import junit.framework.TestCase;
 
-import java.util.Vector;
-
-import at.sw2015.teamturingapp.EditFragmentTab;
-import at.sw2015.teamturingapp.TMConfiguration;
-import at.sw2015.teamturingapp.TMEngine;
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 
 public class EditFragmentTabEngineTest extends TestCase {
 

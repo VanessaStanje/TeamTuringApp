@@ -1,4 +1,4 @@
-package at.sw2015.teamturingapp;
+package at.sw2015.teamturingapp.Utils;
 
 import android.os.Environment;
 
@@ -18,7 +18,7 @@ public class OutWriter {
         this.directory = directory;
     }
 
-    public boolean writeXMLToFile(org.w3c.dom.Document content,String file_name){
+    public boolean writeXMLToFileName(org.w3c.dom.Document content,String file_name){
         try {
 
             if(directory.length() == 0) {
@@ -34,6 +34,35 @@ public class OutWriter {
             }
 
             File file = new File(newFolder, file_name + ".xml");
+            if(!file.exists() && !file.createNewFile())
+            {
+                System.err.println("ERROR; COULD NOT CREATE FILE!");
+                return false;
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(content);
+            StreamResult streamResult = new StreamResult(file);
+            transformer.transform(domSource, streamResult);
+
+        } catch (Exception e) {
+            System.out.println("ERROR; " + e);
+            return false;
+        }
+        return true;
+    }
+
+
+    public boolean writeXMLToFilePath(org.w3c.dom.Document content,String file_path){
+        try {
+
+            if(directory.length() == 0) {
+                System.err.println("ERROR; NO DIRECTORY SELECTED!");
+                return false;
+            }
+
+            File file = new File(file_path);
             if(!file.exists() && !file.createNewFile())
             {
                 System.err.println("ERROR; COULD NOT CREATE FILE!");

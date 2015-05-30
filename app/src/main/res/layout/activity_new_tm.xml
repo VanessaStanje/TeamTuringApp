@@ -1,0 +1,182 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tabsScrollColor"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.09"
+        android:background="@color/ColorPrimaryDark"
+        android:fontFamily="@string/abc_action_bar_home_subtitle_description_format"
+        android:gravity="center"
+        android:text="Create New TM"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:layout_weight="0.09"
+        android:background="@color/cardview_shadow_start_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewNewTMName"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TM NAME"
+            android:textAppearance="?android:attr/textAppearanceInverse" />
+
+        <EditText
+            android:id="@+id/new_tm_name_edit"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:layout_weight="0.09"
+        android:background="@color/cardview_shadow_start_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewAuthor"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="AUTHOR"
+            android:textAppearance="?android:attr/textAppearanceInverse" />
+
+        <EditText
+            android:id="@+id/new_tm_author_edit"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewInitialState"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="INITIAL STATE"
+            android:textAppearance="?android:attr/textAppearanceInverse" />
+
+        <EditText
+            android:id="@+id/new_tm_initial_state_edit"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"
+        android:background="@color/cardview_shadow_start_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewTapeCount"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TAPE COUNT"
+            android:textAppearance="?android:attr/textAppearanceInverse" />
+
+        <EditText
+            android:id="@+id/new_tm_tape_count_edit"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberSigned"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewHeadPos"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="HEADS POSITION"
+            android:textAppearance="?android:attr/textAppearanceInverse" />
+
+        <EditText
+            android:id="@+id/new_tm_head_pos_edit"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberSigned"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.26"
+        android:background="@color/cardview_shadow_start_color"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/new_tm_button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:text="CANCEL" />
+
+        <Button
+            android:id="@+id/new_tm_button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:text="SAVE" />
+    </LinearLayout>
+
+</LinearLayout>

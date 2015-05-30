@@ -1,8 +1,9 @@
-package at.sw2015.teamturingapp;
+package at.sw2015.teamturingapp.Tabs;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 

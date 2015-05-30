@@ -26,5 +26,8 @@
         <activity
             android:name=".NewRuleActivity" />
 
+        <activity
+            android:name=".NewTMActivity" />
+
     </application>
 </manifest>

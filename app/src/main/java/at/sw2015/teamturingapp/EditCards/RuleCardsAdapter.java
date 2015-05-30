@@ -10,17 +10,14 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import java.util.List;
 
-import at.sw2015.teamturingapp.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
 import at.sw2015.teamturingapp.EditRuleActivity;
 import at.sw2015.teamturingapp.R;
-import at.sw2015.teamturingapp.ViewPagerAdapter;
-import at.sw2015.teamturingapp.XMLParser;
-
-import android.widget.AdapterView.OnItemClickListener;
+import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.RulesViewHolder> {
 
@@ -106,7 +103,7 @@ public class RuleCardsAdapter extends RecyclerView.Adapter<RuleCardsAdapter.Rule
         {
             AlertDialog.Builder alter_dialog_builder =
                     new AlertDialog.Builder(ctx,AlertDialog.THEME_HOLO_LIGHT);
-            alter_dialog_builder.setMessage("Do you want to delete the rule?");
+            alter_dialog_builder.setMessage("Do you want to delete the rule #" + rule_id + "?");
             alter_dialog_builder.setCancelable(true);
             alter_dialog_builder.setPositiveButton("YES",
                     new DialogInterface.OnClickListener() {
