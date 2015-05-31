@@ -1,5 +1,15 @@
 package at.sw2015.teamturingapp.Utils;
 
+import android.content.Context;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,16 +20,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlPullParserException;
-
-import android.content.Context;
 
 import at.sw2015.teamturingapp.MainActivity;
 
@@ -48,8 +48,7 @@ public class XMLParser {
         return document;
     }
 
-    public static org.w3c.dom.Document readXMLInputFromSD(String file_path)
-    {
+    public static org.w3c.dom.Document readXMLInputFromSD(String file_path) {
         Document doc = null;
         try {
             File file = new File(file_path);
@@ -64,8 +63,7 @@ public class XMLParser {
         return doc;
     }
 
-    public static org.w3c.dom.Document readXMLInputFromFile(File file)
-    {
+    public static org.w3c.dom.Document readXMLInputFromFile(File file) {
         Document doc = null;
         try {
             InputStream input_stream = new FileInputStream(file.getPath());
@@ -124,7 +122,7 @@ public class XMLParser {
     public static boolean saveTMRule(String current_state, String reads_sign, String writes_sign,
                                      String moves, String next_state, int index, Context ctx)
             throws XmlPullParserException, IOException,
-            ParserConfigurationException, SAXException{
+            ParserConfigurationException, SAXException {
 
         org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
@@ -136,36 +134,40 @@ public class XMLParser {
         rules_list.item(index).setTextContent(new_content);
 
         String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
-    public static boolean addNewRule(String new_rule)
-    {
+    public static boolean addNewRule(String new_rule) {
         org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName("RULES");
         Node new_child = raw_xml_input.createElement("R");
         new_child.setTextContent(new_rule);
-        Element rule = (Element)rules_list.item(0);
+        Element rule = (Element) rules_list.item(0);
         rule.appendChild(new_child);
 
         String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
-    public static boolean removeRule(int index)
-    {
+    public static boolean removeRule(int index) {
         org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
         NodeList main_rule = raw_xml_input.getElementsByTagName("RULES");
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
 
-        if(index >= rules_list.getLength() || main_rule.getLength() == 0)
+        if (index >= rules_list.getLength() || main_rule.getLength() == 0)
             return false;
 
         main_rule.item(0).removeChild(rules_list.item(index));
         String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+    }
+
+    public static boolean writeNewTM(String tm_name, String author,
+                                     String initial_state, String tape_count,
+                                     String heads_position,String tape_content) {
+       return false;
     }
 
 }
