@@ -19,7 +19,6 @@ public class NewTMActivityTest extends ActivityInstrumentationTestCase2<NewTMAct
     }
 
     public void tearDown() throws Exception {
-
     }
 
     public void testButtons(){

@@ -20,7 +20,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-
 import at.sw2015.teamturingapp.MainActivity;
 
 
@@ -167,7 +166,54 @@ public class XMLParser {
     public static boolean writeNewTM(String tm_name, String author,
                                      String initial_state, String tape_count,
                                      String heads_position,String tape_content) {
-       return false;
+        try{
+            DocumentBuilderFactory factory =
+                    DocumentBuilderFactory.newInstance();
+            DocumentBuilder parser = factory.newDocumentBuilder();
+            Document doc=parser.newDocument();
+
+            Element root=doc.createElement("TM_CONFIG");
+            doc.appendChild(root);
+
+            Element AUTHOR=doc.createElement("AUTHOR");
+            AUTHOR.setTextContent(author);
+            root.appendChild(AUTHOR);
+
+            Element TAPE_COUNT=doc.createElement("TAPE_COUNT");
+            TAPE_COUNT.setTextContent(tape_count);
+            root.appendChild(TAPE_COUNT);
+
+            Element INITIAL_STATE=doc.createElement("INITIAL_STATE");
+            INITIAL_STATE.setTextContent(initial_state);
+            root.appendChild(INITIAL_STATE);
+
+            Element HEADS=doc.createElement("HEADS");
+            root.appendChild(HEADS);
+
+            Element H1 = doc.createElement("H");
+            H1.setTextContent(heads_position);
+            HEADS.appendChild(H1);
+
+            Element TAPES=doc.createElement("TAPES");
+            root.appendChild(TAPES);
+
+            Element T1 = doc.createElement("T");
+            T1.setTextContent(tape_content);
+            TAPES.appendChild(T1);
+
+
+            Element RULES=doc.createElement("RULES");
+            root.appendChild(RULES);
+
+            Element INITIAL_RULE = doc.createElement("R");
+            INITIAL_RULE.setTextContent(initial_state + "-0-0-H-" + initial_state);
+            RULES.appendChild(INITIAL_RULE);
+
+            MainActivity.out_writer.writeXMLToFileName(doc,tm_name);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return true;
     }
 
 }
