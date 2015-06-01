@@ -3,6 +3,7 @@ package at.sw2015.teamturingapp.test;
 import java.io.InputStream;
 import java.util.Vector;
 
+import android.os.Environment;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
@@ -140,5 +141,27 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         assertTrue(all_rules.size() == 2);
         assertTrue(all_rules.get(0).get(0).equalsIgnoreCase("S1"));
         assertTrue(all_rules.get(1).get(0).equalsIgnoreCase("S2"));
+    }
+
+    public void testCreateTM(){
+        assertTrue(XMLParser.writeNewTM("NewTMTest","Myself","S0","1","0","0-0-0-0-0"));
+
+        org.w3c.dom.Document raw_xml_input = XMLParser.
+                readXMLInputFromSD(Environment.
+                        getExternalStorageDirectory() + "/TMConfigs/" + "NewTMTest.xml");
+        TMConfiguration new_tm_config = null;
+        try {
+            new_tm_config = XMLParser.readTMConfig(raw_xml_input);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        assertNotNull(new_tm_config);
+        assertEquals(new_tm_config.getAuthor(),"Myself");
+        assertEquals(""+new_tm_config.getHeadPositions().get(0),"0");
+        assertEquals(new_tm_config.getCurrentState(),"S0");
+        assertEquals(""+new_tm_config.getTapeCount(),"1");
+        assertEquals(new_tm_config.getAllTapes().get(0),"0-0-0-0-0");
     }
 }

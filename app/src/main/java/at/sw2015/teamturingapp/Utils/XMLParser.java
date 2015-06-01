@@ -1,15 +1,6 @@
 package at.sw2015.teamturingapp.Utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Vector;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import android.content.Context;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,7 +10,15 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.content.Context;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Vector;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.MainActivity;
 
@@ -48,8 +47,7 @@ public class XMLParser {
         return document;
     }
 
-    public static org.w3c.dom.Document readXMLInputFromSD(String file_path)
-    {
+    public static org.w3c.dom.Document readXMLInputFromSD(String file_path) {
         Document doc = null;
         try {
             File file = new File(file_path);
@@ -64,8 +62,7 @@ public class XMLParser {
         return doc;
     }
 
-    public static org.w3c.dom.Document readXMLInputFromFile(File file)
-    {
+    public static org.w3c.dom.Document readXMLInputFromFile(File file) {
         Document doc = null;
         try {
             InputStream input_stream = new FileInputStream(file.getPath());
@@ -124,7 +121,7 @@ public class XMLParser {
     public static boolean saveTMRule(String current_state, String reads_sign, String writes_sign,
                                      String moves, String next_state, int index, Context ctx)
             throws XmlPullParserException, IOException,
-            ParserConfigurationException, SAXException{
+            ParserConfigurationException, SAXException {
 
         org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
@@ -136,36 +133,87 @@ public class XMLParser {
         rules_list.item(index).setTextContent(new_content);
 
         String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
-    public static boolean addNewRule(String new_rule)
-    {
+    public static boolean addNewRule(String new_rule) {
         org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName("RULES");
         Node new_child = raw_xml_input.createElement("R");
         new_child.setTextContent(new_rule);
-        Element rule = (Element)rules_list.item(0);
+        Element rule = (Element) rules_list.item(0);
         rule.appendChild(new_child);
 
         String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
-    public static boolean removeRule(int index)
-    {
+    public static boolean removeRule(int index) {
         org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
 
         NodeList main_rule = raw_xml_input.getElementsByTagName("RULES");
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
 
-        if(index >= rules_list.getLength() || main_rule.getLength() == 0)
+        if (index >= rules_list.getLength() || main_rule.getLength() == 0)
             return false;
 
         main_rule.item(0).removeChild(rules_list.item(index));
         String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input,file_path);
+        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+    }
+
+    public static boolean writeNewTM(String tm_name, String author,
+                                     String initial_state, String tape_count,
+                                     String heads_position,String tape_content) {
+        try{
+            DocumentBuilderFactory factory =
+                    DocumentBuilderFactory.newInstance();
+            DocumentBuilder parser = factory.newDocumentBuilder();
+            Document doc=parser.newDocument();
+
+            Element root=doc.createElement("TM_CONFIG");
+            doc.appendChild(root);
+
+            Element AUTHOR=doc.createElement("AUTHOR");
+            AUTHOR.setTextContent(author);
+            root.appendChild(AUTHOR);
+
+            Element TAPE_COUNT=doc.createElement("TAPE_COUNT");
+            TAPE_COUNT.setTextContent(tape_count);
+            root.appendChild(TAPE_COUNT);
+
+            Element INITIAL_STATE=doc.createElement("INITIAL_STATE");
+            INITIAL_STATE.setTextContent(initial_state);
+            root.appendChild(INITIAL_STATE);
+
+            Element HEADS=doc.createElement("HEADS");
+            root.appendChild(HEADS);
+
+            Element H1 = doc.createElement("H");
+            H1.setTextContent(heads_position);
+            HEADS.appendChild(H1);
+
+            Element TAPES=doc.createElement("TAPES");
+            root.appendChild(TAPES);
+
+            Element T1 = doc.createElement("T");
+            T1.setTextContent(tape_content);
+            TAPES.appendChild(T1);
+
+
+            Element RULES=doc.createElement("RULES");
+            root.appendChild(RULES);
+
+            Element INITIAL_RULE = doc.createElement("R");
+            INITIAL_RULE.setTextContent(initial_state + "-0-0-H-" + initial_state);
+            RULES.appendChild(INITIAL_RULE);
+
+            MainActivity.out_writer.writeXMLToFileName(doc,tm_name);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return true;
     }
 
 }
