@@ -65,6 +65,18 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
         all_image_views.add((ImageView) root_view.findViewById(R.id.field8));
         all_image_views.add((ImageView) root_view.findViewById(R.id.field9));
 
+        Vector<ImageView> all_image_views_goals = new Vector<>();
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field1_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field2_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field3_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field4_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field5_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field6_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field7_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field8_correct));
+        all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field9_correct));
+
+
         MainActivity activity = (MainActivity) getActivity();
 
         tm_view = new TMView(all_image_views, ((activity)).getResources().getDrawable(R.mipmap.base),
@@ -75,7 +87,13 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
                 ((activity)).getResources().getDrawable(R.mipmap.dollar),
                 ((activity)).getResources().getDrawable(R.mipmap.dollar_sel),
                 ((activity)).getResources().getDrawable(R.mipmap.underline),
-                ((activity)).getResources().getDrawable(R.mipmap.underline_sel));
+                ((activity)).getResources().getDrawable(R.mipmap.underline_sel),
+                all_image_views_goals,
+                ((activity)).getResources().getDrawable(R.mipmap.base_correct),
+                ((activity)).getResources().getDrawable(R.mipmap.one_correct),
+                ((activity)).getResources().getDrawable(R.mipmap.zero_correct),
+                ((activity)).getResources().getDrawable(R.mipmap.dollar_correct),
+                ((activity)).getResources().getDrawable(R.mipmap.underline_correct));
 
         tm_view.printTMState(current_tm_config, getActivity().getBaseContext());
         tm_view.updateView(current_tm_config);

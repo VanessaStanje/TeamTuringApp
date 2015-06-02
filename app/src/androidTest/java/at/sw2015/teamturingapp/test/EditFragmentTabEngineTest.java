@@ -12,7 +12,7 @@ public class EditFragmentTabEngineTest extends TestCase {
         assertTrue(current_tm_config.getAuthor().equalsIgnoreCase("Lukas Gregori and Vanessa Stanje"));
         assertTrue(current_tm_config.getCurrentState().equalsIgnoreCase("S0"));
         assertTrue(current_tm_config.getInitialState().equalsIgnoreCase("S0"));
-        assertTrue(current_tm_config.getAllRules().size() == 3);
+        assertTrue(current_tm_config.getAllRules().size() == 7);
         assertTrue(current_tm_config.getAllTapes().size() == 1);
     }
 

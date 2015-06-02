@@ -9,12 +9,19 @@
 	</HEADS>
 	<TAPES>
 		<!-- Contents of Tape without the trailing blanks -->
-		<T>1-0-0-1-0-1</T>
+		<T>0-1-0-1-0-1</T>
 	</TAPES>
+    <GOALS>
+        <G>1-0-1-0-1-0</G>
+    </GOALS>
 	<RULES>
 		<!-- |Prev. State - Reads - Writes - Moves - Next State| -->
-		<R>S0-1-0-R-S1</R>
-		<R>S1-0-1-R-S2</R>
-		<R>S2-0-1-H-S2</R>
+		<R>S0-0-1-R-S0</R>
+        <R>S0-1-0-R-S1</R>
+        <R>S1-0-1-R-S1</R>
+        <R>S1-1-0-R-S2</R>
+        <R>S2-0-1-R-S2</R>
+        <R>S2-1-0-H-S3</R>
+        <R>S3-0-0-H-S3</R>
 	</RULES>
 </TM_CONFIG>

@@ -71,8 +71,9 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         assertEquals(new_tm_config.getHeadPositions().size(),1);
         assertEquals((int)new_tm_config.getHeadPositions().get(0),0);
         assertEquals(new_tm_config.getAllTapes().size(),1);
-        assertEquals(new_tm_config.getAllTapes().get(0),"1-0-0-1-0-1");
-        assertEquals(new_tm_config.getAllRules().size(),3);
+        assertEquals(new_tm_config.getAllTapes().get(0),"0-1-0-1-0-1");
+        assertEquals(new_tm_config.getAllGoals().get(0),"1-0-1-0-1-0");
+        assertEquals(new_tm_config.getAllRules().size(),7);
 
         Vector<String> rule1 = new_tm_config.getAllRules().get(0);
         Vector<String> rule2 = new_tm_config.getAllRules().get(1);
@@ -83,22 +84,22 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         assertEquals(rule3.size(),5);
 
         assertEquals(rule1.get(0),"S0");
-        assertEquals(rule1.get(1),"1");
-        assertEquals(rule1.get(2),"0");
+        assertEquals(rule1.get(1),"0");
+        assertEquals(rule1.get(2),"1");
         assertEquals(rule1.get(3),"R");
-        assertEquals(rule1.get(4),"S1");
+        assertEquals(rule1.get(4),"S0");
 
-        assertEquals(rule2.get(0),"S1");
-        assertEquals(rule2.get(1),"0");
-        assertEquals(rule2.get(2),"1");
+        assertEquals(rule2.get(0),"S0");
+        assertEquals(rule2.get(1),"1");
+        assertEquals(rule2.get(2),"0");
         assertEquals(rule2.get(3),"R");
-        assertEquals(rule2.get(4),"S2");
+        assertEquals(rule2.get(4),"S1");
 
-        assertEquals(rule3.get(0),"S2");
+        assertEquals(rule3.get(0),"S1");
         assertEquals(rule3.get(1),"0");
         assertEquals(rule3.get(2),"1");
-        assertEquals(rule3.get(3),"H");
-        assertEquals(rule3.get(4),"S2");
+        assertEquals(rule3.get(3),"R");
+        assertEquals(rule3.get(4),"S1");
     }
 
     public void testAddNewRule(){
@@ -116,11 +117,11 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
 
         assertNotNull(new_tm_config);
         Vector<Vector<String>> all_rules = new_tm_config.getAllRules();
-        assertTrue(all_rules.get(3).get(0).equalsIgnoreCase("S7"));
-        assertTrue(all_rules.get(3).get(1).equalsIgnoreCase("1"));
-        assertTrue(all_rules.get(3).get(2).equalsIgnoreCase("0"));
-        assertTrue(all_rules.get(3).get(3).equalsIgnoreCase("R"));
-        assertTrue(all_rules.get(3).get(4).equalsIgnoreCase("S8"));
+        assertTrue(all_rules.get(7).get(0).equalsIgnoreCase("S7"));
+        assertTrue(all_rules.get(7).get(1).equalsIgnoreCase("1"));
+        assertTrue(all_rules.get(7).get(2).equalsIgnoreCase("0"));
+        assertTrue(all_rules.get(7).get(3).equalsIgnoreCase("R"));
+        assertTrue(all_rules.get(7).get(4).equalsIgnoreCase("S8"));
     }
 
     public void testRemoveRule(){
@@ -138,9 +139,9 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
 
         assertNotNull(new_tm_config);
         Vector<Vector<String>> all_rules = new_tm_config.getAllRules();
-        assertTrue(all_rules.size() == 2);
-        assertTrue(all_rules.get(0).get(0).equalsIgnoreCase("S1"));
-        assertTrue(all_rules.get(1).get(0).equalsIgnoreCase("S2"));
+        assertTrue(all_rules.size() == 6);
+        assertTrue(all_rules.get(0).get(0).equalsIgnoreCase("S0"));
+        assertTrue(all_rules.get(1).get(0).equalsIgnoreCase("S1"));
     }
 
     public void testCreateTM(){

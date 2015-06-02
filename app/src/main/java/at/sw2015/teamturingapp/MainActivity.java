@@ -40,7 +40,8 @@ public class MainActivity extends ActionBarActivity {
     // Made public to check in MainActivityTest
     // which test file was loaded
     public static int resource_id = R.raw.tmtestconfig;
-    public static String curr_tm_file_name_path = "tmtestconfig";
+    public static String curr_tm_file_name_path = Environment.
+            getExternalStorageDirectory() + "/TMConfigs/" + "tmtestconfig" + ".xml";
 
     public TMConfiguration current_tm_config = null;
     public static OutWriter out_writer = null;

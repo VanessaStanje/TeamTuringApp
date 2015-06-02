@@ -56,9 +56,11 @@ public class TMEngineTest extends TestCase {
 
         Vector<String> expected_AllTapes = new Vector<>();
         expected_AllTapes.add("1-0-0-1-0-1");
+        Vector<String> all_goals = new Vector<>();
+        all_goals.add("0-0-0-0-0-0");
 
         TMConfiguration test_config = new TMConfiguration("Lukas Gregori and Vanessa Stanje",
-                1, "S0", expected_HeadPosition, expected_AllTapes, expected_AllRules);
+                1, "S0", expected_HeadPosition, expected_AllTapes,all_goals, expected_AllRules);
 
         new_tm_engine.step(test_config);
         assertTrue(test_config.getCurrentState().equalsIgnoreCase("S1"));

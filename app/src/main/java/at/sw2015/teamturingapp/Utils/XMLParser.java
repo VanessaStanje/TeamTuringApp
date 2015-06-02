@@ -30,6 +30,7 @@ public class XMLParser {
     final static String INITIAL_STATE = "INITIAL_STATE";
     final static String HEADS = "H";
     final static String TAPES = "T";
+    final static String GOALS = "G";
     final static String RULES = "R";
 
     public XMLParser() {
@@ -91,10 +92,12 @@ public class XMLParser {
 
         NodeList heads_list = raw_xml_input.getElementsByTagName(HEADS);
         NodeList tapes_list = raw_xml_input.getElementsByTagName(TAPES);
+        NodeList goals_list = raw_xml_input.getElementsByTagName(GOALS);
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
 
         Vector<Integer> head_positions = new Vector<>();
         Vector<String> all_tapes = new Vector<>();
+        Vector<String> all_goals = new Vector<>();
         Vector<Vector<String>> all_rules = new Vector<>();
 
         for (int heads_counter = 0; heads_counter < heads_list.getLength(); heads_counter++)
@@ -103,6 +106,9 @@ public class XMLParser {
 
         for (int tapes_counter = 0; tapes_counter < tapes_list.getLength(); tapes_counter++)
             all_tapes.add(tapes_list.item(tapes_counter).getTextContent());
+
+        for (int goals_counter = 0; goals_counter < tapes_list.getLength(); goals_counter++)
+            all_goals.add(goals_list.item(goals_counter).getTextContent());
 
         for (int rules_counter = 0; rules_counter < rules_list.getLength(); rules_counter++) {
             Vector<String> current_rule = new Vector<>();
@@ -115,7 +121,7 @@ public class XMLParser {
         }
 
         return new TMConfiguration(author, tape_count, initial_state, head_positions,
-                all_tapes, all_rules);
+                all_tapes,all_goals, all_rules);
     }
 
     public static boolean saveTMRule(String current_state, String reads_sign, String writes_sign,
@@ -201,6 +207,13 @@ public class XMLParser {
             T1.setTextContent(tape_content);
             TAPES.appendChild(T1);
 
+            Element GOALS=doc.createElement("GOALS");
+            root.appendChild(GOALS);
+
+            //Todo: Update Test and func.
+            Element G1 = doc.createElement("G");
+            G1.setTextContent("0-0-0-0-0-0");
+            GOALS.appendChild(G1);
 
             Element RULES=doc.createElement("RULES");
             root.appendChild(RULES);
