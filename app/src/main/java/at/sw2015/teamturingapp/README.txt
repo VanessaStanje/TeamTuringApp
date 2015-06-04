@@ -20,4 +20,14 @@
 # This was not completed due to problems with the XML file handlers,
 # which took up more time than planned. We will implement
 # Them in the next iteration.
+#########################################################
+#
+########################################################
+############### RELEASE 0.3 ############################
+#
+# Third release, still in Iteration 2.
+# All of the user stories had been implemented,
+# even more, we managed to be faster than expected and
+# implemented the user stories that were not fully implemented
+# during the last iteration as well as some "bonus"-stuff.
 ########################################################
