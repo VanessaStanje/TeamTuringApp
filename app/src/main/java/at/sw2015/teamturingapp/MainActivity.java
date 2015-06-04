@@ -1,21 +1,35 @@
 package at.sw2015.teamturingapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
+import at.sw2015.teamturingapp.Utils.FileHandler;
+import at.sw2015.teamturingapp.Utils.HighScoreEntry;
+import at.sw2015.teamturingapp.Utils.HighscoreHandler;
+import at.sw2015.teamturingapp.Utils.OutWriter;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -29,25 +43,36 @@ public class MainActivity extends ActionBarActivity {
     // Made public to check in MainActivityTest
     // which test file was loaded
     public static int resource_id = R.raw.tmtestconfig;
-    public static String curr_tm_file_name = "tmtestconfig";
+    public static String curr_tm_file_name_path = Environment.
+            getExternalStorageDirectory() + "/TMConfigs/" + "tmtestconfig" + ".xml";
 
     public TMConfiguration current_tm_config = null;
     public static OutWriter out_writer = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
+        out_writer = new OutWriter("/TMConfigs/");
+
+        if(!out_writer.playerFileExists())
+          HighscoreHandler.setCurrentPlayerName("Player1");
+        else
+          System.out.println("Current Player: " +
+                  HighscoreHandler.getCurrentPlayerName());
+
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         InputStream raw = getResources().openRawResource(resource_id);
-        curr_tm_file_name = getResources().getResourceEntryName(resource_id);
-        out_writer = new OutWriter("TMConfigs");
+        curr_tm_file_name_path = Environment.
+                getExternalStorageDirectory() + "/TMConfigs/" +
+                getResources().getResourceEntryName(resource_id) + ".xml";
 
         try {
-            out_writer.writeXMLToFile(XMLParser.readRawXMLInput(raw),curr_tm_file_name);
+            out_writer.writeXMLToFileName(XMLParser.readRawXMLInput(raw), getResources().getResourceEntryName(resource_id));
             raw = getResources().openRawResource(resource_id);
             org.w3c.dom.Document raw_xml_input = XMLParser.readRawXMLInput(raw);
             current_tm_config = XMLParser.readTMConfig(raw_xml_input);
@@ -70,6 +95,7 @@ public class MainActivity extends ActionBarActivity {
         });
 
         sliding_tab_layout.setViewPager(view_pager);
+        out_writer.clearHighScore(current_tm_config.getTMName());
     }
 
     @Override
@@ -80,6 +106,77 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return item.getItemId() == R.id.action_settings || super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_load:
+                createFileChooser();
+                return true;
+            case R.id.action_new:
+                createNewTMDialog();
+                return true;
+            case R.id.action_highscore:
+                showHighScoreToast();
+                return true;
+            default:
+                return item.getItemId() == R.id.action_settings
+                        || super.onOptionsItemSelected(item);
+        }
     }
+
+    private void createFileChooser() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "Choose a TM File to run"),
+                    0);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "No File Manager found, please install one and try again",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    try {
+                        String path = FileHandler.getPath(this, uri);
+                        org.w3c.dom.Document raw = XMLParser.readXMLInputFromFile(new File(path));
+                        current_tm_config = XMLParser.readTMConfig(raw);
+                        curr_tm_file_name_path = path;
+                        EditFragmentTab.update();
+                        ViewPagerAdapter.current_run_fragment.reset();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void createNewTMDialog() {
+        Intent intent = new Intent(this, NewTMActivity.class);
+        this.startActivity(intent);
+    }
+
+    private String showHighScoreToast()
+    {
+        ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
+
+        String highscore_message = "####### HIGHSCORE #######\n\n";
+        for(HighScoreEntry curr_entry : all_scores)
+            highscore_message += curr_entry.player_name + "-" + curr_entry.step_counter + "\n";
+
+        Toast.makeText(this,highscore_message,
+                Toast.LENGTH_SHORT).show();
+
+        return highscore_message;
+    }
+
+
 }

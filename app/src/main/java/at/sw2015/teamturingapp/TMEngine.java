@@ -2,6 +2,8 @@ package at.sw2015.teamturingapp;
 
 import java.util.Vector;
 
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+
 public class TMEngine {
 
     private static final int CURRENT_STATE = 0;
@@ -73,6 +75,24 @@ public class TMEngine {
             return current_head_position - 1;
 
         return current_head_position;
+    }
+
+    public boolean checkIfGameWon(TMConfiguration current_tm_config)
+    {
+        int done_tapes_count = 0;
+        for(String curr_tape : current_tm_config.getAllTapes())
+        {
+            for(String curr_goal : current_tm_config.getAllGoals())
+            {
+                if(curr_tape.equalsIgnoreCase(curr_goal))
+                    done_tapes_count++;
+            }
+        }
+
+        if(done_tapes_count == current_tm_config.getAllTapes().size())
+            return true;
+
+        return false;
     }
 
 }

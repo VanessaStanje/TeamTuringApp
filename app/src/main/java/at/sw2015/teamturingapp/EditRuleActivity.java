@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
+import at.sw2015.teamturingapp.Utils.XMLParser;
+
 public class EditRuleActivity extends Activity{
 
     private String init_curr_state = "";
@@ -31,7 +35,13 @@ public class EditRuleActivity extends Activity{
         init_writes_sign = intent.getStringExtra("WRITES_SIGN");
         init_moves = intent.getStringExtra("MOVES");
         init_next_state = intent.getStringExtra("NEXT_STATE");
-        rule_id = Integer.parseInt(intent.getStringExtra("RULE_ID"));
+
+        try{
+          rule_id = Integer.parseInt(intent.getStringExtra("RULE_ID"));
+        }catch (NumberFormatException e)
+        {
+          rule_id = 0;
+        }
 
         EditText curr_state_text = (EditText) findViewById(R.id.curr_state_edit);
         EditText reads_sign_text = (EditText) findViewById(R.id.reads_sign_edit);
@@ -104,8 +114,8 @@ public class EditRuleActivity extends Activity{
             String moves = moves_text.getText().toString();
             String next_state = next_state_text.getText().toString();
 
-            no_problem_writing = XMLParser.saveTMRule(curr_state,reads_sign,writes_sign,
-                    moves,next_state,rule_id,this);
+            no_problem_writing = XMLParser.saveTMRule(curr_state, reads_sign, writes_sign,
+                    moves, next_state, rule_id, this);
 
         } catch (Exception pce) {
             pce.printStackTrace();

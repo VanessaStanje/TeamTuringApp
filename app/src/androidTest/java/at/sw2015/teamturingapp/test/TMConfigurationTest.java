@@ -4,14 +4,14 @@ import junit.framework.TestCase;
 
 import java.util.Vector;
 
-import at.sw2015.teamturingapp.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 
 
 public class TMConfigurationTest extends TestCase {
 
     public  void testAuthorSetGet(){
         String expected_author = "Lukas Gregori and Vanessa Stanje";
-        TMConfiguration test_class = new TMConfiguration("Test", 0, "", null, null, null);
+        TMConfiguration test_class = new TMConfiguration("TMTestV1.0","Test", 0, "", null, null,null, null);
         test_class.setAuthor(expected_author);
         String result = test_class.getAuthor();
         assertEquals(expected_author, result);
@@ -19,7 +19,7 @@ public class TMConfigurationTest extends TestCase {
 
     public  void testTapeCountSetGet(){
         int expected_TapeCount = 1;
-        TMConfiguration test_class = new TMConfiguration("Test", 0, "", null, null, null);
+        TMConfiguration test_class = new TMConfiguration("TMTestV1.0","Test", 0, "", null, null,null, null);
         test_class.setTapeCount(expected_TapeCount);
         int result = test_class.getTapeCount();
         assertEquals(expected_TapeCount, result);
@@ -27,7 +27,7 @@ public class TMConfigurationTest extends TestCase {
 
     public  void testInitialStateSetGet(){
         String expected_InitialState = "S0";
-        TMConfiguration test_class = new TMConfiguration("Test", 0, "", null, null, null);
+        TMConfiguration test_class = new TMConfiguration("TMTestV1.0","Test", 0, "", null, null,null, null);
         test_class.setInitialState(expected_InitialState);
         String result = test_class.getInitialState();
         assertEquals(expected_InitialState, result);
@@ -36,7 +36,7 @@ public class TMConfigurationTest extends TestCase {
     public  void testHeadPositionsSetGet(){
         Vector<Integer> expected_HeadPosition = new Vector<>();
         expected_HeadPosition.add(1);
-        TMConfiguration test_class = new TMConfiguration("Test", 0, "", null, null, null);
+        TMConfiguration test_class = new TMConfiguration("TMTestV1.0","Test", 0, "", null, null,null,null);
         test_class.setHeadPositions(expected_HeadPosition);
         Vector<Integer> result = test_class.getHeadPositions();
         assertEquals(expected_HeadPosition, result);
@@ -45,10 +45,17 @@ public class TMConfigurationTest extends TestCase {
     public  void testAllTapesSetGet(){
         Vector<String> expected_AllTapes = new Vector<>();
         expected_AllTapes.add("1-0-0-1-0-1");
-        TMConfiguration test_class = new TMConfiguration("Test", 0, "", null, null, null);
+        TMConfiguration test_class = new TMConfiguration("TMTestV1.0","Test", 0, "", null, null,null, null);
         test_class.setAllTapes(expected_AllTapes);
         Vector<String> result = test_class.getAllTapes();
         assertEquals(expected_AllTapes, result);
+    }
+
+    public  void testTMNameSetGet(){
+        TMConfiguration test_class = new TMConfiguration("TMTestV1.0","Test", 0, "", null, null,null, null);
+        test_class.setTMName("TESTNAME");
+        String result = test_class.getTMName();
+        assertEquals("TESTNAME", result);
     }
 
     public  void testAllRulesSetGet(){
@@ -75,7 +82,7 @@ public class TMConfigurationTest extends TestCase {
         expected_AllRules.add(ruleTwo);
         expected_AllRules.add(ruleThree);
 
-        TMConfiguration test_class = new TMConfiguration("Test", 0, "", null, null, null);
+        TMConfiguration test_class = new TMConfiguration("TMTestV1.0","Test", 0, "", null, null,null, null);
         test_class.setAllRules(expected_AllRules);
         Vector<Vector<String>> result = test_class.getAllRules();
         assertEquals(expected_AllRules, result);

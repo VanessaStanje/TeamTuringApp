@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.Vector;
 
-import at.sw2015.teamturingapp.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.TMEngine;
 
 public class TMEngineTest extends TestCase {
@@ -56,9 +56,11 @@ public class TMEngineTest extends TestCase {
 
         Vector<String> expected_AllTapes = new Vector<>();
         expected_AllTapes.add("1-0-0-1-0-1");
+        Vector<String> all_goals = new Vector<>();
+        all_goals.add("0-0-0-0-0-0");
 
-        TMConfiguration test_config = new TMConfiguration("Lukas Gregori and Vanessa Stanje",
-                1, "S0", expected_HeadPosition, expected_AllTapes, expected_AllRules);
+        TMConfiguration test_config = new TMConfiguration("TMTestV1.0","Lukas Gregori and Vanessa Stanje",
+                1, "S0", expected_HeadPosition, expected_AllTapes,all_goals, expected_AllRules);
 
         new_tm_engine.step(test_config);
         assertTrue(test_config.getCurrentState().equalsIgnoreCase("S1"));
@@ -71,5 +73,49 @@ public class TMEngineTest extends TestCase {
         new_tm_engine.step(test_config);
         assertTrue(test_config.getCurrentState().equalsIgnoreCase("S2"));
         assertEquals((int)test_config.getHeadPositions().get(0),2);
+    }
+
+    public void testCheckIfDone() throws Exception {
+        TMEngine new_tm_engine = new TMEngine();
+        Vector<Vector<String>> expected_AllRules = new Vector<>();
+        Vector<String> ruleOne = new Vector<>();
+        ruleOne.add("S0");
+        ruleOne.add("1");
+        ruleOne.add("0");
+        ruleOne.add("R");
+        ruleOne.add("S1");
+        Vector<String> ruleTwo = new Vector<>();
+        ruleTwo.add("S1");
+        ruleTwo.add("0");
+        ruleTwo.add("1");
+        ruleTwo.add("R");
+        ruleTwo.add("S2");
+        Vector<String> ruleThree = new Vector<>();
+        ruleThree.add("S2");
+        ruleThree.add("0");
+        ruleThree.add("1");
+        ruleThree.add("H");
+        ruleThree.add("S2");
+        expected_AllRules.add(ruleOne);
+        expected_AllRules.add(ruleTwo);
+        expected_AllRules.add(ruleThree);
+
+        Vector<Integer> expected_HeadPosition = new Vector<>();
+        expected_HeadPosition.add(0);
+
+        Vector<String> expected_AllTapes = new Vector<>();
+        expected_AllTapes.add("1-0-0-1-0-1");
+        Vector<String> all_goals = new Vector<>();
+        all_goals.add("0-1-1-1-0-1");
+
+        TMConfiguration test_config = new TMConfiguration("TMTestV1.0","Lukas Gregori and Vanessa Stanje",
+                1, "S0", expected_HeadPosition, expected_AllTapes,all_goals, expected_AllRules);
+
+        new_tm_engine.step(test_config);
+        assertFalse(new_tm_engine.checkIfGameWon(test_config));
+        new_tm_engine.step(test_config);
+        assertFalse(new_tm_engine.checkIfGameWon(test_config));
+        new_tm_engine.step(test_config);
+        assertTrue(new_tm_engine.checkIfGameWon(test_config));
     }
 }

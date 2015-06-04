@@ -1,10 +1,11 @@
-package at.sw2015.teamturingapp;
+package at.sw2015.teamturingapp.Tabs;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.EditCards.RuleCardsAdapter;
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
+import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.NewRuleActivity;
+import at.sw2015.teamturingapp.R;
+import at.sw2015.teamturingapp.Utils.TMConfiguration;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class EditFragmentTab extends Fragment {
 
@@ -82,8 +88,9 @@ public class EditFragmentTab extends Fragment {
     {
         TMConfiguration current_tm_config = null;
         try {
+           Log.d("HERE","FILE: " + MainActivity.curr_tm_file_name_path);
             org.w3c.dom.Document raw_xml_input = XMLParser.
-                    readXMLInputFromSD(MainActivity.curr_tm_file_name);
+                    readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
             current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {

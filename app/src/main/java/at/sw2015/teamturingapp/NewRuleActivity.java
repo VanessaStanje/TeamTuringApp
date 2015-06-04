@@ -1,15 +1,17 @@
 package at.sw2015.teamturingapp;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
+import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
+import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class NewRuleActivity extends Activity{
 
@@ -75,7 +77,7 @@ public class NewRuleActivity extends Activity{
                 new_writes_sign.length() == 0 || new_moves.length() == 0 ||
                 new_next_state.length() == 0)
         {
-            Toast.makeText(getApplicationContext(), (String) "Please fill out all of the fields before" +
+            Toast.makeText(getApplicationContext(),"Please fill out all of the fields before" +
                     " the rule can be saved. Thanks :)", Toast.LENGTH_LONG).show();
             return "ERROR";
         }
