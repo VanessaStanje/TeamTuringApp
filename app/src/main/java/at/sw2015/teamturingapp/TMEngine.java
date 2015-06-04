@@ -77,4 +77,9 @@ public class TMEngine {
         return current_head_position;
     }
 
+    public boolean checkIfGameWon(TMConfiguration current_tm_config)
+    {
+        return false;
+    }
+
 }

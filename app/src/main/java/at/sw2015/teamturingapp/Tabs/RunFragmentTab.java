@@ -1,5 +1,6 @@
 package at.sw2015.teamturingapp.Tabs;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
@@ -30,11 +32,13 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
     private TMEngine tm_engine = new TMEngine();
     private TMView tm_view = null;
     private TMConfiguration current_tm_config = null;
+    private Context ctx = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root_view = inflater.inflate(R.layout.activity_run, container, false);
+        ctx = container.getContext();
 
         try {
             org.w3c.dom.Document raw_xml_input = XMLParser.
@@ -107,6 +111,11 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
             case R.id.button_step:
                 tm_engine.step(current_tm_config);
                 tm_view.updateView(current_tm_config);
+                if(tm_engine.checkIfGameWon(current_tm_config))
+                {
+                    Toast.makeText(ctx,"Congrats, you won the game :) Wuhu!", Toast.LENGTH_LONG).show();
+                    reset();
+                }
                 break;
             case R.id.button_show:
                 if (current_tm_config != null)
