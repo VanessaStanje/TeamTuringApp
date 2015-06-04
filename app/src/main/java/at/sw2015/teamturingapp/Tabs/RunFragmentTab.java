@@ -20,6 +20,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.R;
+import at.sw2015.teamturingapp.Utils.HighscoreHandler;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.TMEngine;
 import at.sw2015.teamturingapp.TMView;
@@ -118,6 +119,8 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
                     Toast.makeText(ctx,"Congrats, you solved the puzzle \""+
                             current_tm_config.getTMName()+"\" in " +
                             step_counter + " steps!", Toast.LENGTH_LONG).show();
+                    MainActivity.out_writer.writeHighScore(current_tm_config.getTMName(),
+                            HighscoreHandler.current_player_name,step_counter);
                     reset();
                 }
                 break;

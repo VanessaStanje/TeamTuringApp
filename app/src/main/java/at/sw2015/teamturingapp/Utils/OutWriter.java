@@ -145,14 +145,68 @@ public class OutWriter {
 
     public void writeHighScore(String tm_name, String player_name, int steps)
     {
+        try {
+            FileWriter file_writer = new FileWriter(Environment.
+                    getExternalStorageDirectory()+ "/" + directory + "/"+
+                    tm_name + "_scores.txt", true);
+            BufferedWriter out = new BufferedWriter(file_writer);
+            out.write(player_name.trim() + "-" + steps + "\n");
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<HighScoreEntry> getHighScore(String tm_name)
     {
-      return null;
+        ArrayList<HighScoreEntry> all_scores = new ArrayList<>();
+        BufferedReader buffered_reader = null;
+
+        try {
+            buffered_reader = new BufferedReader(new FileReader(Environment.
+                    getExternalStorageDirectory()+ "/" + directory + "/"+
+                    tm_name + "_scores.txt"));
+
+            String line = buffered_reader.readLine();
+
+            while (line != null) {
+                String[] current_score = line.trim().split("-");
+                if(current_score.length == 2)
+                {
+                    HighScoreEntry new_entry = new HighScoreEntry();
+                    new_entry.player_name = current_score[0];
+                    new_entry.step_counter = Integer.parseInt(current_score[1]);
+                    all_scores.add(new_entry);
+                }else
+                  System.err.println("ERROR PARSING HIGHSCORE: ILLEGAL SCORE FORMAT!");
+
+                line = buffered_reader.readLine();
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        try {
+            if (buffered_reader != null)
+                buffered_reader.close();
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+      return all_scores;
     }
 
     public void clearHighScore(String tm_name)
     {
+        try {
+            FileWriter file_writer = new FileWriter(Environment.
+                    getExternalStorageDirectory()+ "/" + directory + "/"+
+                    tm_name + "_scores.txt", false);
+            BufferedWriter out = new BufferedWriter(file_writer);
+            out.write("");
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

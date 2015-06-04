@@ -5,7 +5,7 @@ import at.sw2015.teamturingapp.MainActivity;
 
 public class HighscoreHandler {
 
-    private static String current_player_name = "Player1";
+    public static String current_player_name = "Player1";
 
     public static void setCurrentPlayerName(String new_current_player_name)
     {
