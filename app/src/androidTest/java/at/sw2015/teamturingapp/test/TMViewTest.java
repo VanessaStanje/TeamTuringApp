@@ -44,7 +44,7 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
         rule_1.add("S1");
         Vector<Vector<String>> all_rules = new Vector<>();
         all_rules.add(rule_1);
-        TMConfiguration new_tm_config = new TMConfiguration("Test Author",1,"S0",head_pos,all_tapes,all_goals,all_rules);
+        TMConfiguration new_tm_config = new TMConfiguration("TMTEST","Test Author",1,"S0",head_pos,all_tapes,all_goals,all_rules);
 
         Vector<ImageView> all_image_views = new Vector<>();
         all_image_views.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field1));
@@ -120,7 +120,7 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
         rule_1.add("S1");
         Vector<Vector<String>> all_rules = new Vector<>();
         all_rules.add(rule_1);
-        final TMConfiguration new_tm_config = new TMConfiguration("Test Author",1,"S0",head_pos,all_tapes,all_goals,all_rules);
+        final TMConfiguration new_tm_config = new TMConfiguration("TMTEST","Test Author",1,"S0",head_pos,all_tapes,all_goals,all_rules);
 
         ImageView field1 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field1);
         ImageView field2 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2);

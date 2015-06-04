@@ -55,7 +55,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         rule_1.add("S1");
         Vector<Vector<String>> all_rules = new Vector<>();
         all_rules.add(rule_1);
-        TMConfiguration new_tm_config = new TMConfiguration("Test Author", 1, "S0", head_pos, all_tapes,all_goals,all_rules);
+        TMConfiguration new_tm_config = new TMConfiguration("TMTEST","Test Author", 1, "S0", head_pos, all_tapes,all_goals,all_rules);
 
         List<RuleInfo> result = EditFragmentTab.initRulesView(new_tm_config);
 

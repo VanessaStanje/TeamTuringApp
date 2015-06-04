@@ -59,7 +59,7 @@ public class TMEngineTest extends TestCase {
         Vector<String> all_goals = new Vector<>();
         all_goals.add("0-0-0-0-0-0");
 
-        TMConfiguration test_config = new TMConfiguration("Lukas Gregori and Vanessa Stanje",
+        TMConfiguration test_config = new TMConfiguration("TMTestV1.0","Lukas Gregori and Vanessa Stanje",
                 1, "S0", expected_HeadPosition, expected_AllTapes,all_goals, expected_AllRules);
 
         new_tm_engine.step(test_config);
@@ -108,7 +108,7 @@ public class TMEngineTest extends TestCase {
         Vector<String> all_goals = new Vector<>();
         all_goals.add("0-1-1-1-0-1");
 
-        TMConfiguration test_config = new TMConfiguration("Lukas Gregori and Vanessa Stanje",
+        TMConfiguration test_config = new TMConfiguration("TMTestV1.0","Lukas Gregori and Vanessa Stanje",
                 1, "S0", expected_HeadPosition, expected_AllTapes,all_goals, expected_AllRules);
 
         new_tm_engine.step(test_config);

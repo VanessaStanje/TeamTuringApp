@@ -33,6 +33,7 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
     private TMView tm_view = null;
     private TMConfiguration current_tm_config = null;
     private Context ctx = null;
+    private int step_counter = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,11 +110,14 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_step:
+                ++step_counter;
                 tm_engine.step(current_tm_config);
                 tm_view.updateView(current_tm_config);
                 if(tm_engine.checkIfGameWon(current_tm_config))
                 {
-                    Toast.makeText(ctx,"Congrats, you won the game :) Wuhu!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ctx,"Congrats, you solved the puzzle \""+
+                            current_tm_config.getTMName()+"\" in " +
+                            step_counter + " steps!", Toast.LENGTH_LONG).show();
                     reset();
                 }
                 break;
@@ -128,6 +132,8 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
     }
 
     public void reset(){
+        step_counter = 0;
+
         try {
             org.w3c.dom.Document raw_xml_input = XMLParser.
                     readXMLInputFromSD(MainActivity.curr_tm_file_name_path);

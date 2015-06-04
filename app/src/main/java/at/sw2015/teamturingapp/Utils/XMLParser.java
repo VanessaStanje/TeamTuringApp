@@ -25,6 +25,7 @@ import at.sw2015.teamturingapp.MainActivity;
 
 public class XMLParser {
 
+    final static String TMNAME = "TMNAME";
     final static String AUTHOR = "AUTHOR";
     final static String TAPE_COUNT = "TAPE_COUNT";
     final static String INITIAL_STATE = "INITIAL_STATE";
@@ -81,6 +82,9 @@ public class XMLParser {
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
 
+        String tm_name = raw_xml_input.getElementsByTagName(TMNAME).item(0)
+                .getTextContent();
+
         String author = raw_xml_input.getElementsByTagName(AUTHOR).item(0)
                 .getTextContent();
 
@@ -120,7 +124,7 @@ public class XMLParser {
             all_rules.add(current_rule);
         }
 
-        return new TMConfiguration(author, tape_count, initial_state, head_positions,
+        return new TMConfiguration(tm_name,author, tape_count, initial_state, head_positions,
                 all_tapes,all_goals, all_rules);
     }
 
@@ -180,6 +184,10 @@ public class XMLParser {
 
             Element root=doc.createElement("TM_CONFIG");
             doc.appendChild(root);
+
+            Element TMNAME=doc.createElement("TMNAME");
+            TMNAME.setTextContent(tm_name);
+            root.appendChild(TMNAME);
 
             Element AUTHOR=doc.createElement("AUTHOR");
             AUTHOR.setTextContent(author);

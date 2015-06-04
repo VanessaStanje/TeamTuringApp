@@ -39,6 +39,9 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         org.w3c.dom.Document new_doc = XMLParser.readRawXMLInput(in);
         assertNotNull(new_doc);
 
+        NodeList tmname = new_doc.getElementsByTagName("TMNAME");
+        assertEquals(1, tmname.getLength());
+
         NodeList author = new_doc.getElementsByTagName("AUTHOR");
         assertEquals(1,author.getLength());
 
@@ -55,7 +58,7 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         assertEquals(1,tapes.getLength());
 
         NodeList rules = new_doc.getElementsByTagName("R");
-        assertEquals(3,rules.getLength());
+        assertEquals(7,rules.getLength());
     }
 
     public void testReadTMConfig() throws Exception

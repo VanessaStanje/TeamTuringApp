@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <TM_CONFIG>
+	<TMNAME>TMTestV1.0</TMNAME>
     <AUTHOR>Lukas Gregori and Vanessa Stanje</AUTHOR>
 	<TAPE_COUNT>1</TAPE_COUNT>
 	<INITIAL_STATE>S0</INITIAL_STATE>

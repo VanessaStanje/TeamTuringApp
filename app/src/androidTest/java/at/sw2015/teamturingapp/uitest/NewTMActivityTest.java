@@ -30,7 +30,5 @@ public class NewTMActivityTest extends ActivityInstrumentationTestCase2<NewTMAct
         mySolo.enterText(5,"0");
         mySolo.clickOnButton("CANCEL");
     }
-
-
 }
 
