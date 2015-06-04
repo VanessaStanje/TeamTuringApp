@@ -17,6 +17,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -24,6 +25,7 @@ import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
 import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
 import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
 import at.sw2015.teamturingapp.Utils.FileHandler;
+import at.sw2015.teamturingapp.Utils.HighScoreEntry;
 import at.sw2015.teamturingapp.Utils.HighscoreHandler;
 import at.sw2015.teamturingapp.Utils.OutWriter;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
@@ -93,6 +95,7 @@ public class MainActivity extends ActionBarActivity {
         });
 
         sliding_tab_layout.setViewPager(view_pager);
+        out_writer.clearHighScore(current_tm_config.getTMName());
     }
 
     @Override
@@ -109,6 +112,9 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             case R.id.action_new:
                 createNewTMDialog();
+                return true;
+            case R.id.action_highscore:
+                showHighScoreToast();
                 return true;
             default:
                 return item.getItemId() == R.id.action_settings
@@ -156,6 +162,20 @@ public class MainActivity extends ActionBarActivity {
     private void createNewTMDialog() {
         Intent intent = new Intent(this, NewTMActivity.class);
         this.startActivity(intent);
+    }
+
+    private String showHighScoreToast()
+    {
+        ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
+
+        String highscore_message = "####### HIGHSCORE #######\n\n";
+        for(HighScoreEntry curr_entry : all_scores)
+            highscore_message += curr_entry.player_name + "-" + curr_entry.step_counter + "\n";
+
+        Toast.makeText(this,highscore_message,
+                Toast.LENGTH_SHORT).show();
+
+        return highscore_message;
     }
 
 
