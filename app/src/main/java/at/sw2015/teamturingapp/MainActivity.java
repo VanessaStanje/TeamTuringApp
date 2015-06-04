@@ -24,6 +24,7 @@ import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
 import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
 import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
 import at.sw2015.teamturingapp.Utils.FileHandler;
+import at.sw2015.teamturingapp.Utils.HighscoreHandler;
 import at.sw2015.teamturingapp.Utils.OutWriter;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.Utils.XMLParser;
@@ -53,6 +54,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         out_writer = new OutWriter("/TMConfigs/");
+        HighscoreHandler.setCurrentPlayerName("Player1");
+
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 

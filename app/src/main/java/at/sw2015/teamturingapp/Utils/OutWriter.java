@@ -2,7 +2,13 @@ package at.sw2015.teamturingapp.Utils;
 
 import android.os.Environment;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -84,4 +90,15 @@ public class OutWriter {
         }
         return true;
     }
+
+    public void writeCurrentPlayerNameToTXT(String curr_player_name) {
+
+    }
+
+    public String getCurrentPlayerNameFromTXT()
+    {
+        String player_name = "NOT FOUND";
+        return player_name;
+    }
+
 }
