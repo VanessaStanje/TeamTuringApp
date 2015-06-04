@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -142,4 +143,16 @@ public class OutWriter {
         return curr_player_file.exists() && !curr_player_file.isDirectory();
     }
 
+    public void writeHighScore(String tm_name, String player_name, int steps)
+    {
+    }
+
+    public ArrayList<HighScoreEntry> getHighScore(String tm_name)
+    {
+      return null;
+    }
+
+    public void clearHighScore(String tm_name)
+    {
+    }
 }
