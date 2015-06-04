@@ -5,23 +5,36 @@ import java.util.Vector;
 
 public class TMConfiguration {
 
+    private String tm_name_ = "";
     private String author_ = "";
     private int tape_count_ = 0;
     private String initial_state_;
     private String current_state_;
     private Vector<Integer> head_positions_;
     private Vector<String> all_tapes_;
+    private Vector<String> all_goals_;
     private Vector<Vector<String>> all_rules_;
 
-    public TMConfiguration(String author, int tape_count, String initial_state,
-                           Vector<Integer> head_positions, Vector<String> all_tapes,
+
+    public TMConfiguration(String tm_name,String author, int tape_count, String initial_state,
+                           Vector<Integer> head_positions, Vector<String> all_tapes, Vector<String> all_goals,
                            Vector<Vector<String>> all_rules) {
+        this.tm_name_ = tm_name;
         this.author_ = author;
         this.tape_count_ = tape_count;
         this.initial_state_ = current_state_ = initial_state;
         this.head_positions_ = head_positions;
         this.all_tapes_ = all_tapes;
+        this.all_goals_ = all_goals;
         this.all_rules_ = all_rules;
+    }
+
+    public String getTMName() {
+        return tm_name_;
+    }
+
+    public void setTMName(String tm_name_) {
+        this.tm_name_ = tm_name_;
     }
 
     public String getAuthor() {
@@ -54,6 +67,14 @@ public class TMConfiguration {
 
     public void setAllTapes(Vector<String> all_tapes_) {
         this.all_tapes_ = all_tapes_;
+    }
+
+    public Vector<String> getAllGoals() {
+        return all_goals_;
+    }
+
+    public void setAllGoals(Vector<String> all_goals_) {
+        this.all_goals_ = all_tapes_;
     }
 
     public Vector<Vector<String>> getAllRules() {

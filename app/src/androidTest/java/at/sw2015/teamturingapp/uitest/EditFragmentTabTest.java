@@ -45,6 +45,8 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         head_pos.add(0);
         Vector<String> all_tapes = new Vector<>();
         all_tapes.add("1-0-0-1-0-1");
+        Vector<String> all_goals = new Vector<>();
+        all_tapes.add("0-0-0-0-0-0");
         Vector<String> rule_1 = new Vector<>();
         rule_1.add("S0");
         rule_1.add("1");
@@ -53,7 +55,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         rule_1.add("S1");
         Vector<Vector<String>> all_rules = new Vector<>();
         all_rules.add(rule_1);
-        TMConfiguration new_tm_config = new TMConfiguration("Test Author", 1, "S0", head_pos, all_tapes, all_rules);
+        TMConfiguration new_tm_config = new TMConfiguration("TMTEST","Test Author", 1, "S0", head_pos, all_tapes,all_goals,all_rules);
 
         List<RuleInfo> result = EditFragmentTab.initRulesView(new_tm_config);
 
@@ -98,10 +100,10 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         mySolo.clickOnButton("RELOAD");
 
         boolean found1 = mySolo.searchEditText("S0");
-        boolean found2 = mySolo.searchEditText("1");
-        boolean found3 = mySolo.searchEditText("0");
+        boolean found2 = mySolo.searchEditText("0");
+        boolean found3 = mySolo.searchEditText("1");
         boolean found4 = mySolo.searchEditText("R");
-        boolean found5 = mySolo.searchEditText("S1");
+        boolean found5 = mySolo.searchEditText("S0");
 
         assertEquals(found1, true);
         assertEquals(found2, true);
@@ -116,7 +118,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         mySolo.clearEditText(4);
 
         mySolo.enterText(0, "S0");
-        mySolo.enterText(1, "1");
+        mySolo.enterText(1, "0");
         mySolo.enterText(2, "$");
         mySolo.enterText(3, "R");
         mySolo.enterText(4, "S1");
@@ -207,7 +209,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         assertTrue(current_ImageView.contains(field2));
 
         assertTrue(field2.getDrawable().getConstantState().equals
-                (activity.getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
+                (activity.getResources().getDrawable(R.mipmap.zero_sel).getConstantState()));
     }
 
     // Source : http://blogs.steeplesoft.com/posts/2013/simulating-swipes-in-your-android-tests.html

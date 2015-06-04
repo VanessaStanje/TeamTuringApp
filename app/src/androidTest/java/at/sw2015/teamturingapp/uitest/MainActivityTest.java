@@ -120,9 +120,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 assertTrue(field1.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
                 assertTrue(field2.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
+                        (((activity)).getResources().getDrawable(R.mipmap.zero_sel).getConstantState()));
                 assertTrue(field3.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
+                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
                 assertTrue(field4.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
                 assertTrue(field5.getDrawable().getConstantState().equals
@@ -166,6 +166,18 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             ImageView field9 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field9);
             ImageView fieldr = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.border_r);
 
+            ImageView fieldl_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.border_l_correct);
+            ImageView field1_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field1_correct);
+            ImageView field2_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2_correct);
+            ImageView field3_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field3_correct);
+            ImageView field4_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field4_correct);
+            ImageView field5_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field5_correct);
+            ImageView field6_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field6_correct);
+            ImageView field7_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field7_correct);
+            ImageView field8_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field8_correct);
+            ImageView field9_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field9_correct);
+            ImageView fieldr_correct = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.border_r_correct);
+
             assertTrue(current_ImageView.contains(fieldl));
             assertTrue(current_ImageView.contains(field1));
             assertTrue(current_ImageView.contains(field2));
@@ -178,6 +190,18 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertTrue(current_ImageView.contains(field9));
             assertTrue(current_ImageView.contains(fieldr));
 
+            assertTrue(current_ImageView.contains(fieldl_correct));
+            assertTrue(current_ImageView.contains(field1_correct));
+            assertTrue(current_ImageView.contains(field2_correct));
+            assertTrue(current_ImageView.contains(field3_correct));
+            assertTrue(current_ImageView.contains(field4_correct));
+            assertTrue(current_ImageView.contains(field5_correct));
+            assertTrue(current_ImageView.contains(field6_correct));
+            assertTrue(current_ImageView.contains(field7_correct));
+            assertTrue(current_ImageView.contains(field8_correct));
+            assertTrue(current_ImageView.contains(field9_correct));
+            assertTrue(current_ImageView.contains(fieldr_correct));
+
             // Loaded the tmtestconfig file
             if(MainActivity.resource_id == R.raw.tmtestconfig){
                 MainActivity activity = getActivity();
@@ -186,9 +210,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 assertTrue(field1.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
                 assertTrue(field2.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
+                        (((activity)).getResources().getDrawable(R.mipmap.zero_sel).getConstantState()));
                 assertTrue(field3.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
+                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
                 assertTrue(field4.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
                 assertTrue(field5.getDrawable().getConstantState().equals
@@ -203,37 +227,33 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
 
                 // Simulate the TM run
+                mySolo.sleep(3000);
                 mySolo.clickOnButton("STEP");
                 mySolo.sleep(150);
 
                 assertTrue(field2.getDrawable().getConstantState().equals
+                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
+                assertTrue(field3.getDrawable().getConstantState().equals
+                        (((activity)).getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
+
+                mySolo.clickOnButton("STEP");
+                mySolo.sleep(150);
+
+                assertTrue(field3.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
-                assertTrue(field3.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.zero_sel).getConstantState()));
-
-                mySolo.clickOnButton("STEP");
-                mySolo.sleep(150);
-
-                assertTrue(field3.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
                 assertTrue(field4.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.zero_sel).getConstantState()));
 
                 mySolo.clickOnButton("STEP");
                 mySolo.sleep(150);
 
-                assertTrue(field3.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
                 assertTrue(field4.getDrawable().getConstantState().equals
+                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
+                assertTrue(field5.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
 
                 mySolo.clickOnButton("STEP");
                 mySolo.sleep(150);
-
-                assertTrue(field3.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
-                assertTrue(field4.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
 
                 // Reset and again check if initial values
                 mySolo.clickOnButton("RESET");
@@ -242,9 +262,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 assertTrue(field1.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
                 assertTrue(field2.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.one_sel).getConstantState()));
+                        (((activity)).getResources().getDrawable(R.mipmap.zero_sel).getConstantState()));
                 assertTrue(field3.getDrawable().getConstantState().equals
-                        (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
+                        (((activity)).getResources().getDrawable(R.mipmap.one).getConstantState()));
                 assertTrue(field4.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.zero).getConstantState()));
                 assertTrue(field5.getDrawable().getConstantState().equals

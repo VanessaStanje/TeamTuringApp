@@ -10,6 +10,8 @@ import at.sw2015.teamturingapp.Utils.TMConfiguration;
 public class TMView {
 
     private Vector<ImageView> all_image_views_ = null;
+    private Vector<ImageView> all_image_views_goals_ = null;
+
     private Drawable base_ = null;
     private Drawable one_ = null;
     private Drawable one_sel_ = null;
@@ -19,12 +21,22 @@ public class TMView {
     private Drawable dollar_sel_ = null;
     private Drawable underline_ = null;
     private Drawable underline_sel_ = null;
+
+    private Drawable base_correct_ = null;
+    private Drawable one_correct_ = null;
+    private Drawable zero_correct_ = null;
+    private Drawable dollar_correct_ = null;
+    private Drawable underline_correct_ = null;
+
     private final int VISIBLE_TAPE_LENGTH = 9;
 
     public TMView(Vector<ImageView> all_image_views, Drawable base,
                   Drawable one, Drawable one_sel, Drawable zero, Drawable zero_sel,
                   Drawable dollar, Drawable dollar_sel, Drawable underline,
-                  Drawable underline_sel) {
+                  Drawable underline_sel, Vector<ImageView> all_image_views_goals, Drawable base_correct,
+                  Drawable one_correct, Drawable zero_correct,
+                  Drawable dollar_correct,  Drawable underline_correct
+                  ) {
         this.all_image_views_ = all_image_views;
         this.base_ = base;
         this.one_ = one;
@@ -35,6 +47,13 @@ public class TMView {
         this.dollar_sel_ = dollar_sel;
         this.underline_ = underline;
         this.underline_sel_ = underline_sel;
+
+        this.all_image_views_goals_ = all_image_views_goals;
+        this.base_correct_ = base_correct;
+        this.zero_correct_ = zero_correct;
+        this.one_correct_ = one_correct;
+        this.dollar_correct_ = dollar_correct;
+        this.underline_correct_ = underline_correct;
     }
 
     public String printTMState(TMConfiguration tm_config, Context ctx) {
@@ -104,6 +123,36 @@ public class TMView {
                     all_image_views_.get(counter).setImageDrawable(underline_sel_);
             }
         }
+
+
+        counter = 0;
+
+        if(diff < 0)
+        {
+            counter = diff;
+            diff = 0;
+        }
+
+        String tape_correct_in = tm_config.getAllGoals().get(0);
+        String[] goal_one = tape_correct_in.split("-");
+        for(; counter < VISIBLE_TAPE_LENGTH; counter++)
+        {
+            if(counter < diff || counter >= goal_one.length+diff)
+                all_image_views_goals_.get(counter).setImageDrawable(underline_correct_);
+            else
+            {
+                if(goal_one[counter-diff].equalsIgnoreCase("0"))
+                    all_image_views_goals_.get(counter).setImageDrawable(zero_correct_);
+                else if(goal_one[counter-diff].equalsIgnoreCase("1"))
+                    all_image_views_goals_.get(counter).setImageDrawable(one_correct_);
+                else if(goal_one[counter-diff].equalsIgnoreCase("$"))
+                    all_image_views_goals_.get(counter).setImageDrawable(dollar_correct_);
+                else
+                    all_image_views_goals_.get(counter).setImageDrawable(underline_correct_);
+
+            }
+        }
+
     }
 
 }
