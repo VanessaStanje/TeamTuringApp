@@ -16,6 +16,8 @@ public class HighscoreHandler {
 
     public static String getCurrentPlayerName()
     {
+        if(MainActivity.out_writer != null)
+          current_player_name = MainActivity.out_writer.getCurrentPlayerNameFromTXT();
         return current_player_name;
     }
 

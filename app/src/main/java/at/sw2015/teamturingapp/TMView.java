@@ -135,14 +135,12 @@ public class TMView {
 
         String tape_correct_in = tm_config.getAllGoals().get(0);
         String[] goal_one = tape_correct_in.split("-");
-        System.err.println("IM HERE BEBE");
         for(; counter < VISIBLE_TAPE_LENGTH; counter++)
         {
             if(counter < diff || counter >= goal_one.length+diff)
                 all_image_views_goals_.get(counter).setImageDrawable(underline_correct_);
             else
             {
-                System.err.println("HERE WE ARE AGAIN: " + goal_one[counter-diff]);
                 if(goal_one[counter-diff].equalsIgnoreCase("0"))
                     all_image_views_goals_.get(counter).setImageDrawable(zero_correct_);
                 else if(goal_one[counter-diff].equalsIgnoreCase("1"))

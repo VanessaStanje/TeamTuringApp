@@ -92,13 +92,54 @@ public class OutWriter {
     }
 
     public void writeCurrentPlayerNameToTXT(String curr_player_name) {
-
+        try {
+            FileWriter file_writer = new FileWriter(Environment.
+                    getExternalStorageDirectory()+ "/" + directory + "/curr_player.txt", false);
+            BufferedWriter out = new BufferedWriter(file_writer);
+            out.write(curr_player_name.trim());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getCurrentPlayerNameFromTXT()
     {
         String player_name = "NOT FOUND";
+        BufferedReader buffered_reader = null;
+
+        try {
+            buffered_reader = new BufferedReader(new FileReader(Environment.
+                    getExternalStorageDirectory()+ "/" + directory + "/curr_player.txt"));
+
+            StringBuilder string_builder = new StringBuilder();
+            String line = buffered_reader.readLine();
+
+            while (line != null) {
+                string_builder.append(line);
+                line = buffered_reader.readLine();
+            }
+            player_name = string_builder.toString().trim();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        try {
+            if (buffered_reader != null)
+                buffered_reader.close();
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         return player_name;
+    }
+
+    public boolean playerFileExists()
+    {
+        File curr_player_file = new File(Environment.
+                getExternalStorageDirectory()+
+                "/" + directory + "/curr_player.txt");
+        return curr_player_file.exists() && !curr_player_file.isDirectory();
     }
 
 }

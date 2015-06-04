@@ -54,14 +54,20 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         out_writer = new OutWriter("/TMConfigs/");
-        HighscoreHandler.setCurrentPlayerName("Player1");
+
+        if(!out_writer.playerFileExists())
+          HighscoreHandler.setCurrentPlayerName("Player1");
+        else
+          System.out.println("Current Player: " +
+                  HighscoreHandler.getCurrentPlayerName());
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         InputStream raw = getResources().openRawResource(resource_id);
         curr_tm_file_name_path = Environment.
-                getExternalStorageDirectory() + "/TMConfigs/" + getResources().getResourceEntryName(resource_id) + ".xml";
+                getExternalStorageDirectory() + "/TMConfigs/" +
+                getResources().getResourceEntryName(resource_id) + ".xml";
 
         try {
             out_writer.writeXMLToFileName(XMLParser.readRawXMLInput(raw), getResources().getResourceEntryName(resource_id));
