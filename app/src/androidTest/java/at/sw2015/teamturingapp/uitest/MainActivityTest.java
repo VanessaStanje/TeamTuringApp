@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
@@ -357,6 +358,25 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         }
 
         mySolo.sleep(1000);
+    }
+
+    public void testHighscore() {
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Highscore");
+        TextView new_text = mySolo.getText("Player1 - 6");
+        assertNotNull(new_text);
     }
 
 }
