@@ -1,14 +1,20 @@
 package at.sw2015.teamturingapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.xml.sax.SAXException;
@@ -114,7 +120,8 @@ public class MainActivity extends ActionBarActivity {
                 createNewTMDialog();
                 return true;
             case R.id.action_highscore:
-                showHighScoreToast();
+                //showHighScoreToast();
+                showHighScoreDialog();
                 return true;
             default:
                 return item.getItemId() == R.id.action_settings
@@ -176,6 +183,45 @@ public class MainActivity extends ActionBarActivity {
                 Toast.LENGTH_SHORT).show();
 
         return highscore_message;
+    }
+
+    private void showHighScoreDialog()
+    {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                this);
+
+        TextView title = new TextView(this);
+        title.setText("Highscore List");
+        title.setBackgroundColor(Color.parseColor("#990012"));
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(24);
+        builderSingle.setCustomTitle(title);
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                this,R.layout.list_item);
+
+        ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
+        for(HighScoreEntry curr_entry : all_scores)
+            arrayAdapter.add(curr_entry.player_name + " - " + curr_entry.step_counter);
+
+        builderSingle.setNegativeButton("CONTINUE",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+        builderSingle.show();
     }
 
 
