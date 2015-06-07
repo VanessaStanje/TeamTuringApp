@@ -62,6 +62,7 @@ public class NewTMActivity extends Activity {
     public String save() {
         EditText tm_name = (EditText) findViewById(R.id.new_tm_name_edit);
         EditText tm_tape_content = (EditText) findViewById(R.id.new_tm_tape_content_edit);
+        EditText tm_goal_content = (EditText) findViewById(R.id.new_tm_goal_content_edit);
         EditText tm_author = (EditText) findViewById(R.id.new_tm_author_edit);
         EditText tm_initial_state = (EditText) findViewById(R.id.new_tm_initial_state_edit);
         EditText tm_tape_count = (EditText) findViewById(R.id.new_tm_tape_count_edit);
@@ -69,6 +70,7 @@ public class NewTMActivity extends Activity {
 
         String name = tm_name.getText().toString();
         String tape_content = tm_tape_content.getText().toString();
+        String goal_content = tm_goal_content.getText().toString();
         String author = tm_author.getText().toString();
         String initial_state = tm_initial_state.getText().toString();
         String tape_count = tm_tape_count.getText().toString();
@@ -89,7 +91,8 @@ public class NewTMActivity extends Activity {
             return null;
         }
 
-        if (!XMLParser.writeNewTM(name, author, initial_state, tape_count, heads_position, tape_content)) {
+        if (!XMLParser.writeNewTM(name, author, initial_state, tape_count,
+                heads_position, tape_content,goal_content)) {
             Toast.makeText(getApplicationContext(), "ERROR, Could not save the TM!",
                     Toast.LENGTH_LONG).show();
             return null;
