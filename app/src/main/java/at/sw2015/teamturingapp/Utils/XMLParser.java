@@ -21,6 +21,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.MainGameActivity;
 
 
 public class XMLParser {
@@ -133,7 +134,7 @@ public class XMLParser {
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
 
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
 
@@ -142,12 +143,12 @@ public class XMLParser {
 
         rules_list.item(index).setTextContent(new_content);
 
-        String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+        String file_path = MainGameActivity.curr_tm_file_name_path;
+        return MainGameActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
     public static boolean addNewRule(String new_rule) {
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName("RULES");
         Node new_child = raw_xml_input.createElement("R");
@@ -155,12 +156,12 @@ public class XMLParser {
         Element rule = (Element) rules_list.item(0);
         rule.appendChild(new_child);
 
-        String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+        String file_path = MainGameActivity.curr_tm_file_name_path;
+        return MainGameActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
     public static boolean removeRule(int index) {
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
 
         NodeList main_rule = raw_xml_input.getElementsByTagName("RULES");
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
@@ -169,8 +170,8 @@ public class XMLParser {
             return false;
 
         main_rule.item(0).removeChild(rules_list.item(index));
-        String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+        String file_path = MainGameActivity.curr_tm_file_name_path;
+        return MainGameActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
     public static boolean writeNewTM(String tm_name, String author,
@@ -230,7 +231,7 @@ public class XMLParser {
             INITIAL_RULE.setTextContent(initial_state + "-0-0-H-" + initial_state);
             RULES.appendChild(INITIAL_RULE);
 
-            MainActivity.out_writer.writeXMLToFileName(doc,tm_name);
+            MainGameActivity.out_writer.writeXMLToFileName(doc,tm_name);
         }catch(Exception ex){
             ex.printStackTrace();
         }

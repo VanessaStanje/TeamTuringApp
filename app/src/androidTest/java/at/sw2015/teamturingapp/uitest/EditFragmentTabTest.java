@@ -13,13 +13,14 @@ import java.util.List;
 import java.util.Vector;
 
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
+import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
 import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.R;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
 
 
-public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainGameActivity> {
 
     // Source : http://blogs.steeplesoft.com/posts/2013/simulating-swipes-in-your-android-tests.html
     public enum Direction {
@@ -29,7 +30,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
     private Solo mySolo;
 
     public EditFragmentTabTest() {
-        super(MainActivity.class);
+        super(MainGameActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -130,7 +131,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         mySolo.clickOnButton("STEP");
         mySolo.clickOnButton("STEP");
 
-        MainActivity activity = getActivity();
+        MainGameActivity activity = getActivity();
         ArrayList<ImageView> current_ImageView =  mySolo.getCurrentViews(ImageView.class);
 
         ImageView field2 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2);
@@ -179,7 +180,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         mySolo.clickOnButton("STEP");
         mySolo.clickOnButton("STEP");
 
-        MainActivity activity = getActivity();
+        MainGameActivity activity = getActivity();
         ArrayList<ImageView> current_ImageView =  mySolo.getCurrentViews(ImageView.class);
 
         ImageView field2 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2);
@@ -202,7 +203,7 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainAc
         mySolo.clickOnButton("STEP");
         mySolo.clickOnButton("STEP");
 
-        MainActivity activity = getActivity();
+        MainGameActivity activity = getActivity();
         ArrayList<ImageView> current_ImageView =  mySolo.getCurrentViews(ImageView.class);
 
         ImageView field2 = (ImageView) mySolo.getCurrentActivity().findViewById(R.id.field2);

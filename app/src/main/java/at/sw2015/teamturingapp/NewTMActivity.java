@@ -30,7 +30,7 @@ public class NewTMActivity extends Activity {
             public void onClick(View v) {
                 String file_name;
                 if ((file_name=save()) != null) {
-                    MainActivity.curr_tm_file_name_path = Environment.
+                    MainGameActivity.curr_tm_file_name_path = Environment.
                             getExternalStorageDirectory() + "/TMConfigs/" + file_name;
                     EditFragmentTab.update();
                     if(ViewPagerAdapter.current_run_fragment != null)
