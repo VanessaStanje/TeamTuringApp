@@ -175,7 +175,7 @@ public class XMLParser {
 
     public static boolean writeNewTM(String tm_name, String author,
                                      String initial_state, String tape_count,
-                                     String heads_position,String tape_content) {
+                                     String heads_position,String tape_content,String goal_content) {
         try{
             DocumentBuilderFactory factory =
                     DocumentBuilderFactory.newInstance();
@@ -220,7 +220,7 @@ public class XMLParser {
 
             //Todo: Update Test and func.
             Element G1 = doc.createElement("G");
-            G1.setTextContent("0-0-0-0-0-0");
+            G1.setTextContent(goal_content);
             GOALS.appendChild(G1);
 
             Element RULES=doc.createElement("RULES");

@@ -148,7 +148,7 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
     }
 
     public void testCreateTM(){
-        assertTrue(XMLParser.writeNewTM("NewTMTest","Myself","S0","1","0","0-0-0-0-0"));
+        assertTrue(XMLParser.writeNewTM("NewTMTest","Myself","S0","1","0","0-0-0-0-0","0-1-0-1-0"));
 
         org.w3c.dom.Document raw_xml_input = XMLParser.
                 readXMLInputFromSD(Environment.
@@ -167,5 +167,6 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         assertEquals(new_tm_config.getCurrentState(),"S0");
         assertEquals(""+new_tm_config.getTapeCount(),"1");
         assertEquals(new_tm_config.getAllTapes().get(0),"0-0-0-0-0");
+        assertEquals(new_tm_config.getAllGoals().get(0),"0-1-0-1-0");
     }
 }

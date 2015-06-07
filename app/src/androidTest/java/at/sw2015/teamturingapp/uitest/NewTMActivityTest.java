@@ -24,10 +24,11 @@ public class NewTMActivityTest extends ActivityInstrumentationTestCase2<NewTMAct
     public void testButtons(){
         mySolo.enterText(0,"NEW TM NAME");
         mySolo.enterText(1,"0-1-1-0-0");
-        mySolo.enterText(2,"AUTHOR");
-        mySolo.enterText(3,"INITIAL STATE");
-        mySolo.enterText(4,"1");
-        mySolo.enterText(5,"0");
+        mySolo.enterText(2,"0-1-0-1-0");
+        mySolo.enterText(3,"AUTHOR");
+        mySolo.enterText(4,"INITIAL STATE");
+        mySolo.enterText(5,"1");
+        mySolo.enterText(6,"0");
         mySolo.clickOnButton("CANCEL");
     }
 }
