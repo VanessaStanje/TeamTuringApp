@@ -114,7 +114,6 @@ public class MainGameActivity extends ActionBarActivity {
                 createNewTMDialog();
                 return true;
             case R.id.action_highscore:
-                //showHighScoreToast();
                 showHighScoreDialog();
                 return true;
             default:

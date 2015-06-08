@@ -28,4 +28,17 @@ public class StartMenuTest extends ActivityInstrumentationTestCase2<MainActivity
         mySolo.clickOnButton("PLAY");
     }
 
+    public void testHelpMenu() {
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("RUN TM");
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("CREATE NEW TM");
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("LOAD TM");
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("CHANGE RULE");
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("DELETE RULE");
+    }
+
 }
