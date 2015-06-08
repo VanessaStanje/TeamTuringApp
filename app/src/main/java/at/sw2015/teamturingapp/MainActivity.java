@@ -93,6 +93,44 @@ public class MainActivity extends ActionBarActivity {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(
                 this);
 
+        TextView title = new TextView(this);
+        title.setText("HELP");
+        title.setBackgroundColor(Color.parseColor("#990012"));
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(24);
+
+        String[] input = {"RUN TM","CREATE NEW TM","LOAD TM","CHANGE RULE", "DELETE RULE"};
+        builderSingle.setCustomTitle(title).setItems(input, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case HELP_RUN:
+                        Toast.makeText(getBaseContext(), "Just click on play. To run the TM click on step.",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case HELP_NEW_TM:
+                        Toast.makeText(getBaseContext(), "Click on the three dots in the upper-right corner." +
+                                        "Fill out the mask and save",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case HELP_LOAD_TM:
+                        Toast.makeText(getBaseContext(), "Click on the three dots in the upper-right corner and select load." +
+                                        "Your default file browser will open and let you select the file.",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case HELP_CHANGE_RULE:
+                        Toast.makeText(getBaseContext(), "Click on one of the rules in the edit view (swipe left after run).",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case HELP_DELETE_RULE:
+                        Toast.makeText(getBaseContext(), "Longclick on one of the rules in the edit view (swipe left after run)",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                }
+            }
+        });
 
         return builderSingle.create();
     }
