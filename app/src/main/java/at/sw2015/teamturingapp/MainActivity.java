@@ -8,9 +8,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,7 +108,24 @@ public class MainActivity extends ActionBarActivity {
 
     void showHelpDialogImage(int res_id,String help_message)
     {
+        AlertDialog.Builder alert = new AlertDialog.Builder(
+                this);
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View view = factory.inflate(R.layout.help_image, null);
 
+        ImageView help_img = (ImageView) view.findViewById(R.id.image);
+        if(help_img != null) {
+            help_img.setImageResource(res_id);
+            help_img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
+
+        TextView help_text = (TextView) view.findViewById(R.id.textViewHelp);
+        if(help_text != null) {
+            help_text.setText(help_message);
+        }
+
+        alert.setView(view);
+        alert.show();
     }
 
 
