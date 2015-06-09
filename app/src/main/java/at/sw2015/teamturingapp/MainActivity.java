@@ -5,40 +5,14 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
-import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
-import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
-import at.sw2015.teamturingapp.Utils.FileHandler;
-import at.sw2015.teamturingapp.Utils.HighScoreEntry;
-import at.sw2015.teamturingapp.Utils.HighscoreHandler;
-import at.sw2015.teamturingapp.Utils.OutWriter;
-import at.sw2015.teamturingapp.Utils.TMConfiguration;
-import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -106,26 +80,21 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case HELP_RUN:
-                        Toast.makeText(getBaseContext(), "Just click on play. To run the TM click on step.",
-                                Toast.LENGTH_SHORT).show();
+                        showHelpDialogImage(R.mipmap.run_help,"Just click on play. To run the TM click on step.");
                         break;
                     case HELP_NEW_TM:
-                        Toast.makeText(getBaseContext(), "Click on the three dots in the upper-right corner." +
-                                        "Fill out the mask and save",
-                                Toast.LENGTH_SHORT).show();
+                        showHelpDialogImage(R.mipmap.create_tm_help,"Click on the three dots in the upper-right corner." +
+                                "Fill out the mask and save");
                         break;
                     case HELP_LOAD_TM:
-                        Toast.makeText(getBaseContext(), "Click on the three dots in the upper-right corner and select load." +
-                                        "Your default file browser will open and let you select the file.",
-                                Toast.LENGTH_SHORT).show();
+                        showHelpDialogImage(R.mipmap.load_tm_help,"Click on the three dots in the upper-right corner and select load." +
+                                "Your default file browser will open and let you select the file.");
                         break;
                     case HELP_CHANGE_RULE:
-                        Toast.makeText(getBaseContext(), "Click on one of the rules in the edit view (swipe left after run).",
-                                Toast.LENGTH_SHORT).show();
+                        showHelpDialogImage(R.mipmap.edit_rule_help, "Click on one of the rules in the edit view (swipe left after run).");
                         break;
                     case HELP_DELETE_RULE:
-                        Toast.makeText(getBaseContext(), "Longclick on one of the rules in the edit view (swipe left after run)",
-                                Toast.LENGTH_SHORT).show();
+                        showHelpDialogImage(R.mipmap.delete_rule_help,"Long-click on one of the rules in the edit view (swipe left after run)");
                         break;
                     default:
                 }
@@ -133,6 +102,11 @@ public class MainActivity extends ActionBarActivity {
         });
 
         return builderSingle.create();
+    }
+
+    void showHelpDialogImage(int res_id,String help_message)
+    {
+
     }
 
 
