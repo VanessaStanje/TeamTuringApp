@@ -7,18 +7,19 @@ import java.util.Vector;
 import com.robotium.solo.Solo;
 
 import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.R;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.TMView;
 
 
-public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class TMViewTest extends ActivityInstrumentationTestCase2<MainGameActivity> {
 
     private Solo mySolo;
 
     public TMViewTest()
     {
-        super(MainActivity.class);
+        super(MainGameActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -70,7 +71,7 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
         all_image_views_goals.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field9_correct));
 
 
-        MainActivity activity = getActivity();
+        MainGameActivity activity = getActivity();
 
         TMView new_view = new TMView(all_image_views, ((activity)).getResources().getDrawable(R.mipmap.base),
                 ((activity)).getResources().getDrawable(R.mipmap.one),
@@ -154,7 +155,7 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainActivity> {
         all_image_views_goals.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field8_correct));
         all_image_views_goals.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field9_correct));
 
-        MainActivity activity = getActivity();
+        MainGameActivity activity = getActivity();
 
         final TMView new_view = new TMView(all_image_views, ((activity)).getResources().getDrawable(R.mipmap.base),
                 ((activity)).getResources().getDrawable(R.mipmap.one),

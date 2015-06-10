@@ -11,18 +11,19 @@ import com.robotium.solo.Solo;
 import org.w3c.dom.NodeList;
 
 import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.R;
 
 
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
 import at.sw2015.teamturingapp.Utils.XMLParser;
 
-public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity>{
+public class XMLParserTest extends ActivityInstrumentationTestCase2<MainGameActivity>{
 
     private Solo mySolo;
 
     public XMLParserTest(){
-        super(MainActivity.class);
+        super(MainGameActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -109,7 +110,7 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         XMLParser.addNewRule("S7-1-0-R-S8");
 
         org.w3c.dom.Document raw_xml_input = XMLParser.
-                readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+                readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
         TMConfiguration new_tm_config = null;
         try {
             new_tm_config = XMLParser.readTMConfig(raw_xml_input);
@@ -131,7 +132,7 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainActivity
         XMLParser.removeRule(0);
 
         org.w3c.dom.Document raw_xml_input = XMLParser.
-                readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+                readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
         TMConfiguration new_tm_config = null;
         try {
             new_tm_config = XMLParser.readTMConfig(raw_xml_input);
