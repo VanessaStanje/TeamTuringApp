@@ -380,5 +380,34 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainGameA
         assertNotNull(new_text);
     }
 
+    public void testSettings() {
+        mySolo.sleep(150);
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Settings");
+        mySolo.clearEditText(0);
+        mySolo.enterText(0,"Tester");
+        mySolo.sleep(1500);
+
+        mySolo.clickOnButton("SAVE");
+        mySolo.goBack();
+
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Highscore");
+        TextView new_text = mySolo.getText("Tester - 6");
+        assertNotNull(new_text);
+
+    }
 }
 

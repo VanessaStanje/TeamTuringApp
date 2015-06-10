@@ -11,9 +11,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +44,7 @@ public class MainGameActivity extends ActionBarActivity {
     SlidingTabLayout sliding_tab_layout;
     String headers[] = {"Run TM", "Edit TM"};
     int number_of_tabs = 2;
+    AlertDialog settings_dialog = null;
 
     // Made public to check in MainActivityTest
     // which test file was loaded
@@ -107,6 +113,9 @@ public class MainGameActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_settings:
+                showSettingsDialog();
+                return true;
             case R.id.action_load:
                 createFileChooser();
                 return true;
@@ -215,6 +224,11 @@ public class MainGameActivity extends ActionBarActivity {
                 });
 
         builderSingle.show();
+    }
+
+    private void showSettingsDialog()
+    {
+
     }
 
 

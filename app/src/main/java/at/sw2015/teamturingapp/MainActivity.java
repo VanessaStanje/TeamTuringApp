@@ -52,7 +52,6 @@ public class MainActivity extends ActionBarActivity {
         help_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //Todo: Implement Help View
               createDialog().show();
             }
         });
