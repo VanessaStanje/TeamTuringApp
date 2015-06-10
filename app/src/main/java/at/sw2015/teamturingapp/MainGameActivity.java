@@ -228,8 +228,49 @@ public class MainGameActivity extends ActionBarActivity {
 
     private void showSettingsDialog()
     {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                this);
 
+        TextView title = new TextView(this);
+        title.setText("Settings");
+        title.setBackgroundColor(Color.parseColor("#990012"));
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(24);
+        builderSingle.setCustomTitle(title);
+
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View view = factory.inflate(R.layout.settings_layout, null);
+
+        Button save_player = (Button) view.findViewById(R.id.button_save_player);
+        Button cancel_player = (Button) view.findViewById(R.id.button_cancel_player);
+        final EditText player_edit = (EditText) view.findViewById(R.id.player_name_edit);
+
+        if(player_edit != null)
+            player_edit.setText(HighscoreHandler.getCurrentPlayerName());
+
+        save_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(player_edit != null)
+                  HighscoreHandler.setCurrentPlayerName(player_edit.getText().toString());
+
+                if(settings_dialog != null)
+                    settings_dialog.cancel();
+            }
+        });
+
+        cancel_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if(settings_dialog != null)
+                   settings_dialog.cancel();
+            }
+        });
+
+        builderSingle.setView(view);
+        settings_dialog = builderSingle.create();
+        settings_dialog.show();
     }
-
-
 }
