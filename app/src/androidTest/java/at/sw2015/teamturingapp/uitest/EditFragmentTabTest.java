@@ -15,7 +15,6 @@ import java.util.Vector;
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
 import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
-import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.R;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
 
@@ -140,8 +139,6 @@ public class EditFragmentTabTest extends ActivityInstrumentationTestCase2<MainGa
         assertTrue(field2.getDrawable().getConstantState().equals
                 (activity.getResources().getDrawable(R.mipmap.dollar).getConstantState()));
     }
-
-
 
     public void testAddRule() {
         swipe(Direction.Left);

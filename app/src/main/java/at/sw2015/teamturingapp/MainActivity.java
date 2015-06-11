@@ -52,7 +52,6 @@ public class MainActivity extends ActionBarActivity {
         help_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //Todo: Implement Help View
               createDialog().show();
             }
         });
@@ -82,21 +81,19 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case HELP_RUN:
-                        showHelpDialogImage(R.mipmap.run_help,"Just click on play. To run the TM click on step.");
+                        showHelpDialogImage(R.mipmap.run_help,getString(R.string.help_run));
                         break;
                     case HELP_NEW_TM:
-                        showHelpDialogImage(R.mipmap.create_tm_help,"Click on the three dots in the upper-right corner." +
-                                "Fill out the mask and save");
+                        showHelpDialogImage(R.mipmap.create_tm_help,getString(R.string.help_new_tm));
                         break;
                     case HELP_LOAD_TM:
-                        showHelpDialogImage(R.mipmap.load_tm_help,"Click on the three dots in the upper-right corner and select load." +
-                                "Your default file browser will open and let you select the file.");
+                        showHelpDialogImage(R.mipmap.load_tm_help,getString(R.string.help_load_tm));
                         break;
                     case HELP_CHANGE_RULE:
-                        showHelpDialogImage(R.mipmap.edit_rule_help, "Click on one of the rules in the edit view (swipe left after run).");
+                        showHelpDialogImage(R.mipmap.edit_rule_help,getString(R.string.help_change_rule));
                         break;
                     case HELP_DELETE_RULE:
-                        showHelpDialogImage(R.mipmap.delete_rule_help,"Long-click on one of the rules in the edit view (swipe left after run)");
+                        showHelpDialogImage(R.mipmap.delete_rule_help,getString(R.string.help_delete_rule));
                         break;
                     default:
                 }
@@ -127,7 +124,4 @@ public class MainActivity extends ActionBarActivity {
         alert.setView(view);
         alert.show();
     }
-
-
-
 }

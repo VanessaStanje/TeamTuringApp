@@ -14,7 +14,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center"
         android:textColor="#FFFFFF"
-        android:text="Create New Rule"
+        android:text="@string/create_new_rule"
         android:id="@+id/textView2"
         android:layout_weight="0.09"
         android:fontFamily="@string/abc_action_bar_home_subtitle_description_format"
@@ -34,7 +34,7 @@
             android:textAppearance="?android:attr/textAppearanceInverse"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="CURRENT STATE"
+            android:text="@string/current_state"
             android:id="@+id/textViewCurrState" />
 
         <EditText
@@ -59,7 +59,7 @@
             android:textAppearance="?android:attr/textAppearanceInverse"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="READS SIGN"
+            android:text="@string/reads_sign"
             android:id="@+id/textViewReads" />
 
         <EditText
@@ -85,7 +85,7 @@
             android:textAppearance="?android:attr/textAppearanceInverse"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="WRITES SIGN"
+            android:text="@string/writes_sign"
             android:id="@+id/textViewWrites" />
 
         <EditText
@@ -110,7 +110,7 @@
             android:textAppearance="?android:attr/textAppearanceInverse"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="MOVES"
+            android:text="@string/moves"
             android:id="@+id/textViewMoves" />
 
         <EditText
@@ -136,7 +136,7 @@
             android:textAppearance="?android:attr/textAppearanceInverse"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="NEXT STATE"
+            android:text="@string/next_state"
             android:id="@+id/textViewNext"
             style="@style/Animation.AppCompat.DropDownUp" />
 
@@ -159,7 +159,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CANCEL"
+            android:text="@string/cancel"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
             android:id="@+id/button_cancel" />
@@ -167,7 +167,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SAVE"
+            android:text="@string/save"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
             android:id="@+id/button_save" />

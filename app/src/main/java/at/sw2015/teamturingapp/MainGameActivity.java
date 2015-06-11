@@ -11,9 +11,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +44,7 @@ public class MainGameActivity extends ActionBarActivity {
     SlidingTabLayout sliding_tab_layout;
     String headers[] = {"Run TM", "Edit TM"};
     int number_of_tabs = 2;
+    AlertDialog settings_dialog = null;
 
     // Made public to check in MainActivityTest
     // which test file was loaded
@@ -107,6 +113,9 @@ public class MainGameActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_settings:
+                showSettingsDialog();
+                return true;
             case R.id.action_load:
                 createFileChooser();
                 return true;
@@ -217,5 +226,51 @@ public class MainGameActivity extends ActionBarActivity {
         builderSingle.show();
     }
 
+    private void showSettingsDialog()
+    {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                this);
 
+        TextView title = new TextView(this);
+        title.setText("Settings");
+        title.setBackgroundColor(Color.parseColor("#990012"));
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(24);
+        builderSingle.setCustomTitle(title);
+
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View view = factory.inflate(R.layout.settings_layout, null);
+
+        Button save_player = (Button) view.findViewById(R.id.button_save_player);
+        Button cancel_player = (Button) view.findViewById(R.id.button_cancel_player);
+        final EditText player_edit = (EditText) view.findViewById(R.id.player_name_edit);
+
+        if(player_edit != null)
+            player_edit.setText(HighscoreHandler.getCurrentPlayerName());
+
+        save_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(player_edit != null)
+                  HighscoreHandler.setCurrentPlayerName(player_edit.getText().toString());
+
+                if(settings_dialog != null)
+                    settings_dialog.cancel();
+            }
+        });
+
+        cancel_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if(settings_dialog != null)
+                   settings_dialog.cancel();
+            }
+        });
+
+        builderSingle.setView(view);
+        settings_dialog = builderSingle.create();
+        settings_dialog.show();
+    }
 }

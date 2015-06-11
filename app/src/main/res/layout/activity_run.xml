@@ -17,7 +17,7 @@
         android:background="@color/ColorPrimaryDark"
         android:fontFamily="@string/abc_action_bar_home_subtitle_description_format"
         android:gravity="center"
-        android:text="Wanted Tape Content"
+        android:text="@string/wanted_tape_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF" />
 
@@ -136,7 +136,7 @@
         android:fontFamily="@string/abc_action_bar_home_subtitle_description_format"
         android:gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Current Tape Content"
+        android:text="@string/current_tape_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF" />
 
@@ -240,21 +240,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="STEP" />
+                android:text="@string/step" />
 
             <Button
                 android:id="@+id/button_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="RESET" />
+                android:text="@string/reset" />
 
             <Button
                 android:id="@+id/button_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="SHOW" />
+                android:text="@string/show" />
         </TableRow>
 
     </TableLayout>

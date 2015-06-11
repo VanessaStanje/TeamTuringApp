@@ -102,7 +102,6 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
                 ((activity)).getResources().getDrawable(R.mipmap.dollar_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.underline_correct));
 
-        tm_view.printTMState(current_tm_config, getActivity().getBaseContext());
         tm_view.updateView(current_tm_config);
 
         return root_view;
