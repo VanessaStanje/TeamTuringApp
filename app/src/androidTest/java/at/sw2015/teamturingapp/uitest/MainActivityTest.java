@@ -10,7 +10,6 @@ import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
 
-import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.R;
 
@@ -117,7 +116,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainGameA
 
             // Loaded the tmtestconfig file
             if(MainGameActivity.resource_id == R.raw.tmtestconfig){
-                MainGameActivity activity = (MainGameActivity) getActivity();
+                MainGameActivity activity = getActivity();
 
                 assertTrue(field1.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
@@ -362,6 +361,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainGameA
     }
 
     public void testHighscore() {
+        mySolo.sleep(150);
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Settings");
+        mySolo.clearEditText(0);
+        mySolo.enterText(0,"Player1");
+        mySolo.sleep(1500);
+        mySolo.clickOnButton("SAVE");
+        mySolo.goBack();
         mySolo.clickOnButton("STEP");
         mySolo.clickOnButton("STEP");
         mySolo.clickOnButton("STEP");

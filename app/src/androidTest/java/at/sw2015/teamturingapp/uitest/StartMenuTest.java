@@ -30,6 +30,7 @@ public class StartMenuTest extends ActivityInstrumentationTestCase2<MainActivity
     public void testButtons() {
         mySolo.clickOnButton("ABOUT");
         mySolo.clickOnButton("HELP");
+        mySolo.goBack();
         mySolo.clickOnButton("PLAY");
     }
 

@@ -33,4 +33,12 @@
     <string name="about">ABOUT</string>
     <string name="help">HELP</string>
     <string name="player_name">Player Name</string>
+    <string name="help_run">Just click on play. To run the TM click on step.</string>
+    <string name="help_new_tm">Click on the three dots in the upper-right corner. Fill out the mask and save.</string>
+    <string name="help_load_tm">Click on the three dots in the upper-right corner and select load. Your default file browser will open and let you select the file.</string>
+    <string name="help_change_rule">Click on one of the rules in the edit view (swipe left after run).</string>
+    <string name="help_delete_rule">Long-click on one of the rules in the edit view (swipe left after run).</string>
+
 </resources>
+
+
