@@ -16,7 +16,7 @@
         android:background="@color/ColorPrimaryDark"
         android:fontFamily="@string/abc_action_bar_home_subtitle_description_format"
         android:gravity="center"
-        android:text="Create New TM"
+        android:text="@string/create_new_tm"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF" />
 
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TM NAME"
+            android:text="@string/tm_name"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -62,7 +62,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TAPE CONTENT"
+            android:text="@string/tape_content"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -89,7 +89,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="GOAL CONTENT"
+            android:text="@string/goal_content"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -115,7 +115,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="AUTHOR"
+            android:text="@string/author"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -142,7 +142,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="INITIAL STATE"
+            android:text="@string/initial_state"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -168,7 +168,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TAPE COUNT"
+            android:text="@string/tape_count"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -195,7 +195,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="HEADS POSITION"
+            android:text="@string/heads_position"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -222,7 +222,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
-            android:text="CANCEL" />
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/new_tm_button_save"
@@ -230,7 +230,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
-            android:text="SAVE" />
+            android:text="@string/save" />
     </LinearLayout>
 
     <EditText

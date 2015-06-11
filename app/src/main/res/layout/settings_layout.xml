@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Player Name"
+            android:text="@string/player_name"
             android:textAppearance="?android:attr/textAppearanceInverse" />
 
         <EditText
@@ -39,14 +39,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CANCEL" />
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/button_save_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SAVE" />
+            android:text="@string/save" />
     </LinearLayout>
 
 
