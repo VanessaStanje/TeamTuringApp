@@ -106,7 +106,6 @@ public class NewRuleActivity extends Activity{
             return "ERROR";
         }
 
-
         boolean could_add = XMLParser.addNewRule(new_rule);
 
         if(could_add) {
@@ -118,7 +117,6 @@ public class NewRuleActivity extends Activity{
         else
             Toast.makeText(getApplicationContext(),"ERROR, Could not save rule!",
                     Toast.LENGTH_LONG).show();
-
 
         finish();
         return new_rule;
