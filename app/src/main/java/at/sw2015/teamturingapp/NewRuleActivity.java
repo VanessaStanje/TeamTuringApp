@@ -82,6 +82,31 @@ public class NewRuleActivity extends Activity{
             return "ERROR";
         }
 
+
+        if(!new_reads_sign.equalsIgnoreCase("0") && !new_reads_sign.equalsIgnoreCase("1") &&
+                !new_reads_sign.equalsIgnoreCase("$") && !new_reads_sign.equalsIgnoreCase("_"))
+        {
+            Toast.makeText(this.getBaseContext(), "Invalid read sign, use 0,1,$ or _ only.",
+                    Toast.LENGTH_SHORT).show();
+            return "ERROR";
+        }
+
+        if(!new_writes_sign.equalsIgnoreCase("0") && !new_writes_sign.equalsIgnoreCase("1") &&
+                !new_writes_sign.equalsIgnoreCase("$") && !new_writes_sign.equalsIgnoreCase("_"))
+        {
+            Toast.makeText(this.getBaseContext(), "Invalid write sign, use 0,1,$ or _ only.",
+                    Toast.LENGTH_SHORT).show();
+            return "ERROR";
+        }
+
+        if(!new_moves.equalsIgnoreCase("R") && !new_moves.equalsIgnoreCase("L") && !new_moves.equalsIgnoreCase("H"))
+        {
+            Toast.makeText(this.getBaseContext(), "Invalid move direction, use R,L,or H only.",
+                    Toast.LENGTH_SHORT).show();
+            return "ERROR";
+        }
+
+
         boolean could_add = XMLParser.addNewRule(new_rule);
 
         if(could_add) {
