@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
 import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
@@ -48,6 +49,7 @@ public class EditRuleActivity extends Activity{
         EditText writes_sign_text = (EditText) findViewById(R.id.writes_sign_edit);
         EditText moves_text = (EditText) findViewById(R.id.moves_edit);
         EditText next_state_text = (EditText) findViewById(R.id.next_state_edit);
+
 
         curr_state_text.setText(init_curr_state, TextView.BufferType.EDITABLE);
         reads_sign_text.setText(init_reads_sign, TextView.BufferType.EDITABLE);
@@ -113,6 +115,29 @@ public class EditRuleActivity extends Activity{
             String writes_sign = writes_sign_text.getText().toString();
             String moves = moves_text.getText().toString();
             String next_state = next_state_text.getText().toString();
+
+            if(!reads_sign.equalsIgnoreCase("0") && !reads_sign.equalsIgnoreCase("1") &&
+                    !reads_sign.equalsIgnoreCase("$") && !reads_sign.equalsIgnoreCase("_"))
+            {
+                Toast.makeText(this.getBaseContext(), "Invalid read sign, use 0,1,$ or _ only.",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(!writes_sign.equalsIgnoreCase("0") && !writes_sign.equalsIgnoreCase("1") &&
+                    !writes_sign.equalsIgnoreCase("$") && !writes_sign.equalsIgnoreCase("_"))
+            {
+                Toast.makeText(this.getBaseContext(), "Invalid write sign, use 0,1,$ or _ only.",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(!moves.equalsIgnoreCase("R") && !moves.equalsIgnoreCase("L") && !moves.equalsIgnoreCase("H"))
+            {
+                Toast.makeText(this.getBaseContext(), "Invalid move direction, use R,L,or H only.",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             no_problem_writing = XMLParser.saveTMRule(curr_state, reads_sign, writes_sign,
                     moves, next_state, rule_id, this);

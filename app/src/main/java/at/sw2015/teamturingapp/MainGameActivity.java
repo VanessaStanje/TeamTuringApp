@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,11 +62,11 @@ public class MainGameActivity extends ActionBarActivity {
 
         out_writer = new OutWriter("/TMConfigs/");
 
-        if(!out_writer.playerFileExists())
-          HighscoreHandler.setCurrentPlayerName("Player1");
+        if (!out_writer.playerFileExists())
+            HighscoreHandler.setCurrentPlayerName("Player1");
         else
-          System.out.println("Current Player: " +
-                  HighscoreHandler.getCurrentPlayerName());
+            System.out.println("Current Player: " +
+                    HighscoreHandler.getCurrentPlayerName());
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -173,22 +172,20 @@ public class MainGameActivity extends ActionBarActivity {
         this.startActivity(intent);
     }
 
-    private String showHighScoreToast()
-    {
+    private String showHighScoreToast() {
         ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
 
         String highscore_message = "####### HIGHSCORE #######\n\n";
-        for(HighScoreEntry curr_entry : all_scores)
+        for (HighScoreEntry curr_entry : all_scores)
             highscore_message += curr_entry.player_name + "-" + curr_entry.step_counter + "\n";
 
-        Toast.makeText(this,highscore_message,
+        Toast.makeText(this, highscore_message,
                 Toast.LENGTH_SHORT).show();
 
         return highscore_message;
     }
 
-    private void showHighScoreDialog()
-    {
+    private void showHighScoreDialog() {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(
                 this);
 
@@ -202,10 +199,10 @@ public class MainGameActivity extends ActionBarActivity {
         builderSingle.setCustomTitle(title);
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
-                this,R.layout.list_item);
+                this, R.layout.list_item);
 
         ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
-        for(HighScoreEntry curr_entry : all_scores)
+        for (HighScoreEntry curr_entry : all_scores)
             arrayAdapter.add(curr_entry.player_name + " - " + curr_entry.step_counter);
 
         builderSingle.setNegativeButton("CONTINUE",
@@ -226,8 +223,7 @@ public class MainGameActivity extends ActionBarActivity {
         builderSingle.show();
     }
 
-    private void showSettingsDialog()
-    {
+    private void showSettingsDialog() {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(
                 this);
 
@@ -247,16 +243,25 @@ public class MainGameActivity extends ActionBarActivity {
         Button cancel_player = (Button) view.findViewById(R.id.button_cancel_player);
         final EditText player_edit = (EditText) view.findViewById(R.id.player_name_edit);
 
-        if(player_edit != null)
+        if (player_edit != null)
             player_edit.setText(HighscoreHandler.getCurrentPlayerName());
 
         save_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(player_edit != null)
-                  HighscoreHandler.setCurrentPlayerName(player_edit.getText().toString());
+                if (player_edit != null) {
+                    String new_player_name = player_edit.getText().toString();
 
-                if(settings_dialog != null)
+                    if (new_player_name.length() == 0) {
+                        Toast.makeText(getApplicationContext(), "Please fill out all of the fields before" +
+                                " the settings can be saved. Thanks :)", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    HighscoreHandler.setCurrentPlayerName(new_player_name);
+                }
+
+                if (settings_dialog != null)
                     settings_dialog.cancel();
             }
         });
@@ -264,8 +269,8 @@ public class MainGameActivity extends ActionBarActivity {
         cancel_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(settings_dialog != null)
-                   settings_dialog.cancel();
+                if (settings_dialog != null)
+                    settings_dialog.cancel();
             }
         });
 
