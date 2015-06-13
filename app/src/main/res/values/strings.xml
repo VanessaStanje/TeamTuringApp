@@ -38,7 +38,10 @@
     <string name="help_load_tm">Click on the three dots in the upper-right corner and select load. Your default file browser will open and let you select the file.</string>
     <string name="help_change_rule">Click on one of the rules in the edit view (swipe left after run).</string>
     <string name="help_delete_rule">Long-click on one of the rules in the edit view (swipe left after run).</string>
-
+    <string name="help_add_rule">Click on the + sign in the edit view and enter the new rules content.</string>
+    <string name="help_show_tm_state">Click on the show button. The game will display the different states and additional information within a text message.</string>
+    <string name="help_high_scores">Click on the three dots in the upper-right corner. Then click on highscore</string>
+    <string name="help_change_name">Click on the three dots in the upper-right corner. Then click on settings and enter your name.</string>
 </resources>
 
 
