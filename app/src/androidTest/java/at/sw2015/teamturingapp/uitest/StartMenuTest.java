@@ -64,6 +64,30 @@ public class StartMenuTest extends ActivityInstrumentationTestCase2<MainActivity
         mySolo.sleep(150);
         assertTrue(mySolo.getCurrentActivity().getResources().getDrawable(R.mipmap.delete_rule_help).isVisible());
         mySolo.goBack();
+
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("ADD RULE");
+        mySolo.sleep(150);
+        assertTrue(mySolo.getCurrentActivity().getResources().getDrawable(R.mipmap.add_rule_help).isVisible());
+        mySolo.goBack();
+
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("SHOW TM STATE");
+        mySolo.sleep(150);
+        assertTrue(mySolo.getCurrentActivity().getResources().getDrawable(R.mipmap.show_help).isVisible());
+        mySolo.goBack();
+
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("HIGHSCORE");
+        mySolo.sleep(150);
+        assertTrue(mySolo.getCurrentActivity().getResources().getDrawable(R.mipmap.highscore_help).isVisible());
+        mySolo.goBack();
+
+        mySolo.clickOnButton("HELP");
+        mySolo.clickOnText("CHANGE NAME");
+        mySolo.sleep(150);
+        assertTrue(mySolo.getCurrentActivity().getResources().getDrawable(R.mipmap.change_name_help).isVisible());
+        mySolo.goBack();
     }
 
 }
