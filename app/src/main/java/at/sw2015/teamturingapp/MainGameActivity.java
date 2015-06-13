@@ -1,7 +1,6 @@
 package at.sw2015.teamturingapp;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -91,12 +90,7 @@ public class MainGameActivity extends ActionBarActivity {
 
         sliding_tab_layout = (SlidingTabLayout) findViewById(R.id.tabs);
         sliding_tab_layout.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-        sliding_tab_layout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
+        sliding_tab_layout.setCustomTabColorizer(position -> getResources().getColor(R.color.tabsScrollColor));
 
         sliding_tab_layout.setViewPager(view_pager);
         out_writer.clearHighScore(current_tm_config.getTMName());
@@ -172,19 +166,6 @@ public class MainGameActivity extends ActionBarActivity {
         this.startActivity(intent);
     }
 
-    private String showHighScoreToast() {
-        ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
-
-        String highscore_message = "####### HIGHSCORE #######\n\n";
-        for (HighScoreEntry curr_entry : all_scores)
-            highscore_message += curr_entry.player_name + "-" + curr_entry.step_counter + "\n";
-
-        Toast.makeText(this, highscore_message,
-                Toast.LENGTH_SHORT).show();
-
-        return highscore_message;
-    }
-
     private void showHighScoreDialog() {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(
                 this);
@@ -206,18 +187,10 @@ public class MainGameActivity extends ActionBarActivity {
             arrayAdapter.add(curr_entry.player_name + " - " + curr_entry.step_counter);
 
         builderSingle.setNegativeButton("CONTINUE",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                (dialog, which) -> dialog.dismiss());
 
         builderSingle.setAdapter(arrayAdapter,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
+                (dialog, which) -> {
                 });
 
         builderSingle.show();
@@ -246,32 +219,28 @@ public class MainGameActivity extends ActionBarActivity {
         if (player_edit != null)
             player_edit.setText(HighscoreHandler.getCurrentPlayerName());
 
-        save_player.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (player_edit != null) {
-                    String new_player_name = player_edit.getText().toString();
+        save_player.setOnClickListener((View v) -> {
 
-                    if (new_player_name.length() == 0) {
-                        Toast.makeText(getApplicationContext(), "Please fill out all of the fields before" +
-                                " the settings can be saved. Thanks :)", Toast.LENGTH_LONG).show();
-                        return;
-                    }
+            if (player_edit != null) {
+                String new_player_name = player_edit.getText().toString();
 
-                    HighscoreHandler.setCurrentPlayerName(new_player_name);
+                if (new_player_name.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Please fill out all of the fields before" +
+                            " the settings can be saved. Thanks :)", Toast.LENGTH_LONG).show();
+                    return;
                 }
 
-                if (settings_dialog != null)
-                    settings_dialog.cancel();
+                HighscoreHandler.setCurrentPlayerName(new_player_name);
             }
+
+            if (settings_dialog != null)
+                settings_dialog.cancel();
+
         });
 
-        cancel_player.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        cancel_player.setOnClickListener((View v) -> {
                 if (settings_dialog != null)
                     settings_dialog.cancel();
-            }
         });
 
         builderSingle.setView(view);
