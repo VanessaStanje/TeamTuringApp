@@ -56,7 +56,7 @@ public class OutWriter {
             transformer.transform(domSource, streamResult);
 
         } catch (Exception e) {
-            System.out.println("ERROR; " + e);
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -85,7 +85,7 @@ public class OutWriter {
             transformer.transform(domSource, streamResult);
 
         } catch (Exception e) {
-            System.out.println("ERROR; " + e);
+            e.printStackTrace();
             return false;
         }
         return true;

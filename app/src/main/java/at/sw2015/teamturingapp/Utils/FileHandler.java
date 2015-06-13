@@ -18,9 +18,9 @@ public class FileHandler {
             try {
                 cursor = context.getContentResolver().query(uri, projection, null, null, null);
                 int column_index = cursor.getColumnIndexOrThrow("_data");
-                if (cursor.moveToFirst()) {
+                if (cursor.moveToFirst())
                     return cursor.getString(column_index);
-                }
+
                 cursor.close();
             } catch (Exception e) {
                 e.printStackTrace();

@@ -10,7 +10,6 @@ import com.robotium.solo.Solo;
 
 import org.w3c.dom.NodeList;
 
-import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.R;
 
@@ -154,20 +153,22 @@ public class XMLParserTest extends ActivityInstrumentationTestCase2<MainGameActi
         org.w3c.dom.Document raw_xml_input = XMLParser.
                 readXMLInputFromSD(Environment.
                         getExternalStorageDirectory() + "/TMConfigs/" + "NewTMTest.xml");
-        TMConfiguration new_tm_config = null;
+
+        assertNotNull(raw_xml_input);
+
+        TMConfiguration new_tm_config;
         try {
             new_tm_config = XMLParser.readTMConfig(raw_xml_input);
+            assertNotNull(new_tm_config);
+            assertEquals(new_tm_config.getAuthor(),"Myself");
+            assertEquals(""+new_tm_config.getHeadPositions().get(0),"0");
+            assertEquals(new_tm_config.getCurrentState(),"S0");
+            assertEquals(""+new_tm_config.getTapeCount(),"1");
+            assertEquals(new_tm_config.getAllTapes().get(0),"0-0-0-0-0");
+            assertEquals(new_tm_config.getAllGoals().get(0),"0-1-0-1-0");
         }catch (Exception e)
         {
             e.printStackTrace();
         }
-
-        assertNotNull(new_tm_config);
-        assertEquals(new_tm_config.getAuthor(),"Myself");
-        assertEquals(""+new_tm_config.getHeadPositions().get(0),"0");
-        assertEquals(new_tm_config.getCurrentState(),"S0");
-        assertEquals(""+new_tm_config.getTapeCount(),"1");
-        assertEquals(new_tm_config.getAllTapes().get(0),"0-0-0-0-0");
-        assertEquals(new_tm_config.getAllGoals().get(0),"0-1-0-1-0");
     }
 }

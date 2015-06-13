@@ -69,7 +69,6 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainGameActivit
         all_image_views_goals.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field8_correct));
         all_image_views_goals.add((ImageView) mySolo.getCurrentActivity().findViewById(R.id.field9_correct));
 
-
         MainGameActivity activity = getActivity();
 
         TMView new_view = new TMView(all_image_views,
@@ -86,7 +85,6 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainGameActivit
                 ((activity)).getResources().getDrawable(R.mipmap.zero_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.dollar_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.underline_correct));
-
 
         String tm_out = new_view.printTMState(new_tm_config,mySolo.getCurrentActivity().getBaseContext());
         assertTrue(tm_out.length() > 0);
