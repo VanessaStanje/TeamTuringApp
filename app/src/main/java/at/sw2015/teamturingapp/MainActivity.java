@@ -23,6 +23,10 @@ public class MainActivity extends ActionBarActivity {
     final int HELP_LOAD_TM = 2;
     final int HELP_CHANGE_RULE = 3;
     final int HELP_DELETE_RULE = 4;
+    final int HELP_ADD_RULE = 5;
+    final int HELP_SHOW = 6;
+    final int HELP_HIGHSCORE = 7;
+    final int HELP_CHANGE_NAME = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,8 @@ public class MainActivity extends ActionBarActivity {
         title.setTextColor(Color.WHITE);
         title.setTextSize(24);
 
-        String[] input = {"RUN TM","CREATE NEW TM","LOAD TM","CHANGE RULE", "DELETE RULE"};
+        String[] input = {"RUN TM","CREATE NEW TM","LOAD TM","CHANGE RULE",
+                "DELETE RULE","ADD RULE","SHOW TM STATE", "HIGHSCORE", "CHANGE NAME"};
         builderSingle.setCustomTitle(title).setItems(input, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
@@ -94,6 +99,18 @@ public class MainActivity extends ActionBarActivity {
                         break;
                     case HELP_DELETE_RULE:
                         showHelpDialogImage(R.mipmap.delete_rule_help,getString(R.string.help_delete_rule));
+                        break;
+                    case HELP_ADD_RULE:
+                        showHelpDialogImage(R.mipmap.add_rule_help,getString(R.string.help_add_rule));
+                        break;
+                    case HELP_SHOW:
+                        showHelpDialogImage(R.mipmap.show_help,getString(R.string.help_show_tm_state));
+                        break;
+                    case HELP_HIGHSCORE:
+                        showHelpDialogImage(R.mipmap.highscore_help,getString(R.string.help_high_scores));
+                        break;
+                    case HELP_CHANGE_NAME:
+                        showHelpDialogImage(R.mipmap.change_name_help,getString(R.string.help_change_name));
                         break;
                     default:
                 }
