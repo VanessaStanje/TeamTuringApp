@@ -1,6 +1,5 @@
 package at.sw2015.teamturingapp.Utils;
 
-import android.content.Context;
 import android.os.Environment;
 
 import java.io.BufferedReader;
@@ -212,6 +211,9 @@ public class OutWriter {
 
     public boolean deleteTM(String tm_name)
     {
-        return false;
+        File file = new File(Environment.
+                getExternalStorageDirectory()+ "/" + directory + "/"+
+                tm_name + ".xml");
+        return file.delete();
     }
 }
