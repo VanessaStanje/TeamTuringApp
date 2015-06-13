@@ -35,5 +35,8 @@
 ########################################################
 ############### RELEASE 1.0 ############################
 #
-
+# Final release at the end of ther iteration. First
+# version of the finished app is done. Every user story
+# was implemented. We managed to even implement some 
+# more stories than initially thought.
 ########################################################
