@@ -39,7 +39,6 @@ public class NewTMActivity extends Activity {
                 }
             }
         });
-
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -102,7 +102,6 @@ public class MainGameActivity extends ActionBarActivity {
 
         sliding_tab_layout.setViewPager(view_pager);
         out_writer.clearHighScore(current_tm_config.getTMName());
-
     }
 
     @Override
