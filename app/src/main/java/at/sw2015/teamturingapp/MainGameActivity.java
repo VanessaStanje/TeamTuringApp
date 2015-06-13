@@ -279,10 +279,10 @@ public class MainGameActivity extends ActionBarActivity {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         if(out_writer.deleteTM(current_tm_config.getTMName())) {
-                            Toast.makeText(getApplicationContext(), "TM deleted!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),R.string.delete_succeed, Toast.LENGTH_LONG).show();
                             finish();
                         }else
-                            Toast.makeText(getApplicationContext(), "Could not delete TM!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),R.string.delete_failed, Toast.LENGTH_LONG).show();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -292,7 +292,7 @@ public class MainGameActivity extends ActionBarActivity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do you really want to delete this TM?").setPositiveButton("YES", dialogClickListener)
+        builder.setMessage(R.string.delete_question).setPositiveButton("YES", dialogClickListener)
                 .setNegativeButton("NO", dialogClickListener).show();
     }
 

@@ -43,6 +43,10 @@
     <string name="help_show_tm_state">Click on the show button. The game will display the different states and additional information within a text message.</string>
     <string name="help_high_scores">Click on the three dots in the upper-right corner. Then click on highscore</string>
     <string name="help_change_name">Click on the three dots in the upper-right corner. Then click on settings and enter your name.</string>
+    <string name="delete_question">Do you really want to delete this TM?</string>
+    <string name="delete_succeed">TM deleted!</string>
+    <string name="delete_failed">Could not delete TM!</string>
+
 </resources>
 
 
