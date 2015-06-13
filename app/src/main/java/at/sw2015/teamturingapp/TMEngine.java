@@ -12,7 +12,7 @@ public class TMEngine {
     private static final int DIRECTION = 3;
     private static final int STATE = 4;
 
-    public TMEngine(){
+    public TMEngine() {
     }
 
     public void step(TMConfiguration current_tm_config) {
@@ -30,10 +30,14 @@ public class TMEngine {
             String current_state = current_tm_config.getCurrentState();
 
             // Search for matching rule
-            for(Vector<String> current_rule : current_tm_config.getAllRules())
-            {
+            for (Vector<String> current_rule : current_tm_config.getAllRules()) {
                 if (current_rule.get(CURRENT_STATE).equalsIgnoreCase(current_state)
                         && current_rule.get(READ_SIGN).equalsIgnoreCase(read_sign)) {
+
+                    if (current_head_position == (current_tm_config.getAllTapes().get(0).length() - 1) / 2 &&
+                            current_rule.get(DIRECTION).equalsIgnoreCase("R") ||
+                            current_head_position == 0 && current_rule.get(DIRECTION).equalsIgnoreCase("L"))
+                        return;
 
                     // FOUND MATCHING RULE TO CONTINUE
                     // SET NEW TAPE
@@ -57,7 +61,7 @@ public class TMEngine {
                             .getHeadPositions();
 
                     tmp_head_positions.set(tape_counter,
-                            moveHead(current_head_position,current_rule.get(DIRECTION)));
+                            moveHead(current_head_position, current_rule.get(DIRECTION)));
 
                     current_tm_config.setHeadPositions(tmp_head_positions);
                 }
@@ -66,9 +70,7 @@ public class TMEngine {
     }
 
 
-
-    public int moveHead(int current_head_position, String direction)
-    {
+    public int moveHead(int current_head_position, String direction) {
         if (direction.equalsIgnoreCase("R"))
             return current_head_position + 1;
         else if (direction.equalsIgnoreCase("L"))
@@ -77,22 +79,16 @@ public class TMEngine {
         return current_head_position;
     }
 
-    public boolean checkIfGameWon(TMConfiguration current_tm_config)
-    {
+    public boolean checkIfGameWon(TMConfiguration current_tm_config) {
         int done_tapes_count = 0;
-        for(String curr_tape : current_tm_config.getAllTapes())
-        {
-            for(String curr_goal : current_tm_config.getAllGoals())
-            {
-                if(curr_tape.equalsIgnoreCase(curr_goal))
+        for (String curr_tape : current_tm_config.getAllTapes()) {
+            for (String curr_goal : current_tm_config.getAllGoals()) {
+                if (curr_tape.equalsIgnoreCase(curr_goal))
                     done_tapes_count++;
             }
         }
 
-        if(done_tapes_count == current_tm_config.getAllTapes().size())
-            return true;
-
-        return false;
+        return done_tapes_count == current_tm_config.getAllTapes().size();
     }
 
 }

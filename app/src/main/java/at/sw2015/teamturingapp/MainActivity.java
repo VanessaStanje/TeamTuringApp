@@ -1,101 +1,65 @@
 package at.sw2015.teamturingapp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
-import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
-import at.sw2015.teamturingapp.Tabs.ViewPagerAdapter;
-import at.sw2015.teamturingapp.Utils.FileHandler;
-import at.sw2015.teamturingapp.Utils.HighScoreEntry;
-import at.sw2015.teamturingapp.Utils.HighscoreHandler;
-import at.sw2015.teamturingapp.Utils.OutWriter;
-import at.sw2015.teamturingapp.Utils.TMConfiguration;
-import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class MainActivity extends ActionBarActivity {
 
-    Toolbar toolbar;
-    ViewPager view_pager;
-    ViewPagerAdapter view_pager_adapter;
-    SlidingTabLayout sliding_tab_layout;
-    String headers[] = {"Run TM", "Edit TM"};
-    int number_of_tabs = 2;
-
-    // Made public to check in MainActivityTest
-    // which test file was loaded
-    public static int resource_id = R.raw.tmtestconfig;
-    public static String curr_tm_file_name_path = Environment.
-            getExternalStorageDirectory() + "/TMConfigs/" + "tmtestconfig" + ".xml";
-
-    public TMConfiguration current_tm_config = null;
-    public static OutWriter out_writer = null;
+    final int HELP_RUN = 0;
+    final int HELP_NEW_TM = 1;
+    final int HELP_LOAD_TM = 2;
+    final int HELP_CHANGE_RULE = 3;
+    final int HELP_DELETE_RULE = 4;
+    final int HELP_ADD_RULE = 5;
+    final int HELP_SHOW = 6;
+    final int HELP_HIGHSCORE = 7;
+    final int HELP_CHANGE_NAME = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_startmenu);
 
-        setContentView(R.layout.activity_main);
-
-        out_writer = new OutWriter("/TMConfigs/");
-
-        if(!out_writer.playerFileExists())
-          HighscoreHandler.setCurrentPlayerName("Player1");
-        else
-          System.out.println("Current Player: " +
-                  HighscoreHandler.getCurrentPlayerName());
-
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-
-        InputStream raw = getResources().openRawResource(resource_id);
-        curr_tm_file_name_path = Environment.
-                getExternalStorageDirectory() + "/TMConfigs/" +
-                getResources().getResourceEntryName(resource_id) + ".xml";
-
-        try {
-            out_writer.writeXMLToFileName(XMLParser.readRawXMLInput(raw), getResources().getResourceEntryName(resource_id));
-            raw = getResources().openRawResource(resource_id);
-            org.w3c.dom.Document raw_xml_input = XMLParser.readRawXMLInput(raw);
-            current_tm_config = XMLParser.readTMConfig(raw_xml_input);
-        } catch (XmlPullParserException | IOException
-                | ParserConfigurationException | SAXException e) {
-            e.printStackTrace();
-        }
-
-        view_pager_adapter = new ViewPagerAdapter(getSupportFragmentManager(), headers, number_of_tabs);
-        view_pager = (ViewPager) findViewById(R.id.pager);
-        view_pager.setAdapter(view_pager_adapter);
-
-        sliding_tab_layout = (SlidingTabLayout) findViewById(R.id.tabs);
-        sliding_tab_layout.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-        sliding_tab_layout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        Button play_game_button = (Button) findViewById(R.id.button_play);
+        play_game_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainGameActivity.class);
+                startActivity(intent);
             }
         });
 
-        sliding_tab_layout.setViewPager(view_pager);
-        out_writer.clearHighScore(current_tm_config.getTMName());
+        Button about_button = (Button) findViewById(R.id.button_about);
+        about_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Game was created by Lukas Gregori and" +
+                                " Vanessa Stanje as part of the SW course.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button help_button = (Button) findViewById(R.id.button_help);
+        help_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              createDialog().show();
+            }
+        });
+
     }
 
     @Override
@@ -104,79 +68,77 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_load:
-                createFileChooser();
-                return true;
-            case R.id.action_new:
-                createNewTMDialog();
-                return true;
-            case R.id.action_highscore:
-                showHighScoreToast();
-                return true;
-            default:
-                return item.getItemId() == R.id.action_settings
-                        || super.onOptionsItemSelected(item);
-        }
-    }
+    public Dialog createDialog() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                this);
 
-    private void createFileChooser() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
+        TextView title = new TextView(this);
+        title.setText("HELP");
+        title.setBackgroundColor(Color.parseColor("#990012"));
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(24);
 
-        try {
-            startActivityForResult(
-                    Intent.createChooser(intent, "Choose a TM File to run"),
-                    0);
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "No File Manager found, please install one and try again",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 0:
-                if (resultCode == RESULT_OK) {
-                    Uri uri = data.getData();
-                    try {
-                        String path = FileHandler.getPath(this, uri);
-                        org.w3c.dom.Document raw = XMLParser.readXMLInputFromFile(new File(path));
-                        current_tm_config = XMLParser.readTMConfig(raw);
-                        curr_tm_file_name_path = path;
-                        EditFragmentTab.update();
-                        ViewPagerAdapter.current_run_fragment.reset();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        String[] input = {"RUN TM","CREATE NEW TM","LOAD TM","CHANGE RULE",
+                "DELETE RULE","ADD RULE","SHOW TM STATE", "HIGHSCORE", "CHANGE NAME"};
+        builderSingle.setCustomTitle(title).setItems(input, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case HELP_RUN:
+                        showHelpDialogImage(R.mipmap.run_help,getString(R.string.help_run));
+                        break;
+                    case HELP_NEW_TM:
+                        showHelpDialogImage(R.mipmap.create_tm_help,getString(R.string.help_new_tm));
+                        break;
+                    case HELP_LOAD_TM:
+                        showHelpDialogImage(R.mipmap.load_tm_help,getString(R.string.help_load_tm));
+                        break;
+                    case HELP_CHANGE_RULE:
+                        showHelpDialogImage(R.mipmap.edit_rule_help,getString(R.string.help_change_rule));
+                        break;
+                    case HELP_DELETE_RULE:
+                        showHelpDialogImage(R.mipmap.delete_rule_help,getString(R.string.help_delete_rule));
+                        break;
+                    case HELP_ADD_RULE:
+                        showHelpDialogImage(R.mipmap.add_rule_help,getString(R.string.help_add_rule));
+                        break;
+                    case HELP_SHOW:
+                        showHelpDialogImage(R.mipmap.show_help,getString(R.string.help_show_tm_state));
+                        break;
+                    case HELP_HIGHSCORE:
+                        showHelpDialogImage(R.mipmap.highscore_help,getString(R.string.help_high_scores));
+                        break;
+                    case HELP_CHANGE_NAME:
+                        showHelpDialogImage(R.mipmap.change_name_help,getString(R.string.help_change_name));
+                        break;
+                    default:
                 }
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+            }
+        });
+
+        return builderSingle.create();
     }
 
-    private void createNewTMDialog() {
-        Intent intent = new Intent(this, NewTMActivity.class);
-        this.startActivity(intent);
-    }
-
-    private String showHighScoreToast()
+    void showHelpDialogImage(int res_id,String help_message)
     {
-        ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
+        AlertDialog.Builder alert = new AlertDialog.Builder(
+                this);
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View view = factory.inflate(R.layout.help_image, null);
 
-        String highscore_message = "####### HIGHSCORE #######\n\n";
-        for(HighScoreEntry curr_entry : all_scores)
-            highscore_message += curr_entry.player_name + "-" + curr_entry.step_counter + "\n";
+        ImageView help_img = (ImageView) view.findViewById(R.id.image);
+        if(help_img != null) {
+            help_img.setImageResource(res_id);
+            help_img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
 
-        Toast.makeText(this,highscore_message,
-                Toast.LENGTH_SHORT).show();
+        TextView help_text = (TextView) view.findViewById(R.id.textViewHelp);
+        if(help_text != null) {
+            help_text.setText(help_message);
+        }
 
-        return highscore_message;
+        alert.setView(view);
+        alert.show();
     }
-
-
 }

@@ -4,21 +4,22 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
 
-import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.R;
 
 
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class MainActivityTest extends ActivityInstrumentationTestCase2<MainGameActivity> {
 
     private Solo mySolo;
 
     public MainActivityTest(){
-        super(MainActivity.class);
+        super(MainGameActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -114,8 +115,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertTrue(current_ImageView.contains(fieldr));
 
             // Loaded the tmtestconfig file
-            if(MainActivity.resource_id == R.raw.tmtestconfig){
-                MainActivity activity = getActivity();
+            if(MainGameActivity.resource_id == R.raw.tmtestconfig){
+                MainGameActivity activity = getActivity();
 
                 assertTrue(field1.getDrawable().getConstantState().equals
                         (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
@@ -203,8 +204,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertTrue(current_ImageView.contains(fieldr_correct));
 
             // Loaded the tmtestconfig file
-            if(MainActivity.resource_id == R.raw.tmtestconfig){
-                MainActivity activity = getActivity();
+            if(MainGameActivity.resource_id == R.raw.tmtestconfig){
+                MainGameActivity activity = getActivity();
 
                 //Check if initial config matches expected
                 assertTrue(field1.getDrawable().getConstantState().equals
@@ -334,7 +335,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertTrue(current_ImageView.contains(field9));
             assertTrue(current_ImageView.contains(fieldr));
 
-            MainActivity activity = getActivity();
+            MainGameActivity activity = getActivity();
 
             assertTrue(field1.getDrawable().getConstantState().equals
                     (((activity)).getResources().getDrawable(R.mipmap.underline).getConstantState()));
@@ -359,5 +360,61 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         mySolo.sleep(1000);
     }
 
+    public void testHighscore() {
+        mySolo.sleep(150);
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Settings");
+        mySolo.clearEditText(0);
+        mySolo.enterText(0,"Player1");
+        mySolo.sleep(1500);
+        mySolo.clickOnButton("SAVE");
+        mySolo.goBack();
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Highscore");
+        TextView new_text = mySolo.getText("Player1 - 6");
+        assertNotNull(new_text);
+    }
+
+    public void testSettings() {
+        mySolo.sleep(150);
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Settings");
+        mySolo.clearEditText(0);
+        mySolo.enterText(0,"Tester");
+        mySolo.sleep(1500);
+
+        mySolo.clickOnButton("SAVE");
+        mySolo.goBack();
+
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.clickOnButton("STEP");
+        mySolo.sendKey(KeyEvent.KEYCODE_MENU);
+        mySolo.clickOnText("Highscore");
+        TextView new_text = mySolo.getText("Tester - 6");
+        assertNotNull(new_text);
+
+    }
 }
 

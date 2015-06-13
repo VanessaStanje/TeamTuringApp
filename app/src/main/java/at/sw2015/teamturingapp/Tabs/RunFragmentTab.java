@@ -18,7 +18,7 @@ import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.R;
 import at.sw2015.teamturingapp.Utils.HighscoreHandler;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
@@ -44,8 +44,8 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
 
         try {
             org.w3c.dom.Document raw_xml_input = XMLParser.
-                    readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
-            System.err.println(MainActivity.curr_tm_file_name_path);
+                    readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
+            System.err.println(MainGameActivity.curr_tm_file_name_path);
             current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {
@@ -82,10 +82,9 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
         all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field8_correct));
         all_image_views_goals.add((ImageView) root_view.findViewById(R.id.field9_correct));
 
+        MainGameActivity activity = (MainGameActivity) getActivity();
 
-        MainActivity activity = (MainActivity) getActivity();
-
-        tm_view = new TMView(all_image_views, ((activity)).getResources().getDrawable(R.mipmap.base),
+        tm_view = new TMView(all_image_views,
                 ((activity)).getResources().getDrawable(R.mipmap.one),
                 ((activity)).getResources().getDrawable(R.mipmap.one_sel),
                 ((activity)).getResources().getDrawable(R.mipmap.zero),
@@ -95,13 +94,11 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
                 ((activity)).getResources().getDrawable(R.mipmap.underline),
                 ((activity)).getResources().getDrawable(R.mipmap.underline_sel),
                 all_image_views_goals,
-                ((activity)).getResources().getDrawable(R.mipmap.base_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.one_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.zero_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.dollar_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.underline_correct));
 
-        tm_view.printTMState(current_tm_config, getActivity().getBaseContext());
         tm_view.updateView(current_tm_config);
 
         return root_view;
@@ -119,7 +116,7 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
                     Toast.makeText(ctx,"Congrats, you solved the puzzle \""+
                             current_tm_config.getTMName()+"\" in " +
                             step_counter + " steps!", Toast.LENGTH_LONG).show();
-                    MainActivity.out_writer.writeHighScore(current_tm_config.getTMName(),
+                    MainGameActivity.out_writer.writeHighScore(current_tm_config.getTMName(),
                             HighscoreHandler.current_player_name,step_counter);
                     reset();
                 }
@@ -139,7 +136,7 @@ public class RunFragmentTab extends Fragment implements View.OnClickListener {
 
         try {
             org.w3c.dom.Document raw_xml_input = XMLParser.
-                    readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+                    readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
             current_tm_config = XMLParser.readTMConfig(raw_xml_input);
         } catch (XmlPullParserException | IOException
                 | ParserConfigurationException | SAXException e) {

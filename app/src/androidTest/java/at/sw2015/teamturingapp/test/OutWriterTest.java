@@ -1,7 +1,10 @@
 package at.sw2015.teamturingapp.test;
 
+import android.os.Environment;
+
 import junit.framework.TestCase;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -50,5 +53,16 @@ public class OutWriterTest extends TestCase {
         assertEquals(all_entries.get(2).step_counter,223);
 
         out_writer.clearHighScore("TMTEST");
+    }
+
+    public void testOutWriteDelete() throws Exception {
+        OutWriter out_writer = new OutWriter("/TMConfigs/");
+        assertNotNull(out_writer);
+        File file = new File(Environment.
+                getExternalStorageDirectory()+ "/" + "TMConfigs" + "/"+
+                "tmtestconfig" + ".xml");
+        assertTrue(file.exists());
+        assertTrue(out_writer.deleteTM("tmtestconfig"));
+        assertFalse(file.exists());
     }
 }

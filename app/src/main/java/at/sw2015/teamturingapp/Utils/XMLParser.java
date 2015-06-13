@@ -1,7 +1,5 @@
 package at.sw2015.teamturingapp.Utils;
 
-import android.content.Context;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,13 +12,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.MainGameActivity;
 
 
 public class XMLParser {
@@ -33,6 +32,7 @@ public class XMLParser {
     final static String TAPES = "T";
     final static String GOALS = "G";
     final static String RULES = "R";
+    final static String TM_CONFIG = "TM_CONFIG";
 
     public XMLParser() {
     }
@@ -81,7 +81,6 @@ public class XMLParser {
     public static TMConfiguration readTMConfig(org.w3c.dom.Document raw_xml_input)
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
-
         String tm_name = raw_xml_input.getElementsByTagName(TMNAME).item(0)
                 .getTextContent();
 
@@ -118,9 +117,7 @@ public class XMLParser {
             Vector<String> current_rule = new Vector<>();
             String current_rule_string = rules_list.item(rules_counter)
                     .getTextContent();
-            String[] splitted_rule = current_rule_string.split("-");
-            for (int elem_counter = 0; elem_counter < splitted_rule.length; elem_counter++)
-                current_rule.add(splitted_rule[elem_counter]);
+            Collections.addAll(current_rule, current_rule_string.split("-"));
             all_rules.add(current_rule);
         }
 
@@ -129,11 +126,11 @@ public class XMLParser {
     }
 
     public static boolean saveTMRule(String current_state, String reads_sign, String writes_sign,
-                                     String moves, String next_state, int index, Context ctx)
+                                     String moves, String next_state, int index)
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
 
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
 
@@ -142,12 +139,12 @@ public class XMLParser {
 
         rules_list.item(index).setTextContent(new_content);
 
-        String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+        String file_path = MainGameActivity.curr_tm_file_name_path;
+        return MainGameActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
     public static boolean addNewRule(String new_rule) {
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
 
         NodeList rules_list = raw_xml_input.getElementsByTagName("RULES");
         Node new_child = raw_xml_input.createElement("R");
@@ -155,12 +152,12 @@ public class XMLParser {
         Element rule = (Element) rules_list.item(0);
         rule.appendChild(new_child);
 
-        String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+        String file_path = MainGameActivity.curr_tm_file_name_path;
+        return MainGameActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
     public static boolean removeRule(int index) {
-        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainActivity.curr_tm_file_name_path);
+        org.w3c.dom.Document raw_xml_input = readXMLInputFromSD(MainGameActivity.curr_tm_file_name_path);
 
         NodeList main_rule = raw_xml_input.getElementsByTagName("RULES");
         NodeList rules_list = raw_xml_input.getElementsByTagName(RULES);
@@ -169,68 +166,67 @@ public class XMLParser {
             return false;
 
         main_rule.item(0).removeChild(rules_list.item(index));
-        String file_path = MainActivity.curr_tm_file_name_path;
-        return MainActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
+        String file_path = MainGameActivity.curr_tm_file_name_path;
+        return MainGameActivity.out_writer.writeXMLToFilePath(raw_xml_input, file_path);
     }
 
     public static boolean writeNewTM(String tm_name, String author,
                                      String initial_state, String tape_count,
-                                     String heads_position,String tape_content) {
+                                     String heads_position,String tape_content,String goal_content) {
         try{
             DocumentBuilderFactory factory =
                     DocumentBuilderFactory.newInstance();
             DocumentBuilder parser = factory.newDocumentBuilder();
             Document doc=parser.newDocument();
 
-            Element root=doc.createElement("TM_CONFIG");
+            Element root=doc.createElement(TM_CONFIG);
             doc.appendChild(root);
 
-            Element TMNAME=doc.createElement("TMNAME");
-            TMNAME.setTextContent(tm_name);
-            root.appendChild(TMNAME);
+            Element TM_NAME=doc.createElement(TMNAME);
+            TM_NAME.setTextContent(tm_name);
+            root.appendChild(TM_NAME);
 
-            Element AUTHOR=doc.createElement("AUTHOR");
-            AUTHOR.setTextContent(author);
-            root.appendChild(AUTHOR);
+            Element AUTHOR_XML=doc.createElement(AUTHOR);
+            AUTHOR_XML.setTextContent(author);
+            root.appendChild(AUTHOR_XML);
 
-            Element TAPE_COUNT=doc.createElement("TAPE_COUNT");
-            TAPE_COUNT.setTextContent(tape_count);
-            root.appendChild(TAPE_COUNT);
+            Element TAPE_COUNT_XML=doc.createElement(TAPE_COUNT);
+            TAPE_COUNT_XML.setTextContent(tape_count);
+            root.appendChild(TAPE_COUNT_XML);
 
-            Element INITIAL_STATE=doc.createElement("INITIAL_STATE");
-            INITIAL_STATE.setTextContent(initial_state);
-            root.appendChild(INITIAL_STATE);
+            Element INITIAL_STATE_XML=doc.createElement(INITIAL_STATE);
+            INITIAL_STATE_XML.setTextContent(initial_state);
+            root.appendChild(INITIAL_STATE_XML);
 
-            Element HEADS=doc.createElement("HEADS");
-            root.appendChild(HEADS);
+            Element HEADS_XML=doc.createElement(HEADS);
+            root.appendChild(HEADS_XML);
 
             Element H1 = doc.createElement("H");
             H1.setTextContent(heads_position);
-            HEADS.appendChild(H1);
+            HEADS_XML.appendChild(H1);
 
-            Element TAPES=doc.createElement("TAPES");
-            root.appendChild(TAPES);
+            Element TAPES_XML=doc.createElement(TAPES);
+            root.appendChild(TAPES_XML);
 
             Element T1 = doc.createElement("T");
             T1.setTextContent(tape_content);
-            TAPES.appendChild(T1);
+            TAPES_XML.appendChild(T1);
 
-            Element GOALS=doc.createElement("GOALS");
-            root.appendChild(GOALS);
+            Element GOALS_XML=doc.createElement(GOALS);
+            root.appendChild(GOALS_XML);
 
-            //Todo: Update Test and func.
             Element G1 = doc.createElement("G");
-            G1.setTextContent("0-0-0-0-0-0");
-            GOALS.appendChild(G1);
+            G1.setTextContent(goal_content);
+            GOALS_XML.appendChild(G1);
 
-            Element RULES=doc.createElement("RULES");
-            root.appendChild(RULES);
+            Element RULES_XML=doc.createElement(RULES);
+            root.appendChild(RULES_XML);
 
             Element INITIAL_RULE = doc.createElement("R");
             INITIAL_RULE.setTextContent(initial_state + "-0-0-H-" + initial_state);
-            RULES.appendChild(INITIAL_RULE);
+            RULES_XML.appendChild(INITIAL_RULE);
 
-            MainActivity.out_writer.writeXMLToFileName(doc,tm_name);
+            MainGameActivity.out_writer.writeXMLToFileName(doc,tm_name);
         }catch(Exception ex){
             ex.printStackTrace();
         }

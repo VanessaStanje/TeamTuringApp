@@ -31,3 +31,12 @@
 # implemented the user stories that were not fully implemented
 # during the last iteration as well as some "bonus"-stuff.
 ########################################################
+#
+########################################################
+############### RELEASE 1.0 ############################
+#
+# Final release at the end of ther iteration. First
+# version of the finished app is done. Every user story
+# was implemented. We managed to even implement some 
+# more stories than initially thought.
+########################################################

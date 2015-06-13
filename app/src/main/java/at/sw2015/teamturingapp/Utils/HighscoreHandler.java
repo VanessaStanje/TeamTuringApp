@@ -1,7 +1,7 @@
 package at.sw2015.teamturingapp.Utils;
 
 
-import at.sw2015.teamturingapp.MainActivity;
+import at.sw2015.teamturingapp.MainGameActivity;
 
 public class HighscoreHandler {
 
@@ -10,14 +10,14 @@ public class HighscoreHandler {
     public static void setCurrentPlayerName(String new_current_player_name)
     {
         current_player_name = new_current_player_name;
-        if(MainActivity.out_writer != null)
-            MainActivity.out_writer.writeCurrentPlayerNameToTXT(current_player_name);
+        if(MainGameActivity.out_writer != null)
+            MainGameActivity.out_writer.writeCurrentPlayerNameToTXT(current_player_name);
     }
 
     public static String getCurrentPlayerName()
     {
-        if(MainActivity.out_writer != null)
-          current_player_name = MainActivity.out_writer.getCurrentPlayerNameFromTXT();
+        if(MainGameActivity.out_writer != null)
+          current_player_name = MainGameActivity.out_writer.getCurrentPlayerNameFromTXT();
         return current_player_name;
     }
 
