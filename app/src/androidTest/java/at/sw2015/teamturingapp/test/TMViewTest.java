@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import java.util.Vector;
 import com.robotium.solo.Solo;
 
-import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.R;
 import at.sw2015.teamturingapp.Utils.TMConfiguration;
@@ -73,7 +72,7 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainGameActivit
 
         MainGameActivity activity = getActivity();
 
-        TMView new_view = new TMView(all_image_views, ((activity)).getResources().getDrawable(R.mipmap.base),
+        TMView new_view = new TMView(all_image_views,
                 ((activity)).getResources().getDrawable(R.mipmap.one),
                 ((activity)).getResources().getDrawable(R.mipmap.one_sel),
                 ((activity)).getResources().getDrawable(R.mipmap.zero),
@@ -83,7 +82,6 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainGameActivit
                 ((activity)).getResources().getDrawable(R.mipmap.underline),
                 ((activity)).getResources().getDrawable(R.mipmap.underline_sel),
                 all_image_views_goals,
-                ((activity)).getResources().getDrawable(R.mipmap.base_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.one_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.zero_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.dollar_correct),
@@ -157,7 +155,7 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainGameActivit
 
         MainGameActivity activity = getActivity();
 
-        final TMView new_view = new TMView(all_image_views, ((activity)).getResources().getDrawable(R.mipmap.base),
+        final TMView new_view = new TMView(all_image_views,
                 ((activity)).getResources().getDrawable(R.mipmap.one),
                 ((activity)).getResources().getDrawable(R.mipmap.one_sel),
                 ((activity)).getResources().getDrawable(R.mipmap.zero),
@@ -167,7 +165,6 @@ public class TMViewTest extends ActivityInstrumentationTestCase2<MainGameActivit
                 ((activity)).getResources().getDrawable(R.mipmap.underline),
                 ((activity)).getResources().getDrawable(R.mipmap.underline_sel),
                 all_image_views_goals,
-                ((activity)).getResources().getDrawable(R.mipmap.base_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.one_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.zero_correct),
                 ((activity)).getResources().getDrawable(R.mipmap.dollar_correct),
