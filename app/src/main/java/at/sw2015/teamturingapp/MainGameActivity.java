@@ -24,6 +24,8 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
 import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
@@ -100,7 +102,6 @@ public class MainGameActivity extends ActionBarActivity {
 
         sliding_tab_layout.setViewPager(view_pager);
         out_writer.clearHighScore(current_tm_config.getTMName());
-
     }
 
     @Override
@@ -117,6 +118,9 @@ public class MainGameActivity extends ActionBarActivity {
                 return true;
             case R.id.action_load:
                 createFileChooser();
+                return true;
+            case R.id.action_delete_tm:
+                showDeleteTMDialog();
                 return true;
             case R.id.action_new:
                 createNewTMDialog();
@@ -172,19 +176,6 @@ public class MainGameActivity extends ActionBarActivity {
         this.startActivity(intent);
     }
 
-    private String showHighScoreToast() {
-        ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
-
-        String highscore_message = "####### HIGHSCORE #######\n\n";
-        for (HighScoreEntry curr_entry : all_scores)
-            highscore_message += curr_entry.player_name + "-" + curr_entry.step_counter + "\n";
-
-        Toast.makeText(this, highscore_message,
-                Toast.LENGTH_SHORT).show();
-
-        return highscore_message;
-    }
-
     private void showHighScoreDialog() {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(
                 this);
@@ -202,6 +193,8 @@ public class MainGameActivity extends ActionBarActivity {
                 this, R.layout.list_item);
 
         ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
+        Collections.sort(all_scores,new CustomComparator());
+
         for (HighScoreEntry curr_entry : all_scores)
             arrayAdapter.add(curr_entry.player_name + " - " + curr_entry.step_counter);
 
@@ -277,5 +270,36 @@ public class MainGameActivity extends ActionBarActivity {
         builderSingle.setView(view);
         settings_dialog = builderSingle.create();
         settings_dialog.show();
+    }
+
+    private void showDeleteTMDialog() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        if(out_writer.deleteTM(current_tm_config.getTMName())) {
+                            Toast.makeText(getApplicationContext(),R.string.delete_succeed, Toast.LENGTH_LONG).show();
+                            finish();
+                        }else
+                            Toast.makeText(getApplicationContext(),R.string.delete_failed, Toast.LENGTH_LONG).show();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.delete_question).setPositiveButton("YES", dialogClickListener)
+                .setNegativeButton("NO", dialogClickListener).show();
+    }
+
+    public class CustomComparator implements Comparator<HighScoreEntry> {
+        @Override
+        public int compare(HighScoreEntry o1, HighScoreEntry o2) {
+            return o1.step_counter - o2.step_counter;
+        }
     }
 }

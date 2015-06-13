@@ -1,7 +1,6 @@
 package at.sw2015.teamturingapp.Utils;
 
 
-import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.MainGameActivity;
 
 public class HighscoreHandler {

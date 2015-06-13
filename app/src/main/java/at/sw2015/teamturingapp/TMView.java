@@ -12,7 +12,6 @@ public class TMView {
     private Vector<ImageView> all_image_views_ = null;
     private Vector<ImageView> all_image_views_goals_ = null;
 
-    private Drawable base_ = null;
     private Drawable one_ = null;
     private Drawable one_sel_ = null;
     private Drawable zero_ = null;
@@ -22,7 +21,6 @@ public class TMView {
     private Drawable underline_ = null;
     private Drawable underline_sel_ = null;
 
-    private Drawable base_correct_ = null;
     private Drawable one_correct_ = null;
     private Drawable zero_correct_ = null;
     private Drawable dollar_correct_ = null;
@@ -30,15 +28,14 @@ public class TMView {
 
     private final int VISIBLE_TAPE_LENGTH = 9;
 
-    public TMView(Vector<ImageView> all_image_views, Drawable base,
+    public TMView(Vector<ImageView> all_image_views,
                   Drawable one, Drawable one_sel, Drawable zero, Drawable zero_sel,
                   Drawable dollar, Drawable dollar_sel, Drawable underline,
-                  Drawable underline_sel, Vector<ImageView> all_image_views_goals, Drawable base_correct,
+                  Drawable underline_sel, Vector<ImageView> all_image_views_goals,
                   Drawable one_correct, Drawable zero_correct,
                   Drawable dollar_correct,  Drawable underline_correct
                   ) {
         this.all_image_views_ = all_image_views;
-        this.base_ = base;
         this.one_ = one;
         this.one_sel_ = one_sel;
         this.zero_ = zero;
@@ -49,7 +46,6 @@ public class TMView {
         this.underline_sel_ = underline_sel;
 
         this.all_image_views_goals_ = all_image_views_goals;
-        this.base_correct_ = base_correct;
         this.zero_correct_ = zero_correct;
         this.one_correct_ = one_correct;
         this.dollar_correct_ = dollar_correct;

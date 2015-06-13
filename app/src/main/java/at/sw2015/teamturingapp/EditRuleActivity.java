@@ -140,7 +140,7 @@ public class EditRuleActivity extends Activity{
             }
 
             no_problem_writing = XMLParser.saveTMRule(curr_state, reads_sign, writes_sign,
-                    moves, next_state, rule_id, this);
+                    moves, next_state, rule_id);
 
         } catch (Exception pce) {
             pce.printStackTrace();

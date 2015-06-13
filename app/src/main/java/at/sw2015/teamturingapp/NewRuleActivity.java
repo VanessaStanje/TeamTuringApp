@@ -15,6 +15,7 @@ import at.sw2015.teamturingapp.Utils.XMLParser;
 
 public class NewRuleActivity extends Activity{
 
+    static final String ERROR_CODE = "ERROR";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class NewRuleActivity extends Activity{
         {
             Toast.makeText(getApplicationContext(),"Please fill out all of the fields before" +
                     " the rule can be saved. Thanks :)", Toast.LENGTH_LONG).show();
-            return "ERROR";
+            return ERROR_CODE;
         }
 
 
@@ -88,7 +89,7 @@ public class NewRuleActivity extends Activity{
         {
             Toast.makeText(this.getBaseContext(), "Invalid read sign, use 0,1,$ or _ only.",
                     Toast.LENGTH_SHORT).show();
-            return "ERROR";
+            return ERROR_CODE;
         }
 
         if(!new_writes_sign.equalsIgnoreCase("0") && !new_writes_sign.equalsIgnoreCase("1") &&
@@ -96,14 +97,14 @@ public class NewRuleActivity extends Activity{
         {
             Toast.makeText(this.getBaseContext(), "Invalid write sign, use 0,1,$ or _ only.",
                     Toast.LENGTH_SHORT).show();
-            return "ERROR";
+            return ERROR_CODE;
         }
 
         if(!new_moves.equalsIgnoreCase("R") && !new_moves.equalsIgnoreCase("L") && !new_moves.equalsIgnoreCase("H"))
         {
             Toast.makeText(this.getBaseContext(), "Invalid move direction, use R,L,or H only.",
                     Toast.LENGTH_SHORT).show();
-            return "ERROR";
+            return ERROR_CODE;
         }
 
         boolean could_add = XMLParser.addNewRule(new_rule);

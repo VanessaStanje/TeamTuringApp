@@ -5,7 +5,6 @@ import android.os.Environment;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -57,7 +56,7 @@ public class OutWriter {
             transformer.transform(domSource, streamResult);
 
         } catch (Exception e) {
-            System.out.println("ERROR; " + e);
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -86,7 +85,7 @@ public class OutWriter {
             transformer.transform(domSource, streamResult);
 
         } catch (Exception e) {
-            System.out.println("ERROR; " + e);
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -208,5 +207,13 @@ public class OutWriter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean deleteTM(String tm_name)
+    {
+        File file = new File(Environment.
+                getExternalStorageDirectory()+ "/" + directory + "/"+
+                tm_name + ".xml");
+        return file.delete();
     }
 }

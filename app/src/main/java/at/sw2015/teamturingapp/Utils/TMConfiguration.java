@@ -73,10 +73,6 @@ public class TMConfiguration {
         return all_goals_;
     }
 
-    public void setAllGoals(Vector<String> all_goals_) {
-        this.all_goals_ = all_tapes_;
-    }
-
     public Vector<Vector<String>> getAllRules() {
         return all_rules_;
     }
