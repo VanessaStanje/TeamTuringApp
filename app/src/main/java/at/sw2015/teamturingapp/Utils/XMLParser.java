@@ -1,7 +1,5 @@
 package at.sw2015.teamturingapp.Utils;
 
-import android.content.Context;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,13 +12,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.MainGameActivity;
 
 
@@ -119,9 +117,7 @@ public class XMLParser {
             Vector<String> current_rule = new Vector<>();
             String current_rule_string = rules_list.item(rules_counter)
                     .getTextContent();
-            String[] splitted_rule = current_rule_string.split("-");
-            for (int elem_counter = 0; elem_counter < splitted_rule.length; elem_counter++)
-                current_rule.add(splitted_rule[elem_counter]);
+            Collections.addAll(current_rule, current_rule_string.split("-"));
             all_rules.add(current_rule);
         }
 
@@ -130,7 +126,7 @@ public class XMLParser {
     }
 
     public static boolean saveTMRule(String current_state, String reads_sign, String writes_sign,
-                                     String moves, String next_state, int index, Context ctx)
+                                     String moves, String next_state, int index)
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
 
@@ -186,9 +182,9 @@ public class XMLParser {
             Element root=doc.createElement("TM_CONFIG");
             doc.appendChild(root);
 
-            Element TMNAME=doc.createElement("TMNAME");
-            TMNAME.setTextContent(tm_name);
-            root.appendChild(TMNAME);
+            Element TM_NAME=doc.createElement("TMNAME");
+            TM_NAME.setTextContent(tm_name);
+            root.appendChild(TM_NAME);
 
             Element AUTHOR=doc.createElement("AUTHOR");
             AUTHOR.setTextContent(author);

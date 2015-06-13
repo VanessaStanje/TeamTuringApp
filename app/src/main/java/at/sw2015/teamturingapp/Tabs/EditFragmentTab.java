@@ -23,7 +23,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import at.sw2015.teamturingapp.EditCards.RuleCardsAdapter;
 import at.sw2015.teamturingapp.EditCards.RuleInfo;
-import at.sw2015.teamturingapp.MainActivity;
 import at.sw2015.teamturingapp.MainGameActivity;
 import at.sw2015.teamturingapp.NewRuleActivity;
 import at.sw2015.teamturingapp.R;

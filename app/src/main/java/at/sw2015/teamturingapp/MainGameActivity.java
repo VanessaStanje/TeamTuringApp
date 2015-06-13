@@ -1,6 +1,7 @@
 package at.sw2015.teamturingapp;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -90,7 +91,12 @@ public class MainGameActivity extends ActionBarActivity {
 
         sliding_tab_layout = (SlidingTabLayout) findViewById(R.id.tabs);
         sliding_tab_layout.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-        sliding_tab_layout.setCustomTabColorizer(position -> getResources().getColor(R.color.tabsScrollColor));
+        sliding_tab_layout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
 
         sliding_tab_layout.setViewPager(view_pager);
         out_writer.clearHighScore(current_tm_config.getTMName());
@@ -187,10 +193,18 @@ public class MainGameActivity extends ActionBarActivity {
             arrayAdapter.add(curr_entry.player_name + " - " + curr_entry.step_counter);
 
         builderSingle.setNegativeButton("CONTINUE",
-                (dialog, which) -> dialog.dismiss());
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
         builderSingle.setAdapter(arrayAdapter,
-                (dialog, which) -> {
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
                 });
 
         builderSingle.show();
@@ -219,28 +233,32 @@ public class MainGameActivity extends ActionBarActivity {
         if (player_edit != null)
             player_edit.setText(HighscoreHandler.getCurrentPlayerName());
 
-        save_player.setOnClickListener((View v) -> {
+        save_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (player_edit != null) {
+                    String new_player_name = player_edit.getText().toString();
 
-            if (player_edit != null) {
-                String new_player_name = player_edit.getText().toString();
+                    if (new_player_name.length() == 0) {
+                        Toast.makeText(getApplicationContext(), "Please fill out all of the fields before" +
+                                " the settings can be saved. Thanks :)", Toast.LENGTH_LONG).show();
+                        return;
+                    }
 
-                if (new_player_name.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please fill out all of the fields before" +
-                            " the settings can be saved. Thanks :)", Toast.LENGTH_LONG).show();
-                    return;
+                    HighscoreHandler.setCurrentPlayerName(new_player_name);
                 }
 
-                HighscoreHandler.setCurrentPlayerName(new_player_name);
-            }
-
-            if (settings_dialog != null)
-                settings_dialog.cancel();
-
-        });
-
-        cancel_player.setOnClickListener((View v) -> {
                 if (settings_dialog != null)
                     settings_dialog.cancel();
+            }
+        });
+
+        cancel_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (settings_dialog != null)
+                    settings_dialog.cancel();
+            }
         });
 
         builderSingle.setView(view);
