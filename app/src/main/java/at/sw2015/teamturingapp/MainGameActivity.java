@@ -24,6 +24,8 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import at.sw2015.teamturingapp.SlidingTab.SlidingTabLayout;
 import at.sw2015.teamturingapp.Tabs.EditFragmentTab;
@@ -192,6 +194,8 @@ public class MainGameActivity extends ActionBarActivity {
                 this, R.layout.list_item);
 
         ArrayList<HighScoreEntry> all_scores = out_writer.getHighScore(current_tm_config.getTMName());
+        Collections.sort(all_scores,new CustomComparator());
+
         for (HighScoreEntry curr_entry : all_scores)
             arrayAdapter.add(curr_entry.player_name + " - " + curr_entry.step_counter);
 
@@ -291,5 +295,12 @@ public class MainGameActivity extends ActionBarActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Do you really want to delete this TM?").setPositiveButton("YES", dialogClickListener)
                 .setNegativeButton("NO", dialogClickListener).show();
+    }
+
+    public class CustomComparator implements Comparator<HighScoreEntry> {
+        @Override
+        public int compare(HighScoreEntry o1, HighScoreEntry o2) {
+            return o1.step_counter - o2.step_counter;
+        }
     }
 }
