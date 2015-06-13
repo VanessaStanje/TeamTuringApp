@@ -118,6 +118,9 @@ public class MainGameActivity extends ActionBarActivity {
             case R.id.action_load:
                 createFileChooser();
                 return true;
+            case R.id.action_delete_tm:
+                showDeleteTMDialog();
+                return true;
             case R.id.action_new:
                 createNewTMDialog();
                 return true;
@@ -264,5 +267,29 @@ public class MainGameActivity extends ActionBarActivity {
         builderSingle.setView(view);
         settings_dialog = builderSingle.create();
         settings_dialog.show();
+    }
+
+    private void showDeleteTMDialog() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        if(out_writer.deleteTM(current_tm_config.getTMName())) {
+                            Toast.makeText(getApplicationContext(), "TM deleted!", Toast.LENGTH_LONG).show();
+                            finish();
+                        }else
+                            Toast.makeText(getApplicationContext(), "Could not delete TM!", Toast.LENGTH_LONG).show();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you really want to delete this TM?").setPositiveButton("YES", dialogClickListener)
+                .setNegativeButton("NO", dialogClickListener).show();
     }
 }

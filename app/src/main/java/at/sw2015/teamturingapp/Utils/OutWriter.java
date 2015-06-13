@@ -1,5 +1,6 @@
 package at.sw2015.teamturingapp.Utils;
 
+import android.content.Context;
 import android.os.Environment;
 
 import java.io.BufferedReader;
@@ -207,5 +208,10 @@ public class OutWriter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean deleteTM(String tm_name)
+    {
+        return false;
     }
 }
