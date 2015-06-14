@@ -40,3 +40,5 @@
 # was implemented. We managed to even implement some 
 # more stories than initially thought.
 ########################################################
+# Hotfix 1.1 because of small bug in new tm (forgot .trim())
+########################################################
