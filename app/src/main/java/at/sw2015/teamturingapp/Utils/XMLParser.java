@@ -82,16 +82,16 @@ public class XMLParser {
             throws XmlPullParserException, IOException,
             ParserConfigurationException, SAXException {
         String tm_name = raw_xml_input.getElementsByTagName(TMNAME).item(0)
-                .getTextContent();
+                .getTextContent().trim();
 
         String author = raw_xml_input.getElementsByTagName(AUTHOR).item(0)
-                .getTextContent();
+                .getTextContent().trim();
 
         String initial_state = raw_xml_input.getElementsByTagName(INITIAL_STATE).item(0)
-                .getTextContent();
+                .getTextContent().trim();
 
         int tape_count = Integer.parseInt(raw_xml_input
-                .getElementsByTagName(TAPE_COUNT).item(0).getTextContent());
+                .getElementsByTagName(TAPE_COUNT).item(0).getTextContent().trim());
 
         NodeList heads_list = raw_xml_input.getElementsByTagName(HEADS);
         NodeList tapes_list = raw_xml_input.getElementsByTagName(TAPES);
@@ -105,18 +105,18 @@ public class XMLParser {
 
         for (int heads_counter = 0; heads_counter < heads_list.getLength(); heads_counter++)
             head_positions.add(Integer.parseInt(heads_list.item(heads_counter)
-                    .getTextContent()));
+                    .getTextContent().trim()));
 
         for (int tapes_counter = 0; tapes_counter < tapes_list.getLength(); tapes_counter++)
-            all_tapes.add(tapes_list.item(tapes_counter).getTextContent());
+            all_tapes.add(tapes_list.item(tapes_counter).getTextContent().trim());
 
         for (int goals_counter = 0; goals_counter < tapes_list.getLength(); goals_counter++)
-            all_goals.add(goals_list.item(goals_counter).getTextContent());
+            all_goals.add(goals_list.item(goals_counter).getTextContent().trim());
 
         for (int rules_counter = 0; rules_counter < rules_list.getLength(); rules_counter++) {
             Vector<String> current_rule = new Vector<>();
             String current_rule_string = rules_list.item(rules_counter)
-                    .getTextContent();
+                    .getTextContent().trim();
             Collections.addAll(current_rule, current_rule_string.split("-"));
             all_rules.add(current_rule);
         }
